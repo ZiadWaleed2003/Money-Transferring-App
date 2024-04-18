@@ -1,3 +1,12 @@
+:root {
+    --text: #dee0f2;
+    --background: #06070f;
+    --dark: #06070f;
+    --primary: #a1a7ce;
+    --secondary: #161935;
+    --accent: #606bd2;
+}
+
 .back-to-top {
     position: fixed;
     display: none;

@@ -57,6 +57,11 @@
         loop: true,
         nav : false
     });
+    $(document).ready(function(){
+        const current_page_name = document.location.pathname.split('/').pop().split('.')[0];
+        
+        $('#'+current_page_name).addClass('active');
+    });
 
 
     // Chart Global Color
