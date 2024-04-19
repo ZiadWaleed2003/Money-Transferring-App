@@ -1,0 +1,7 @@
+.options div{
+    transition-duration: 0.3s;
+}
+.options div:hover{
+    background-color: red !important;
+}
+
