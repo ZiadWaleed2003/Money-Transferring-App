@@ -17,7 +17,6 @@
                 <div class="navbar-nav w-100">
                     <a id="blank" href="Blank.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Blank</a>
                 </div>
-
             </nav>
-        </div>
+        </div> 
         <!-- Sidebar End -->
