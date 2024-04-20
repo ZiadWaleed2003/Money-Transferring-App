@@ -18,7 +18,6 @@
                     <a id="transactions" href="transactions.php" class="nav-item nav-link"><i class="bi bi-arrow-down-up" style="transform: rotate(45deg);"></i>Transactions</a>
                     <a id="blank" href="blank.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Blank</a>
                 </div>
-
             </nav>
-        </div>
+        </div> 
         <!-- Sidebar End -->
