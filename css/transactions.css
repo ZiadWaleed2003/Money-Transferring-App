@@ -1,7 +1,29 @@
-.options div{
-    transition-duration: 0.3s;
+#links-tracking{
+
+
+    .active{
+        color: var(--accent) !important;
+    }
 }
-.options div:hover{
-    background-color: red !important;
+
+#transaction-section-content{
+    
+    
+    .home-page{
+        
+        
+        .options {
+
+            
+            div{
+                transition-duration: 0.3s;                
+            }
+            div:hover{
+                background-color: var(--accent) !important; 
+            }
+        }
+
+    }
 }
+    
 
