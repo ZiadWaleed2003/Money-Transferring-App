@@ -46,7 +46,7 @@
                     </div>  
                     
                     <div class="col-sm-6 col-xl-3">
-                        <a id="send-donation" class="options" href="#">
+                        <a id="send-donation" class="options" href="send-donation.php">
                             <div class="bg-dark flex-column align-items-center justify-content-center p-4">
                                 <h3 class="m-0 text-center p-2">Send Donation</h3>
                             </div>

@@ -10,14 +10,14 @@
         <div class="col-12 text-center header">
             <h3 class="display-3 p-5">Transactions</h3>
         </div>
-        
+
         <div class="col-12 text-center pb-5">
             <span id="links-tracking">
                 <a href="transactions.php" class="h5">Home Page</a>
                 &nbsp;
                 /
                 &nbsp;
-                <a href="send-money.php" class="h5 text-primary">Send Money</a>
+                <a href="send-donation.php" class="h5 text-primary">Send Donation</a>
 
             </span>
         </div>
@@ -28,36 +28,40 @@
 
                     <form>
                         <div class="mb-3">
-                            <label for="" class="form-label h4" >Select Your Card</label>
+                            <label for="" class="form-label h4">Select Your Card</label>
                             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" required>
                                 <option value="" class="text-muted" selected disabled>-- Open Cards list --</option>
-                                <option value="1" class="bg-danger text-white">One</option>
+                                <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
                         </div>
                         <div class="row mt-5">
                             <div class="col-6">
-                                <label class="form-label h4">Reciver Card</label>
-                                <input type="text" id="reciver-card" name="reciver-card" placeholder="1234 5678 9102 3456" class="form-control form-control-lg" required>
-
+                                <label for="" class="form-label h4">Select Donation Foundation</label>
+                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" required>
+                                    <option value="" class="text-muted" selected disabled>-- Open list --</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
                             </div>
                             <div class="col-6">
                                 <label class="form-label h4">Amount</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="amount" name="amount" placeholder="12345" class="form-control form-control-lg" aria-label="Amount (to the nearest dollar)" required>
+                                    <input type="text" id="amount" name="amount" placeholder="1234567" class="form-control form-control-lg" aria-label="Amount (to the nearest dollar)" required>
                                     <span class="input-group-text ">E£</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="alert alert-danger alert-dismissible fade" role="alert">
-                            <i class="fa fa-exclamation-circle me-2"></i>An icon &amp; dismissing danger alert—check it out!
+                            <i class="fa fa-exclamation-circle me-2 show"></i>An icon &amp; dismissing danger alert—check it out!
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        
+
                         <div class="row justify-content-center">
-                            <button class="btn btn-lg btn-primary w-25 m-2" type="submit">Send Money</button>
+                            <button class="btn btn-lg btn-primary w-25" type="submit">Send Donation</button>
                         </div>
                     </form>
 
