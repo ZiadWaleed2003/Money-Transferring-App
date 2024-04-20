@@ -57,7 +57,7 @@
                 <div class="row g-4 mb-4">
                     
                     <div class="col-sm-6 col-xl-3">
-                        <a id="pay-payments" class="options" href="#">
+                        <a id="pay-payments" class="options" href="pay-payment.php">
                             <div class="bg-dark flex-column align-items-center justify-content-center p-4">
                                 <h3 class="m-0 text-center p-2">Pay Payments</h3>
                             </div>
