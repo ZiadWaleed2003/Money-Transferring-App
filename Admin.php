@@ -84,6 +84,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone Number</th>
+                                    <th scope="col">Role</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -98,7 +99,7 @@
                         die("Connection failed: " . mysqli_connect_error());
                     }
 
-                    $sql = "SELECT id, name, email, phone_number FROM users";
+                    $sql = "SELECT id, name, email, phone_number, role FROM users";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
@@ -108,6 +109,7 @@
                             echo "<td>" . $row["name"] . "</td>";
                             echo "<td>" . $row["email"] . "</td>";
                             echo "<td>" . $row["phone_number"] . "</td>";
+                            echo "<td>" . $row["role"] . "</td>";
                             echo "</tr>";
                         }
                     } else {
