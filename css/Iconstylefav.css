@@ -1,0 +1,26 @@
+.icon-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 2px;
+  }
+  
+  .icon-button:hover {
+    background-color: transparent;
+    color: #ff0000;
+    
+  }
+  
+  .icon-button i {
+    pointer-events: none;
+  }
+
+  .feedback-container {
+    background-color: #000000;
+    border: 2px solid #ff0000;
+    padding: 20px;
+    text-align: center;
+  }
