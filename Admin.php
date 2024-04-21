@@ -5,7 +5,6 @@
 
 
 
-
 <!-- Blank Start -->
 <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
@@ -82,41 +81,40 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone Number</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Zyad</td>
-                                    <td>Atef</td>
-                                    <td>ZyadAtef@email.com</td>
-                                    <td>01142301658</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Ziad</td>
-                                    <td>Adel</td>
-                                    <td>elzoz@email.com</td>
-                                    <td>01142301438</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Ziad</td>
-                                    <td>Waleed</td>
-                                    <td>weld@email.com</td>
-                                    <td>01548801438</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Bassel</td>
-                                    <td>Waled</td>
-                                    <td>basel@email.com</td>
-                                    <td>010499901438</td>
-                                </tr>
+<?php                            
+                    $host = "localhost";    
+                    $username = "root";
+                    $password = "";
+                    $dbname = "moneyapp";
+                    $conn = mysqli_connect($host, $username, $password, $dbname);
+
+                    if (!$conn){
+                        die("Connection failed: " . mysqli_connect_error());
+                    }
+
+                    $sql = "SELECT id, name, email, phone_number FROM users";
+                    $result = mysqli_query($conn, $sql);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr>";
+                            echo "<th scope='row'>" . $row["id"] . "</th>";
+                            echo "<td>" . $row["name"] . "</td>";
+                            echo "<td>" . $row["email"] . "</td>";
+                            echo "<td>" . $row["phone_number"] . "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='4'>No users found</td></tr>";
+                    }
+                    mysqli_close($conn);
+?>
                             </tbody>
                         </table>
                     </div>
