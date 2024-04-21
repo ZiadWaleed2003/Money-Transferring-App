@@ -15,14 +15,9 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a id="blank" href="Blank.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Blank</a>
-                    <a id="requist list" href="requistlist.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>requist list</a>
-                    <a id="view transactions status" href="view_transactions_status.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>view_transactions_status</a>
-                    <a id="check balance" href="checkbalance.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>check balance</a>
-                    <a id="recievemoney" href="recievemoney.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>recievemoney</a>
+                    <a id="transactions" href="transactions.php" class="nav-item nav-link"><i class="bi bi-arrow-down-up" style="transform: rotate(45deg);"></i>Transactions</a>
+                    <a id="blank" href="blank.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Blank</a>
                 </div>
-                </div>
-
             </nav>
-        </div>
+        </div> 
         <!-- Sidebar End -->
