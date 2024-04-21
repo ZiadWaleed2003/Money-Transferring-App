@@ -2,7 +2,7 @@
 <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
                 <a href="index.php" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>ElZowZat & Bassel</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -15,7 +15,8 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a id="transactions" href="transactions.php" class="nav-item nav-link"><i class="bi bi-arrow-down-up" style="transform: rotate(45deg);"></i>Transactions</a>
+                    <a id="card" href="card.php" class="nav-item nav-link"><i class="bi bi-arrow-down-up" style="transform: rotate(45deg);"></i> Cards</a>
+                    <a id="transactions" href="transactions.php" class="nav-item nav-link"><i class="bi bi-arrow-down-up" style="transform: rotate(45deg);"></i> Transactions</a>
                     <a id="blank" href="blank.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Blank</a>
                 </div>
             </nav>
