@@ -13,7 +13,7 @@
         
         <div class="col-12 text-center pb-5">
             <span id="links-tracking">
-                <a href="transactions.php" class="h5 active">Home Page</a>
+                <a href="transactions.php" class="h5 text-primary">Home Page</a>
 
             </span>
         </div>
@@ -30,7 +30,7 @@
                     </div>
                     
                     <div class="col-sm-6 col-xl-3">
-                        <a id="send-to-card" class="options" href="#">
+                        <a id="send-to-card" class="options" href="send-money.php">
                             <div class="bg-dark flex-column align-items-center justify-content-center p-4">
                                 <h4 class="m-0 text-center p-2">Send Money to Card</h4>
                             </div>
@@ -46,7 +46,7 @@
                     </div>  
                     
                     <div class="col-sm-6 col-xl-3">
-                        <a id="send-donation" class="options" href="#">
+                        <a id="send-donation" class="options" href="send-donation.php">
                             <div class="bg-dark flex-column align-items-center justify-content-center p-4">
                                 <h3 class="m-0 text-center p-2">Send Donation</h3>
                             </div>
@@ -57,7 +57,7 @@
                 <div class="row g-4 mb-4">
                     
                     <div class="col-sm-6 col-xl-3">
-                        <a id="pay-payments" class="options" href="#">
+                        <a id="pay-payments" class="options" href="pay-payment.php">
                             <div class="bg-dark flex-column align-items-center justify-content-center p-4">
                                 <h3 class="m-0 text-center p-2">Pay Payments</h3>
                             </div>
