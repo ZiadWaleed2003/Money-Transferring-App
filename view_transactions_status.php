@@ -7,12 +7,7 @@
 
 
 <!-- Blank Start -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transaction Status</title>
+
     <style>
         .status-container {
             display: flex;
@@ -52,8 +47,10 @@
             color: red;
         }
     </style>
-</head>
-<body>
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
+        
     <div class="status-container">
         <h1>Transaction Status</h1>
        
@@ -64,7 +61,13 @@
         <h2> reciver name :  </h2>
         <h2> time :  </h2>
         <h2> Amount :  </h2>
+        <a href="http://localhost/Money-Transferring-App/transactions.php">
+        <button type="button" class="btn btn-primary rounded-pill m-2" >back to home</button>
+    </a>
+    </div>
+</div>
 
 <!-- Blank End -->
+
 
 <?php require_once("main-components/footer.php")?>

@@ -7,14 +7,11 @@
 
 
 <!-- Blank Start -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Check Balance</title>
-</head>
-<body>
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
+        
+        
     <h1>Check Balance</h1>
     <p>Please select a card and click the submit button to check its balance.</p>
     <label for="card-select">Select a Card:</label>
@@ -23,10 +20,13 @@
     <option value="debit">card 2</option>
     <option value="gift">card 3</option>
 </select>
-<input type="submit" value="Submit" />
+<a href="http://localhost/Money-Transferring-App/balanceshow.php">
+        <button type="button" class="btn btn-primary rounded-pill m-2" >show balance</button>
+</a>
+    </div>
+</div>
 
-</body>
-</html>
+
 <!-- Blank End -->
 
 <?php require_once("main-components/footer.php")?>

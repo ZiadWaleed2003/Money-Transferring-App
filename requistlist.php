@@ -71,6 +71,7 @@
                     </td>
                     <td><botton class="accept">accept</botton>
                     </td>
+                    
                 </tr>
                 <tr>
                     <th scope="row">3</th>
