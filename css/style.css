@@ -285,3 +285,11 @@
 .acct-page-img {
     align-self: center !important;
 }
+
+.line{
+    width: 200px;
+    height: 1px;
+    border: 1px solid var(--accent);
+    
+    margin: 15px auto 50px auto;
+}
