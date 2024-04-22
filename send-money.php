@@ -6,7 +6,11 @@
 <!-- Transaction Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="row bg-secondary rounded align-items-center justify-content-center mx-0 p-5">
-
+        
+        <div class="container back-to-previous" onclick="window.history.back()">
+            <a class="text-decoration-underline"><i class="bi bi-chevron-left me-1"></i>back</a>
+        </div>
+        
         <div class="col-12 text-center header">
             <h3 class="display-3 p-5">Transactions</h3>
         </div>
