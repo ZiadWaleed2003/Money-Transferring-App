@@ -22,7 +22,7 @@
             <div class="home-page">
                 <div class="row g-4 mb-4">
                     <div class="col-sm-6 col-xl-3">
-                        <a id="check-balance" class="options" href="#">
+                        <a id="check-balance" class="options" href="checkbalance.php">
                             <div class="bg-dark flex-column align-items-center justify-content-center p-4">
                                 <h3 class="m-0 text-center p-2">Check Balance</h3>
                             </div>
@@ -65,7 +65,7 @@
                     </div>
                     
                     <div class="col-sm-6 col-xl-3">
-                        <a id="request-money" class="options" href="#">
+                        <a id="request-money" class="options" href="recievemoney.php">
                             <div class="bg-dark flex-column align-items-center justify-content-center p-4">
                                 <h3 class="m-0 text-center p-2">Request Money</h3>
                             </div>
@@ -73,7 +73,7 @@
                     </div>
     
                     <div class="col-sm-6 col-xl-3">
-                        <a id="requests-list" class="options" href="#">
+                        <a id="requests-list" class="options" href="requistlist.php">
                             <div class="bg-dark flex-column align-items-center justify-content-center p-4">
                                 <h3 class="m-0 text-center p-2">Requests list</h3>
                             </div>
