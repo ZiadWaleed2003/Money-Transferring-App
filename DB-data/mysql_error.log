@@ -663,3 +663,134 @@ recovered pages: 0% 100% (0.0 seconds);
 2024-04-21 18:46:02 0 [Note] InnoDB: Loading buffer pool(s) from F:\Programming\swe-fall-2024\Money-Transferring-App\db-data\ib_buffer_pool
 2024-04-21 18:46:02 0 [Note] Plugin 'FEEDBACK' is disabled.
 2024-04-21 18:46:02 0 [Note] Server socket created on IP: '::'.
+2024-04-25 22:33:23 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-25 22:33:23 0 [Note] InnoDB: Uses event mutexes
+2024-04-25 22:33:23 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-25 22:33:23 0 [Note] InnoDB: Number of pools: 1
+2024-04-25 22:33:23 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-25 22:33:23 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:23 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:23 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error
+2024-04-25 22:33:23 0 [Note] InnoDB: Starting shutdown...
+2024-04-25 22:33:23 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2024-04-25 22:33:23 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2024-04-25 22:33:23 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-25 22:33:23 0 [ERROR] Unknown/unsupported storage engine: InnoDB
+2024-04-25 22:33:23 0 [ERROR] Aborting
+2024-04-25 22:33:26 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-25 22:33:26 0 [Note] InnoDB: Uses event mutexes
+2024-04-25 22:33:26 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-25 22:33:26 0 [Note] InnoDB: Number of pools: 1
+2024-04-25 22:33:26 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-25 22:33:26 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:26 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:26 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error
+2024-04-25 22:33:26 0 [Note] InnoDB: Starting shutdown...
+2024-04-25 22:33:27 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2024-04-25 22:33:27 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2024-04-25 22:33:27 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-25 22:33:27 0 [ERROR] Unknown/unsupported storage engine: InnoDB
+2024-04-25 22:33:27 0 [ERROR] Aborting
+2024-04-25 22:33:33 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-25 22:33:33 0 [Note] InnoDB: Uses event mutexes
+2024-04-25 22:33:33 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-25 22:33:33 0 [Note] InnoDB: Number of pools: 1
+2024-04-25 22:33:33 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-25 22:33:33 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:33 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:33 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error
+2024-04-25 22:33:33 0 [Note] InnoDB: Starting shutdown...
+2024-04-25 22:33:33 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2024-04-25 22:33:33 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2024-04-25 22:33:33 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-25 22:33:33 0 [ERROR] Unknown/unsupported storage engine: InnoDB
+2024-04-25 22:33:33 0 [ERROR] Aborting
+2024-04-25 22:33:35 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-25 22:33:35 0 [Note] InnoDB: Uses event mutexes
+2024-04-25 22:33:35 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-25 22:33:35 0 [Note] InnoDB: Number of pools: 1
+2024-04-25 22:33:35 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-25 22:33:35 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:35 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:35 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error
+2024-04-25 22:33:35 0 [Note] InnoDB: Starting shutdown...
+2024-04-25 22:33:36 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2024-04-25 22:33:36 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2024-04-25 22:33:36 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-25 22:33:36 0 [ERROR] Unknown/unsupported storage engine: InnoDB
+2024-04-25 22:33:36 0 [ERROR] Aborting
+2024-04-25 22:33:37 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-25 22:33:37 0 [Note] InnoDB: Uses event mutexes
+2024-04-25 22:33:37 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-25 22:33:37 0 [Note] InnoDB: Number of pools: 1
+2024-04-25 22:33:37 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-25 22:33:37 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:37 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:37 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error
+2024-04-25 22:33:37 0 [Note] InnoDB: Starting shutdown...
+2024-04-25 22:33:37 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2024-04-25 22:33:37 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2024-04-25 22:33:37 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-25 22:33:37 0 [ERROR] Unknown/unsupported storage engine: InnoDB
+2024-04-25 22:33:37 0 [ERROR] Aborting
+2024-04-25 22:33:38 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-25 22:33:38 0 [Note] InnoDB: Uses event mutexes
+2024-04-25 22:33:38 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-25 22:33:38 0 [Note] InnoDB: Number of pools: 1
+2024-04-25 22:33:38 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-25 22:33:38 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:38 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:38 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error
+2024-04-25 22:33:38 0 [Note] InnoDB: Starting shutdown...
+2024-04-25 22:33:38 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2024-04-25 22:33:38 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2024-04-25 22:33:38 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-25 22:33:38 0 [ERROR] Unknown/unsupported storage engine: InnoDB
+2024-04-25 22:33:38 0 [ERROR] Aborting
+2024-04-25 22:33:43 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-25 22:33:43 0 [Note] InnoDB: Uses event mutexes
+2024-04-25 22:33:43 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-25 22:33:43 0 [Note] InnoDB: Number of pools: 1
+2024-04-25 22:33:43 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-25 22:33:43 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:43 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:43 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error
+2024-04-25 22:33:43 0 [Note] InnoDB: Starting shutdown...
+2024-04-25 22:33:43 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2024-04-25 22:33:43 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2024-04-25 22:33:43 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-25 22:33:43 0 [ERROR] Unknown/unsupported storage engine: InnoDB
+2024-04-25 22:33:43 0 [ERROR] Aborting
+2024-04-25 22:33:45 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-25 22:33:45 0 [Note] InnoDB: Uses event mutexes
+2024-04-25 22:33:45 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-25 22:33:45 0 [Note] InnoDB: Number of pools: 1
+2024-04-25 22:33:45 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-25 22:33:45 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:45 0 [ERROR] InnoDB: Unable to create temporary file; errno: 0
+2024-04-25 22:33:45 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error
+2024-04-25 22:33:45 0 [Note] InnoDB: Starting shutdown...
+2024-04-25 22:33:45 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2024-04-25 22:33:45 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2024-04-25 22:33:45 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-25 22:33:45 0 [ERROR] Unknown/unsupported storage engine: InnoDB
+2024-04-25 22:33:45 0 [ERROR] Aborting
+2024-04-25 22:36:06 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-25 22:36:06 0 [Note] InnoDB: Uses event mutexes
+2024-04-25 22:36:06 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-25 22:36:06 0 [Note] InnoDB: Number of pools: 1
+2024-04-25 22:36:06 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-25 22:36:06 0 [Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M
+2024-04-25 22:36:06 0 [Note] InnoDB: Completed initialization of buffer pool
+2024-04-25 22:36:06 0 [Note] InnoDB: Starting crash recovery from checkpoint LSN=381134
+2024-04-25 22:36:06 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2024-04-25 22:36:06 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2024-04-25 22:36:06 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2024-04-25 22:36:06 0 [Note] InnoDB: Setting file 'C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2024-04-25 22:36:06 0 [Note] InnoDB: File 'C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ibtmp1' size is now 12 MB.
+2024-04-25 22:36:06 0 [Note] InnoDB: Waiting for purge to start
+2024-04-25 22:36:06 0 [Note] InnoDB: 10.4.27 started; log sequence number 381143; transaction id 295
+2024-04-25 22:36:06 0 [Note] InnoDB: Loading buffer pool(s) from C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ib_buffer_pool
+2024-04-25 22:36:06 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-25 22:36:06 0 [Note] InnoDB: Buffer pool(s) load completed at 240425 22:36:06
+2024-04-25 22:36:06 0 [Note] Server socket created on IP: '::'.
