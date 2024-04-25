@@ -2,21 +2,21 @@
 
 class DBController
 {
-    public $dbHost="localhost";
-    public $dbUser="root";
-    public $dbPassword="";
-    public $dbName="moneyapp";
-    public $connection;
+    const db_host = 'localhost';
+    const db_user = 'root';
+    const db_password = '';
+    const db_name = 'moneyapp';
 
-    public function openconnection(){
-        $this->connection= new mysqli($this->dbHost,$this->dbUser,$this->dbPassword,$this->dbName);
-        if($this->connection->connect_error){
-            echo "Connection Error : ".$this->connection->connect_error;
+
+    public static function openconnection(){
+        $connection= new mysqli(dbHost,dbUser,dbPassword,dbName);
+
+        if($connection->connect_error){
+            echo "Connection Error : ".$connection->connect_error;
             return false;
         }
-        else{
-            return true;
-        }
+        
+        return $connection;
     }
 
 
