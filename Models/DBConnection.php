@@ -26,7 +26,7 @@ class DBConnection
             return false;
         }
 
-        return $connection;  
+        return $this->connection;  
     }
 
     public function closeConnection(){
