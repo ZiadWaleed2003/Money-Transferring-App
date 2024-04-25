@@ -19,7 +19,7 @@ class DBController
         }
     }
 
-    
+
     public function closeconnection(){
         if($this->connection){
             $this->connection.close();
@@ -29,5 +29,16 @@ class DBController
         }
     }
 
+
+    public function select($qry){
+        $result=$this->connection->query($qry);
+        if(!$result){
+            echo "Error".mysqli_error($this->connection);
+            return false;
+        }
+        else{
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+    }
 
 }

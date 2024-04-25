@@ -11,7 +11,7 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-secondary rounded h-100 p-4">
                     <h6 class="mb-4">ADD BANk</h6>
-                    <form action ="add_bank.php" method ="POST">
+                    <form action ="Models/add_bank.php" method ="POST">
                         <div class="mb-3">
                             <label class="form-label">Bank Name</label>
                             <input type="text" class="form-control" name="name" placeholder="Bank Name" aria-label="Username" aria-describedby="basic-addon1">
@@ -29,7 +29,7 @@
                <div class="col-sm-12 col-xl-6">
                                 <div class="bg-secondary rounded h-100 p-4">
                                     <h6 class="mb-4">ADD BILL PAYMENT</h6>
-                                    <form action ="add_bill.php" method ="POST">
+                                    <form action ="Models/add_bill.php" method ="POST">
                         <div class="mb-3">
                             <label class="form-label">Bill Name</label>
                             <input type="text" class="form-control" name="name" placeholder="Bill Name" aria-label="Username" aria-describedby="basic-addon1">
@@ -49,7 +49,7 @@
                                     <div class="col-sm-12 col-xl-6">
                                         <div class="bg-secondary rounded h-100 p-4">
                                             <h6 class="mb-4">ADD DONATION</h6>
-                                            <form action ="add_donation.php" method ="POST">
+                                            <form action ="Models/add_donation.php" method ="POST">
                                            <div class="mb-3">
                                                     <label class="form-label">Name</label>
                                                     <input type="text" class="form-control" name="name" placeholder="name" aria-label="NAME" aria-describedby="basic-addon1">
