@@ -794,100 +794,21 @@ recovered pages: 0% 100% (0.0 seconds);
 2024-04-25 22:36:06 0 [Note] Plugin 'FEEDBACK' is disabled.
 2024-04-25 22:36:06 0 [Note] InnoDB: Buffer pool(s) load completed at 240425 22:36:06
 2024-04-25 22:36:06 0 [Note] Server socket created on IP: '::'.
-2024-04-25 23:28:34 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
-2024-04-25 23:28:34 0 [Note] InnoDB: Uses event mutexes
-2024-04-25 23:28:34 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
-2024-04-25 23:28:34 0 [Note] InnoDB: Number of pools: 1
-2024-04-25 23:28:34 0 [Note] InnoDB: Using SSE2 crc32 instructions
-2024-04-25 23:28:34 0 [Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M
-2024-04-25 23:28:34 0 [Note] InnoDB: Completed initialization of buffer pool
-2024-04-25 23:28:34 0 [Note] InnoDB: Starting crash recovery from checkpoint LSN=381152
-2024-04-25 23:28:34 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
-2024-04-25 23:28:34 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
-2024-04-25 23:28:34 0 [Note] InnoDB: Creating shared tablespace for temporary tables
-2024-04-25 23:28:34 0 [Note] InnoDB: Setting file 'C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
-2024-04-25 23:28:34 0 [Note] InnoDB: File 'C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ibtmp1' size is now 12 MB.
-2024-04-25 23:28:34 0 [Note] InnoDB: Waiting for purge to start
-2024-04-25 23:28:35 0 [Note] InnoDB: 10.4.27 started; log sequence number 381161; transaction id 295
-2024-04-25 23:28:35 0 [Note] InnoDB: Loading buffer pool(s) from C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ib_buffer_pool
-2024-04-25 23:28:35 0 [Note] Plugin 'FEEDBACK' is disabled.
-2024-04-25 23:28:35 0 [Note] Server socket created on IP: '::'.
-2024-04-25 23:47:11 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
-2024-04-25 23:47:11 0 [Note] InnoDB: Uses event mutexes
-2024-04-25 23:47:11 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
-2024-04-25 23:47:11 0 [Note] InnoDB: Number of pools: 1
-2024-04-25 23:47:11 0 [Note] InnoDB: Using SSE2 crc32 instructions
-2024-04-25 23:47:11 0 [Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M
-2024-04-25 23:47:11 0 [Note] InnoDB: Completed initialization of buffer pool
-2024-04-25 23:47:11 0 [Note] InnoDB: Starting crash recovery from checkpoint LSN=381170
-2024-04-25 23:47:11 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
-2024-04-25 23:47:11 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
-2024-04-25 23:47:11 0 [Note] InnoDB: Creating shared tablespace for temporary tables
-2024-04-25 23:47:11 0 [Note] InnoDB: Setting file 'C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
-2024-04-25 23:47:11 0 [Note] InnoDB: File 'C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ibtmp1' size is now 12 MB.
-2024-04-25 23:47:11 0 [Note] InnoDB: Waiting for purge to start
-2024-04-25 23:47:11 0 [Note] InnoDB: 10.4.27 started; log sequence number 381179; transaction id 295
-2024-04-25 23:47:11 0 [Note] InnoDB: Loading buffer pool(s) from C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ib_buffer_pool
-2024-04-25 23:47:11 0 [Note] Plugin 'FEEDBACK' is disabled.
-2024-04-25 23:47:11 0 [Note] Server socket created on IP: '::'.
-2024-04-25 23:47:11 0x3158  InnoDB: Assertion failure in file D:\winx64-packages\build\src\storage\innobase\os\os0file.cc line 6154
-InnoDB: Failing assertion: slot
-InnoDB: We intentionally generate a memory trap.
-InnoDB: Submit a detailed bug report to https://jira.mariadb.org/
-InnoDB: If you get repeated assertion failures or crashes, even
-InnoDB: immediately after the mysqld startup, there may be
-InnoDB: corruption in the InnoDB tablespace. Please refer to
-InnoDB: https://mariadb.com/kb/en/library/innodb-recovery-modes/
-InnoDB: about forcing recovery.
-2024-04-25 23:47:11 0x3e80  InnoDB: Assertion failure in file D:\winx64-packages\build\src\storage\innobase\os\os0file.cc line 6154
-InnoDB: Failing a240425 23:47:11 [ERROR] mysqld got exception 0x80000003 ;
-sThis could be because you hit a bug. It is also possible that this binary
-or one of the libraries it was linked against is corrupt, improperly built,
-or misconfigured. This error can also be caused by malfunctioning hardware.
-
-sTo report this bug, see https://mariadb.com/kb/en/reporting-bugs
-
-eWe will try our best to scrape up some info that will hopefully help
-diagnose the problem, but since we have already crashed, 
-something is definitely wrong and this may fail.
-
-rServer version: 10.4.27-MariaDB
-tkey_buffer_size=16777216
-iread_buffer_size=262144
-omax_used_connections=0
-nmax_threads=65537
-:thread_count=6
- It is possible that mysqld could use up to 
-key_buffer_size + (read_buffer_size + sort_buffer_size)*max_threads = 20302 K  bytes of memory
-sHope that's ok; if not, decrease some variables in the equation.
-
-lThread pointer: 0x0
-otAttempting backtrace. You can use the following information to find out
-where mysqld died. If you see no messages after this, something went
-terribly wrong...
-
-InnoDB: We intentionally generate a memory trap.
-InnoDB: Submit a detailed bug report to https://jira.mariadb.org/
-InnoDB: If you get repeated assertion failures or crashes, even
-InnoDB: immediately after the mysqld startup, there may be
-InnoDB: corruption in the InnoDB tablespace. Please refer to
-InnoDB: https://mariadb.com/kb/en/library/innodb-recovery-modes/
-InnoDB: about forcing recovery.
-2024-02024-04-25 23:47:13 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
-2024-04-25 23:47:13 0 [Note] InnoDB: Uses event mutexes
-2024-04-25 23:47:13 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
-2024-04-25 23:47:13 0 [Note] InnoDB: Number of pools: 1
-2024-04-25 23:47:13 0 [Note] InnoDB: Using SSE2 crc32 instructions
-2024-04-25 23:47:13 0 [Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M
-2024-04-25 23:47:13 0 [Note] InnoDB: Completed initialization of buffer pool
-2024-04-25 23:47:13 0 [Note] InnoDB: Starting crash recovery from checkpoint LSN=381170
-2024-04-25 23:47:13 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
-2024-04-25 23:47:13 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
-2024-04-25 23:47:13 0 [Note] InnoDB: Creating shared tablespace for temporary tables
-2024-04-25 23:47:13 0 [Note] InnoDB: Setting file 'C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
-2024-04-25 23:47:13 0 [Note] InnoDB: File 'C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ibtmp1' size is now 12 MB.
-2024-04-25 23:47:14 0 [Note] InnoDB: Waiting for purge to start
-2024-04-25 23:47:14 0 [Note] InnoDB: 10.4.27 started; log sequence number 381179; transaction id 295
-2024-04-25 23:47:14 0 [Note] InnoDB: Loading buffer pool(s) from C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ib_buffer_pool
-2024-04-25 23:47:14 0 [Note] Plugin 'FEEDBACK' is disabled.
-2024-04-25 23:47:14 0 [Note] Server socket created on IP: '::'.
+2024-04-25 23:28:29 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-25 23:28:29 0 [Note] InnoDB: Uses event mutexes
+2024-04-25 23:28:29 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-25 23:28:29 0 [Note] InnoDB: Number of pools: 1
+2024-04-25 23:28:29 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-25 23:28:29 0 [Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M
+2024-04-25 23:28:29 0 [Note] InnoDB: Completed initialization of buffer pool
+2024-04-25 23:28:29 0 [Note] InnoDB: Starting crash recovery from checkpoint LSN=381493
+2024-04-25 23:28:29 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2024-04-25 23:28:29 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2024-04-25 23:28:29 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2024-04-25 23:28:29 0 [Note] InnoDB: Setting file 'C:\xampp\mysql\data\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2024-04-25 23:28:29 0 [Note] InnoDB: File 'C:\xampp\mysql\data\ibtmp1' size is now 12 MB.
+2024-04-25 23:28:29 0 [Note] InnoDB: 10.4.27 started; log sequence number 381502; transaction id 309
+2024-04-25 23:28:29 0 [Note] InnoDB: Loading buffer pool(s) from C:\xampp\mysql\data\ib_buffer_pool
+2024-04-25 23:28:29 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-25 23:28:29 0 [Note] InnoDB: Buffer pool(s) load completed at 240425 23:28:29
+2024-04-25 23:28:29 0 [Note] Server socket created on IP: '::'.
