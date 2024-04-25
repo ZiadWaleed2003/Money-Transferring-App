@@ -10,8 +10,8 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Jhon Doe</h6>
-                        <span>Admin</span>
+                        <h6 class="mb-0">ElZowZat</h6>
+                        <span>User</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -21,7 +21,9 @@
                     <a id="transactions" href="transactions.php" class="nav-item nav-link"><i class="bi bi-arrow-down-up" style="transform: rotate(45deg);"></i> Transactions</a>
                     <a id="blank" href="blank.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Blank</a>
                     <a id="transac" href="transacation-history.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Transacations</a>
-
+                    <a id="Feedback" href="feedback.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Feedback</a>
+ 
+                    
                 </div>
             </nav>
         </div> 
