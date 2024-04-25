@@ -31,7 +31,7 @@ class DBConnection
 
     public function closeConnection(){
         if($this->connection){
-            $this->connection.close();
+            $this->connection->close();
         }
         else{
             echo "Connection not open";
