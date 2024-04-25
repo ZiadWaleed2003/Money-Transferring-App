@@ -1,0 +1,21 @@
+#transaction-section-content{
+    
+    
+    .home-page{
+        
+        
+        .options {
+
+            
+            div{
+                transition-duration: 0.3s;                
+            }
+            div:hover{
+                background-color: var(--accent) !important; 
+            }
+        }
+
+    }
+}
+    
+

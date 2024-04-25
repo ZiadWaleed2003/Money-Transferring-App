@@ -1,0 +1,19 @@
+.ipn-input input[type="text"] {
+    width: 70px;
+    height: 70px;
+    
+    font-size: 50px;
+    text-align: center;
+    color: var(--text);
+    
+    background-color: var(--background);
+    caret-color: transparent;
+    border: none;
+}
+.line{
+    width: 200px;
+    height: 1px;
+    border: 1px solid var(--accent);
+    
+    margin: 15px auto 50px auto;
+}
