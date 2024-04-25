@@ -14,13 +14,18 @@ class CRUD{
              if(!$result)
                 {
                     echo "Error : ".mysqli_error($connection);
+                    $db->closeConnection();
                     return false;
                 }
                 else
                 {
+                    $db->closeConnection();
                     return $connection->insert_id;
                 }
 
+        }else{
+            echo "Error : ".mysqli_error($connection);
+            return false;
         }
     }
 
@@ -36,13 +41,16 @@ class CRUD{
             if(!$result){
 
                 echo "Error : ".mysqli_error($connection);
+                $db->closeConnection();
                 return false;
             }
             else{
+                $db->closeConnection();
                 return True;
             }
         }
         else{
+                echo "Error : ".mysqli_error($connection);
                 return false;
         }
 
@@ -61,13 +69,19 @@ class CRUD{
              if(!$result)
                 {
                     echo "Error : ".mysqli_error($connection);
+                    $db->closeConnection();
                     return false;
                 }
                 else
                 {
+                    $db->closeConnection();
                     return $connection->insert_id;
                 }
 
+        }else{
+
+            echo "Error : ".mysqli_error($connection);
+            return false;
         }
     }
 
@@ -84,14 +98,20 @@ class CRUD{
             if(!$result){
                 
                 echo "Error : ".mysqli_error($connection);
+                $db->closeConnection();
                 return false;
                 
             }
             else{
 
+                $db->closeConnection();
                 return $result->fetch_all(MYSQLI_ASSOC);
 
             }
+        }else{
+
+            echo "Error : ".mysqli_error($connection);
+            return false;
         }
 
     }
