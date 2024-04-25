@@ -1,6 +1,13 @@
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
+<?php
+    require_once ("../../controllers/ProductController.php");
+
+    $productController= new ProductController;
+    $bank=$productController->getbanks();
+
+?>
 
             <!-- add card Start -->
             <div class="container-fluid pt-4 px-4">
@@ -18,12 +25,15 @@
                                     <label for="floatingSelect">Bank Name</label>
                                     <select class="form-select" id="floatingSelect"
                                         aria-label="Floating label select example">
-                                        <option selected>Banks</option>
-                                        <option value="1">Alhaly</option>
-                                        <option value="2">CIB</option>
-                                        <option value="3">QNB</option>
+                                        <?php
+                                        foreach($bank as $banks)
+                                        {
+                                            ?>
+                                            <option value="<?php echo $banks["id"] ?>"><?php echo $banks["name"] ?></option>
+                                            <?php
+                                        }
+                                        ?>
                                     </select>
-                                    
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Card Number</label>
