@@ -29,7 +29,7 @@ class DBConnection
         return $connection;  
     }
 
-    public function closeconnection(){
+    public function closeConnection(){
         if($this->connection){
             $this->connection.close();
         }
