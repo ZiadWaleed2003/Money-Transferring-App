@@ -23,7 +23,7 @@
  
    
                 if($CardController->addCard($card)){
-                    header("location:card.php");
+                    echo "<script> window.location.href='card.php';</script>";
                     
 
                 }

@@ -1,9 +1,6 @@
 <?php
     
-require_once '../../Models/bank.php';
-require_once 'DBConnection.php';
-require_once 'CRUD.php';
-
+require_once("CRUD.php");
 
 class BankController{
     protected $db;
