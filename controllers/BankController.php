@@ -1,34 +1,43 @@
 <?php
     
-require_once '../Models/bank.php';
-require_once '../Models/DBConnection.php';
+require_once("CRUD.php");
 
 class BankController{
-    public function addBank(bank $bank){
-        $this->db= new DBConnection;
-        if($this->db->openconnection){
-            $check = "SELECT * FROM bank where [name]= '$bank->name' and [id]='$bank->id'";
-            $var=$this->db->select($check);
-            if(mysqli_num_rows($var)>0){
-                $query = "insert into bank values ('','$bank->name','$bank->id')";
-                return $this->db->insert($query);
-            }   
+    protected $db;
+
+
+        public function addBank(bank $bank){
+            $name = $bank->getName();
+            $id = $bank->getId();
+            
+            $check ="SELECT * FROM bank WHERE name = '$name' AND id ='$id'";
+            
+            $existingBanks = CRUD::Select($check);
+            
+            if(empty($existingBanks)){
+                $query = "INSERT INTO bank (id, name) VALUES ('$id', '$name')";
+                
+                $result = CRUD::Insert($query);
+                
+                if($result !== false){
+                    return true; 
+                } else {
+                    return false;
+                }
+            } else {
+                return false; 
+            }
         }
-    else{
-    echo "Error in connection";
-    return false;
-    }
-}
+        
 
     public function viewAllbanks(){
-        $this->db = new DBConnection;
-        if($this->db->openconnection){
-            $query="select *from bank";
-            $this->db->select($query);
+        $query = "select * from bank";
+        $result = CRUD::Select($query);
+        if($result){
+            return $result;
         }
         else{
             echo"ERROR IN CONNECTION";
-            return false;
         }
     }
 }
