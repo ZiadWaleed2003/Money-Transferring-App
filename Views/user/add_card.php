@@ -2,10 +2,36 @@
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
 <?php
-    require_once ("../../controllers/ProductController.php");
+    require_once '../../controllers/CardController.php';
+    require_once ("../../Models/card.php");
 
-    $productController= new ProductController;
-    $bank=$productController->getbanks();
+    $CardController= new CardController;
+    $bank=$CardController->getbanks();
+
+                         
+    if (isset($_POST['add'])){
+        if (isset($_POST['name']) && isset($_POST['bankname']) && isset($_POST['cardnumber']) && isset($_POST['cvv']) && isset($_POST["ipn"])) {
+            
+            if (!empty($_POST['name']) && !empty($_POST['cardnumber']) && !empty($_POST['cvv']) && !empty($_POST['ipn'])) {
+                $card = new card;
+                $card->setName($_POST['name']);
+                $card->setNumber($_POST['cardnumber']);
+                $card->setCvv($_POST['cvv']);
+                $card->setIpnCode($_POST['ipn']) ;
+                $card->setBankId((int)$_POST['bankname']);
+                
+ 
+   
+                if($CardController->addCard($card)){
+                    header("location:card.php");
+
+                }
+                else{
+                    echo"Error: Card not added";
+                }
+        }
+    }
+}
 
 ?>
 
@@ -15,16 +41,16 @@
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-secondary rounded h-100 p-4">
                             <h4 class="mb-4">Add New Card</h4>
-                            <form>
+                            <form method="post" action="add_card.php" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Card Name Holder</label>
                                     <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                        aria-describedby="emailHelp" name="name">
                                 </div>
                                 <div class="mb-3">
                                     <label for="floatingSelect">Bank Name</label>
                                     <select class="form-select" id="floatingSelect"
-                                        aria-label="Floating label select example">
+                                        aria-label="Floating label select example" name="bankname" >
                                         <?php
                                         foreach($bank as $banks)
                                         {
@@ -37,18 +63,18 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Card Number</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword1">
+                                    <input type="number" class="form-control" id="exampleInputPassword1" name="cardnumber" placeholder="1234 5678 9102 3456">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">CVV Number</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword1">
+                                    <input type="number" class="form-control" id="exampleInputPassword1" name="cvv" placeholder="eg. 177">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">IPN Code Number</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword1">
+                                    <input type="number" class="form-control" id="exampleInputPassword1" name="ipn">
                                 </div>
-                                    <input type="submit" name="Add" class="btn btn-primary">
+                                <button type="submit" name="add"class="btn btn-primary">Add</button>
                             </form>
                         </div>
                     </div>
