@@ -8,7 +8,7 @@
             return $this->Name;
         }
         public function setName($Name){
-            $this->Name = Name;
+            $this->Name = $Name;
         }
         public function getAcct_No(){
             return $this->Acct_No;
@@ -20,7 +20,7 @@
             return $this->balance;
         }
         public function setbalance($balance){
-            $this->balance = balance;
+            $this->balance = $balance;
         }
 
     }
