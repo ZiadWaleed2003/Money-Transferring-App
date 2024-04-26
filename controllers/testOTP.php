@@ -1,6 +1,6 @@
 <?php
 
-header("location : SendOTP.php");
+header("location:SendOTP.php");
 
 
 ?>
