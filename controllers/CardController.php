@@ -70,6 +70,19 @@ class CardController
         
    }
 
+   public function updateCard($name,$id)
+    {
+       $query="update usercards SET name='$name' where usercards.id=$id";
+       $result=CRUD::Update($query);
+       if($result !=false){
+        return true;
+       }
+       else{
+        return false;
+       }
+        
+   }
+
 
 
 }

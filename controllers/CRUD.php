@@ -75,7 +75,7 @@ class CRUD{
                 else
                 {
                     $db->closeConnection();
-                    return $connection->insert_id;
+                    return true;
                 }
 
         }else{
