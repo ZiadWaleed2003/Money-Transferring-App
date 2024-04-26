@@ -1,28 +1,28 @@
 <?php
     
-require_once '../../Models/bank.php';
+require_once '../../Models/bill.php';
 require_once 'DBConnection.php';
 require_once 'CRUD.php';
 
 
-class BankController{
+class BillController{
     protected $db;
 
 
-        public function addBank(bank $bank){
-            $name = $bank->getName();
-            $id = $bank->getId();
+        public function addBill(bill $bill){
+            $billname = $bill->getBillName();
+            $acct_no = $bill->getAcct_No();
             
             // Query to check if the bank with the given name and ID already exists
-            $check ="SELECT * FROM bank WHERE name = '$name' AND id ='$id'";
+            $check ="SELECT * FROM bills WHERE name = '$billname' AND account_number ='$acct_no'";
             
             // Performing the query to check for existing banks
-            $existingBanks = CRUD::Select($check);
+            $existingBills = CRUD::Select($check);
             
             // Checking if there are no existing banks with the same name and ID
-            if(empty($existingBanks)){
+            if(empty($existingBills)){
                 // Query to insert the new bank into the database
-                $query = "INSERT INTO bank (id, name) VALUES ('$id', '$name')";
+                $query = "INSERT INTO bills (name, account_number,balance) VALUES ('$billname', '$acct_no', '0.0')";
                 
                 // Performing the query to insert the new bank
                 $result = CRUD::Insert($query);
@@ -37,17 +37,4 @@ class BankController{
                 return false; // Bank not added because a bank with the same name and ID already exists
             }
         }
-        
-
-    public function viewAllbanks(){
-        $query = "select * from bank";
-        $result = CRUD::Select($query);
-        if($result){
-            return $result;
-        }
-        else{
-            echo"ERROR IN CONNECTION";
-        }
     }
-}
-?>
