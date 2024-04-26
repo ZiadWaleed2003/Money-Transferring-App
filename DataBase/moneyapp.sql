@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2024 at 05:22 PM
+-- Generation Time: Apr 27, 2024 at 01:50 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `moneyapp`
 --
-CREATE DATABASE IF NOT EXISTS `moneyapp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `moneyapp`;
 
 -- --------------------------------------------------------
 
@@ -29,7 +27,6 @@ USE `moneyapp`;
 -- Table structure for table `bank`
 --
 
-DROP TABLE IF EXISTS `bank`;
 CREATE TABLE `bank` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL
@@ -41,7 +38,6 @@ CREATE TABLE `bank` (
 -- Table structure for table `bankcards`
 --
 
-DROP TABLE IF EXISTS `bankcards`;
 CREATE TABLE `bankcards` (
   `id` int(11) NOT NULL,
   `user_mobile_number` int(11) NOT NULL,
@@ -57,7 +53,6 @@ CREATE TABLE `bankcards` (
 -- Table structure for table `bills`
 --
 
-DROP TABLE IF EXISTS `bills`;
 CREATE TABLE `bills` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
@@ -71,7 +66,6 @@ CREATE TABLE `bills` (
 -- Table structure for table `donations`
 --
 
-DROP TABLE IF EXISTS `donations`;
 CREATE TABLE `donations` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
@@ -85,7 +79,6 @@ CREATE TABLE `donations` (
 -- Table structure for table `feedback`
 --
 
-DROP TABLE IF EXISTS `feedback`;
 CREATE TABLE `feedback` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -98,7 +91,6 @@ CREATE TABLE `feedback` (
 -- Table structure for table `image`
 --
 
-DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -111,7 +103,6 @@ CREATE TABLE `image` (
 -- Table structure for table `requests`
 --
 
-DROP TABLE IF EXISTS `requests`;
 CREATE TABLE `requests` (
   `id` int(11) NOT NULL,
   `sender_id` int(11) NOT NULL,
@@ -127,7 +118,6 @@ CREATE TABLE `requests` (
 -- Table structure for table `transactions`
 --
 
-DROP TABLE IF EXISTS `transactions`;
 CREATE TABLE `transactions` (
   `id` int(11) NOT NULL,
   `sender_id` int(11) NOT NULL,
@@ -144,7 +134,6 @@ CREATE TABLE `transactions` (
 -- Table structure for table `usercards`
 --
 
-DROP TABLE IF EXISTS `usercards`;
 CREATE TABLE `usercards` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -162,7 +151,6 @@ CREATE TABLE `usercards` (
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -342,8 +330,8 @@ ALTER TABLE `requests`
 -- Constraints for table `transactions`
 --
 ALTER TABLE `transactions`
-  ADD CONSTRAINT `reciever_fk` FOREIGN KEY (`reciever_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `sender_fk` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `reciever_usercard_fk` FOREIGN KEY (`reciever_id`) REFERENCES `usercards` (`id`),
+  ADD CONSTRAINT `sender_usercard_fk` FOREIGN KEY (`sender_id`) REFERENCES `usercards` (`id`);
 
 --
 -- Constraints for table `usercards`
