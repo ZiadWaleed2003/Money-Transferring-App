@@ -942,4 +942,28 @@ Version: '10.4.27-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribut
 2024-04-26 15:13:13 0 [Note] InnoDB: Loading buffer pool(s) from C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ib_buffer_pool
 2024-04-26 15:13:13 0 [Note] Plugin 'FEEDBACK' is disabled.
 2024-04-26 15:13:13 0 [Note] Server socket created on IP: '::'.
-2024-04-26 15:13:13 0 [Note] InnoDB: Buffer pool(s) load completed 
+2024-04-26 15:13:13 0 [Note] InnoDB: Buffer pool(s) load completed 2024-04-26 19:20:58 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-26 19:20:58 0 [Note] InnoDB: Uses event mutexes
+2024-04-26 19:20:58 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-26 19:20:58 0 [Note] InnoDB: Number of pools: 1
+2024-04-26 19:20:58 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-26 19:20:58 0 [Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M
+2024-04-26 19:20:58 0 [Note] InnoDB: Completed initialization of buffer pool
+2024-04-26 19:20:58 0 [Note] InnoDB: Starting crash recovery from checkpoint LSN=780186
+2024-04-26 19:20:59 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2024-04-26 19:20:59 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2024-04-26 19:20:59 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2024-04-26 19:20:59 0 [Note] InnoDB: Setting file 'C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2024-04-26 19:20:59 0 [Note] InnoDB: File 'C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ibtmp1' size is now 12 MB.
+2024-04-26 19:20:59 0 [Note] InnoDB: Waiting for purge to start
+2024-04-26 19:20:59 0 [Note] InnoDB: 10.4.27 started; log sequence number 780195; transaction id 1024
+2024-04-26 19:20:59 0 [Note] InnoDB: Loading buffer pool(s) from C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ib_buffer_pool
+2024-04-26 19:20:59 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-26 19:20:59 0 [Note] InnoDB: Buffer pool(s) load completed at 240426 19:20:59
+2024-04-26 19:20:59 0 [Note] Server socket created on IP: '::'.
+2024-04-26 19:20:59 0 [ERROR] mysqld.exe: Table '.\mysql\roles_mapping' is marked as crashed and should be repaired
+2024-04-26 19:20:59 0 [Warning] Recovering table: '.\mysql\roles_mapping'
+2024-04-26 19:20:59 0 [Note] Reading of all Master_info entries succeeded
+2024-04-26 19:20:59 0 [Note] Added new Master_info '' to hash table
+2024-04-26 19:20:59 0 [Note] c:\xampp\mysql\bin\mysqld.exe: ready for connections.
+Version: '10.4.27-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribution

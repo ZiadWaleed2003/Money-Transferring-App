@@ -24,6 +24,7 @@
    
                 if($CardController->addCard($card)){
                     header("location:card.php");
+                    
 
                 }
                 else{
