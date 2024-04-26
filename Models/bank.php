@@ -3,7 +3,6 @@
 class bank{
     private $name;
     private $id;
-    protected $db;
     public function getName(){
         return $this->name;
     }
