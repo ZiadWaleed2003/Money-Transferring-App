@@ -2,23 +2,28 @@
 
 class DBConnection
 {
-    private const DB_HOST = 'localhost';
-    private const DB_USER = 'root';
-    private const DB_PASSWORD = '';
-    private const DB_NAME = 'moneyapp';
+    private  $DB_HOST;
+    private  $DB_USER ;
+    private  $DB_PASSWORD ;
+    private  $DB_NAME;
     public $connection;  
 
 
     public function __construct(){
 
+        $this->DB_host = 'localhost' ;
+        $this->DB_USER = 'root' ;
+        $this->DB_PASSWORD = '' ;
+        $this->DB_NAME = 'moneyapp' ;
+        
     }
 
     public function openConnection() {
         $this->connection = new mysqli(
-            self::DB_HOST,
-            self::DB_USER,
-            self::DB_PASSWORD,
-            self::DB_NAME
+            $this->DB_HOST,
+            $this->DB_USER,
+            $this->DB_PASSWORD,
+            $this->DB_NAME
         );
 
         if ($this->connection->connect_error) {
