@@ -1,7 +1,7 @@
 <?php
     
 require_once '../Models/bank.php';
-require_once '../Models/DBConnection.php';
+require_once 'DBConnection.php';
 
 class BankController{
     public function addBank(bank $bank){
