@@ -1163,6 +1163,26 @@ Version: '10.4.27-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribut
 =======
 >>>>>>> 23c62088bead842e7a3acf0e7e4da9779e95d26d
 >>>>>>> 7d36d097e8b7856afb9d489f690c6cde27ba951d
+<<<<<<< HEAD
+2024-04-27 20:39:27 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-27 20:39:27 0 [Note] InnoDB: Uses event mutexes
+2024-04-27 20:39:27 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-27 20:39:27 0 [Note] InnoDB: Number of pools: 1
+2024-04-27 20:39:27 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-27 20:39:27 0 [Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M
+2024-04-27 20:39:27 0 [Note] InnoDB: Completed initialization of buffer pool
+2024-04-27 20:39:27 0 [Note] InnoDB: Starting crash recovery from checkpoint LSN=1270627
+2024-04-27 20:39:28 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2024-04-27 20:39:28 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2024-04-27 20:39:28 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2024-04-27 20:39:28 0 [Note] InnoDB: Setting file 'C:\xampp\mysql\data\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2024-04-27 20:39:28 0 [Note] InnoDB: File 'C:\xampp\mysql\data\ibtmp1' size is now 12 MB.
+2024-04-27 20:39:28 0 [Note] InnoDB: 10.4.27 started; log sequence number 1270636; transaction id 1158
+2024-04-27 20:39:28 0 [Note] InnoDB: Loading buffer pool(s) from C:\xampp\mysql\data\ib_buffer_pool
+2024-04-27 20:39:28 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-27 20:39:28 0 [Note] InnoDB: Buffer pool(s) load completed at 240427 20:39:28
+2024-04-27 20:39:28 0 [Note] Server socket created on IP: '::'.
+=======
 2024-04-27 12:07:59 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
 2024-04-27 12:07:59 0 [Note] InnoDB: Uses event mutexes
 2024-04-27 12:07:59 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
@@ -1199,6 +1219,7 @@ Version: '10.4.27-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribut
 2024-04-27 12:09:15 0 [Note] InnoDB: Loading buffer pool(s) from C:\xampp\htdocs\project\Money-Transferring-App\DB-data\ib_buffer_pool
 2024-04-27 12:09:15 0 [Note] Plugin 'FEEDBACK' is disabled.
 2024-04-27 12:09:15 0 [Note] Server socket created on IP: '::'.
+<<<<<<< HEAD
 2024-04-27 21:50:34 0 [Note] Starting MariaDB 10.4.32-MariaDB source revision c4143f909528e3fab0677a28631d10389354c491 as process 19996
 2024-04-27 21:50:34 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
 2024-04-27 21:50:34 0 [Note] InnoDB: Uses event mutexes
@@ -1218,3 +1239,6 @@ Version: '10.4.27-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribut
 2024-04-27 21:50:34 0 [Note] Plugin 'FEEDBACK' is disabled.
 2024-04-27 21:50:34 0 [Note] InnoDB: Loading buffer pool(s) from F:\Programming\swe-fall-2024\Money-Transferring-App\db-data\ib_buffer_pool
 2024-04-27 21:50:34 0 [Note] Server socket created on IP: '::'.
+=======
+>>>>>>> 0039f8fce67ad7f53ba988164f9366a0b2fd159a
+>>>>>>> 0897a822f6f3253712af1be68cbe8c51104e30b4
