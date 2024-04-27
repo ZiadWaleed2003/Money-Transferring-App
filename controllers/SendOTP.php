@@ -23,21 +23,22 @@ try {
     $mail->Port = 587;
 
         $mail->setFrom('elzozatandbasselco@gmail.com' , 'ElZozat and Bassel CO.');
-        $mail->addAddress("shahersa3ed1@gmail.com");
+        $mail->addAddress("zyadatefali12@gmail.com");
 
 
         $mail->isHTML(true);
         $mail->Subject = "Your Verification code";
 
-        $mail->Body = "<p>ana 3ayez bosa ya baby</p>";
+        $mail->Body = "<p> ya nigga ya zingy t3ala msms</p>";
 
  
         $mail->Send();
         echo "Message Sent OK\n";
-    } catch (Exception $e) {
-    echo $e->errorMessage(); //Pretty error messages from PHPMailer
-    } catch (Exception $e) {
-    echo $e->getMessage(); //Boring error messages from anything else!
+
+    } catch ( Exception $e) {
+
+        echo $e->errorMessage(); //Pretty error messages from PHPMailer
+    
     }
 
 
