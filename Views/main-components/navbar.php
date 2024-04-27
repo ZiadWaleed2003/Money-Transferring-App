@@ -17,7 +17,7 @@
                             <span class="d-none d-lg-inline-flex">ElZowZat</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="account-view.php" class="dropdown-item">My Profile</a>
+                            <a href="user-accct-view.php" class="dropdown-item">My Profile</a>
                             <a href="#" class="dropdown-item">Settings</a>
                             <a href="#" class="dropdown-item">Log Out</a>
                         </div>
