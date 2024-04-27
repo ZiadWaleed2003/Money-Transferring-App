@@ -7,11 +7,16 @@
 <?php  
     require_once ("../../controllers/BankController.php");
     require_once ("../../controllers/BillController.php");
+    require_once ("../../controllers/DonationController.php");
     require_once ("../../Models/bank.php");
     require_once ("../../Models/bill.php");
+    require_once ("../../Models/donation.php");
+
     
     $bankcontroller = new BankController;
     $billcontroller = new BillController;
+    $donationcontroller = new DonationController;
+
 
 ?>
 
@@ -19,6 +24,11 @@
 
 
 <!-- Blank Start -->
+<div class="col-sm-6 col-xl-3">
+    <a id="Admin" class="options" href="index.php">
+        <button type="button" class="btn btn-outline-light m-2"><-BACK</button>
+    </a>
+</div>
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-12 col-xl-6">
@@ -98,7 +108,7 @@
                 <div class="col-sm-12 col-xl-6 m-auto">
                     <div class="bg-secondary rounded h-100 p-4">
                         <h6 class="mb-4">ADD DONATION</h6>
-                        <form action="../Models/add_donation.php" method="POST">
+                        <form action="Admin.php" method="POST">
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
                                 <input type="text" class="form-control" name="name" placeholder="name" aria-label="NAME" aria-describedby="basic-addon1">
@@ -109,8 +119,26 @@
                             </div>
                             <div class="mb-3 form-check">
                             </div>
-                            <button type="submit" class="btn btn-primary">ADD</button>
+                            <button type="submit" name="adddonation" class="btn btn-primary">ADD</button>
                         </form>
+                        <?php
+                if(isset($_POST['adddonation'])){
+                    if(isset($_POST['name']) && isset($_POST['account_number'])){
+                        if(!empty($_POST['name']) && !empty($_POST['account_number'])){
+                            $donation = new donation;
+                            $donation->setName($_POST['name']);
+                            $donation->setAcct_No($_POST['account_number']);
+                            if($donationcontroller->adddonation($donation)){
+                                echo "donation added";
+                            }
+                            else{
+                                echo "error donation not added";
+                            }
+
+                        }
+                    }
+                }
+                ?>
                     </div>
                 </div>
         <!-- Blank End -->
