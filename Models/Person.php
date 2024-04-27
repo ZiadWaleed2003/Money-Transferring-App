@@ -18,8 +18,47 @@ abstract class PERSON {
         
     }
 
+    public function getName() {
+        return $this->name;
+    }
 
-    abstract public function logOut() : bool;
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+
+    public function setName($name) {
+      
+        $this->name = $name;
+    }
+
+    public function setId($id) {
+      
+        $this->id = $id;
+    }
+
+    public function setEmail($email) {
+      
+        $this->email = $email;
+    }
+    
+    public function setPassword($password) {
+      
+        $this->password = $password;
+    }
+   
+    
+
+
+    abstract public function logOut();
 
 
 }
