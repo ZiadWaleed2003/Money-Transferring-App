@@ -37,7 +37,7 @@ class BankController{
             return $result;
         }
         else{
-            echo"ERROR IN CONNECTION";
+            return false;
         }
     }
 }

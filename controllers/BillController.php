@@ -1,7 +1,6 @@
 <?php
     
-require_once '../../Models/bill.php';
-require_once 'DBConnection.php';
+
 require_once 'CRUD.php';
 
 
@@ -29,6 +28,16 @@ class BillController{
                 }
             } else {
                 return false; 
+            }
+        }
+        public function viewAllbills(){
+            $query = "select * from bills";
+            $result = CRUD::Select($query);
+            if($result){
+                return $result;
+            }
+            else{
+                return false;
             }
         }
     }

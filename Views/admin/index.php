@@ -1,6 +1,20 @@
 <?php require_once("../main-components/header.php")?>
 <?php require_once("../main-components/side-navbar.php")?>
 <?php require_once("../main-components/navbar.php")?>
+<?php  
+    require_once ("../../controllers/BankController.php");
+    require_once ("../../controllers/BillController.php");
+    require_once ("../../controllers/DonationController.php");
+    require_once ("../../Models/bank.php");
+    require_once ("../../Models/bill.php");
+    require_once ("../../Models/donation.php");
+    $bankcontroller = new BankController;
+    $billcontroller = new BillController;
+    $donationcontroller = new DonationController;
+
+
+
+?>
 
 
 <!-- blank Start -->
@@ -76,8 +90,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            // PHP code to fetch and display data for the second table
+                        <?php
+                            $bill = $billcontroller->viewAllbills();
+                            if($bill){
+                                foreach($bill as $bills){
+                                    echo "<tr>";
+                                    echo "<td>". $bills['id']. "</td>";
+                                    echo "<td>". $bills['name']. "</td>";
+                                    echo "<td>". $bills['balance']. "</td>";
+                                    echo "<td>". $bills['account_number']. "</td>";
+                                    echo "<tr>";
+                                }
+                            }
                             ?>
                         </tbody>
                     </table>
@@ -99,8 +123,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            // PHP code to fetch and display data for the third table
+                        <?php
+                            $donation = $donationcontroller->viewAlldonations();
+                            if($donation){
+                                foreach($donation as $donations){
+                                    echo "<tr>";
+                                    echo "<td>". $donations['id']. "</td>";
+                                    echo "<td>". $donations['name']. "</td>";
+                                    echo "<td>". $donations['balance']. "</td>";
+                                    echo "<td>". $donations['account_number']. "</td>";
+                                    echo "<tr>";
+                                }
+                            }
                             ?>
                         </tbody>
                     </table>
@@ -121,7 +155,15 @@
                         </thead>
                         <tbody>
                             <?php
-                            // PHP code to fetch and display data for the fourth table
+                            $banks = $bankcontroller->viewAllbanks();
+                            if($banks){
+                                foreach($banks as $bank){
+                                    echo "<tr>";
+                                    echo "<td>". $bank['id']. "</td>";
+                                    echo "<td>". $bank['name']. "</td>";
+                                    echo "<tr>";
+                                }
+                            }
                             ?>
                         </tbody>
                     </table>
