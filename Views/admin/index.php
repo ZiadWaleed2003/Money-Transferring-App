@@ -5,12 +5,15 @@
     require_once ("../../controllers/BankController.php");
     require_once ("../../controllers/BillController.php");
     require_once ("../../controllers/DonationController.php");
+    require_once ("../../controllers/useracct_Controller.php");
     require_once ("../../Models/bank.php");
     require_once ("../../Models/bill.php");
     require_once ("../../Models/donation.php");
+    require_once ("../../Models/User.php");
     $bankcontroller = new BankController;
     $billcontroller = new BillController;
     $donationcontroller = new DonationController;
+    $usercontroller = new useracct_Controller;
 
 
 
@@ -42,34 +45,19 @@
                         </thead>
                         <tbody>
                         <?php
-                                    $host = "localhost";
-                                    $username = "root";
-                                    $password = "";
-                                    $dbname = "moneyapp";
-                                    $conn = mysqli_connect($host, $username, $password, $dbname);
-
-                                    if (!$conn) {
-                                        die("Connection failed: " . mysqli_connect_error());
-                                    }
-
-                                    $sql = "SELECT id, name, email, phone_number, role FROM users";
-                                    $result = mysqli_query($conn, $sql);
-
-                                    if (mysqli_num_rows($result) > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            echo "<tr>";
-                                            echo "<th scope='row'>" . $row["id"] . "</th>";
-                                            echo "<td>" . $row["name"] . "</td>";
-                                            echo "<td>" . $row["email"] . "</td>";
-                                            echo "<td>" . $row["phone_number"] . "</td>";
-                                            echo "<td>" . $row["role"] . "</td>";
-                                            echo "</tr>";
-                                        }
-                                    } else {
-                                        echo "<tr><td colspan='4'>No users found</td></tr>";
-                                    }
-                                    mysqli_close($conn);
-                                    ?>
+                            $user = $usercontroller->viewAllusers();
+                            if($user){
+                                foreach($user as $users){
+                                    echo "<tr>";
+                                    echo "<td>". $users['id']. "</td>";
+                                    echo "<td>". $users['name']. "</td>";
+                                    echo "<td>". $users['email']. "</td>";
+                                    echo "<td>". $users['phone_number']. "</td>";
+                                    echo "<td>". $users['role']. "</td>";
+                                    echo "<tr>";
+                                }
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
