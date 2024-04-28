@@ -14,8 +14,9 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
-    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet">
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -33,14 +34,15 @@
     <link href="../assets/css/Iconstylefav.css" rel="stylesheet">
 
     <?php if (file_exists("../assets/css/" . pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME) . ".css")): ?>
-        <link rel="stylesheet" type="text/css" href="../assets/css/<?php echo pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME); ?>.css">
+        <link rel="stylesheet" type="text/css"
+            href="../assets/css/<?php echo pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME); ?>.css">
     <?php endif; ?>
 
 </head>
 
 <body>
-<div class="container-fluid position-relative d-flex p-0">
+    <div class="container-fluid position-relative d-flex p-0">
         <!-- Spinner Start -->
-        
+
 
         <!-- Spinner End -->

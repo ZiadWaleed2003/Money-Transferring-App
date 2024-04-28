@@ -1,116 +1,112 @@
 <?php
-require_once("DBConnection.php");
-class CRUD{
+require_once ("DBConnection.php");
+class CRUD
+{
 
-    public static function Insert($query){
-            
+    public static function Insert($query)
+    {
+
         $db = new DBConnection();
         $connection = $db->openConnection();
 
-        if ($connection != FALSE){
+        if ($connection != FALSE) {
 
             $result = $connection->query($query);
-               
-             if(!$result)
-                {
-                    echo "Error : ".mysqli_error($connection);
-                    $db->closeConnection();
-                    return false;
-                }
-                else
-                {
-                    
-                    return $connection->insert_id;
-                }
 
-        }else{
-            echo "Error : ".mysqli_error($connection);
+            if (!$result) {
+                echo "Error : " . mysqli_error($connection);
+                $db->closeConnection();
+                return false;
+            } else {
+
+                return $connection->insert_id;
+            }
+
+        } else {
+            echo "Error : " . mysqli_error($connection);
             return false;
         }
     }
 
-    public static function Delete($query){
+    public static function Delete($query)
+    {
 
         $db = new DBConnection();
         $connection = $db->openConnection();
 
-        if($connection != FALSE){
+        if ($connection != FALSE) {
 
             $result = $connection->query($query);
 
-            if(!$result){
+            if (!$result) {
 
-                echo "Error : ".mysqli_error($connection);
+                echo "Error : " . mysqli_error($connection);
                 $db->closeConnection();
                 return false;
-            }
-            else{
+            } else {
                 $db->closeConnection();
                 return True;
             }
-        }
-        else{
-                echo "Error : ".mysqli_error($connection);
-                return false;
+        } else {
+            echo "Error : " . mysqli_error($connection);
+            return false;
         }
 
 
     }
 
-    public static function Update($query){
-            
+    public static function Update($query)
+    {
+
         $db = new DBConnection();
         $connection = $db->openConnection();
 
-        if ($connection != FALSE){
+        if ($connection != FALSE) {
 
             $result = $connection->query($query);
-               
-             if(!$result)
-                {
-                    echo "Error : ".mysqli_error($connection);
-                    $db->closeConnection();
-                    return false;
-                }
-                else
-                {
-                    $db->closeConnection();
-                    return true;
-                }
 
-        }else{
+            if (!$result) {
+                echo "Error : " . mysqli_error($connection);
+                $db->closeConnection();
+                return false;
+            } else {
+                $db->closeConnection();
+                return true;
+            }
 
-            echo "Error : ".mysqli_error($connection);
+        } else {
+
+            echo "Error : " . mysqli_error($connection);
             return false;
         }
     }
 
 
-    public static function Select($query){
+    public static function Select($query)
+    {
 
         $db = new DBConnection();
         $connection = $db->openConnection();
 
-        if($connection != false){
+        if ($connection != false) {
 
             $result = $connection->query($query);
 
-            if(!$result){
-                
-                echo "Error : ".mysqli_error($connection);
+            if (!$result) {
+
+                echo "Error : " . mysqli_error($connection);
                 $db->closeConnection();
                 return false;
-                
-            }
-            else{
+
+            } else {
 
                 $db->closeConnection();
                 return $result->fetch_all(MYSQLI_ASSOC);
 
             }
-        }else{
+        } else {
 
-            echo "Error : ".mysqli_error($connection);
+            echo "Error : " . mysqli_error($connection);
             return false;
         }
 
