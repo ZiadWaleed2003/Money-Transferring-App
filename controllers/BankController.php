@@ -37,6 +37,7 @@ class BankController{
             return $result;
         }
         else{
+            echo "NO BANKS TO SHOW";
             return false;
         }
     }
