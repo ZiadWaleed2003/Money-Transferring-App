@@ -1,6 +1,7 @@
 <?php
 
-abstract class PERSON {
+abstract class PERSON
+{
 
 
     protected $name;
@@ -9,53 +10,61 @@ abstract class PERSON {
     protected $password;
 
 
-    public function __construct($name , $id , $email , $password)
+    public function __construct($name, $id, $email, $password)
     {
-        $this->name     = $name;
-        $this->id       = $id;
-        $this->email    = $email;
+        $this->name = $name;
+        $this->id = $id;
+        $this->email = $email;
         $this->password = $password;
-        
+
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function getPassword() {
+    public function getPassword()
+    {
         return $this->password;
     }
 
 
-    public function setName($name) {
-      
+    public function setName($name)
+    {
+
         $this->name = $name;
     }
 
-    public function setId($id) {
-      
+    public function setId($id)
+    {
+
         $this->id = $id;
     }
 
-    public function setEmail($email) {
-      
+    public function setEmail($email)
+    {
+
         $this->email = $email;
     }
-    
-    public function setPassword($password) {
-      
+
+    public function setPassword($password)
+    {
+
         $this->password = $password;
     }
-   
-    
+
+
 
 
     abstract public function logOut();
@@ -65,3 +74,4 @@ abstract class PERSON {
 
 
 ?>
+

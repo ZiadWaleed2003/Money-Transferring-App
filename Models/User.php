@@ -1,46 +1,59 @@
 <?php
 
 require_once "Person.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/controllers/CRUD.php";
 
-class User extends PERSON{
+class User extends PERSON
+{
 
 
     private $image_path;
     private $phone_number;
 
 
-    public function __construct($id , $name , $email , $password , $image_path , $phone_number)
+    public function __construct($id, $name, $email, $password, $image_path, $phone_number)
     {
-        parent::__construct($name , $id , $email , $password);
+        parent::__construct($name, $id, $email, $password);
 
-        $this->image_path   = $image_path;
+        $this->image_path = $image_path;
         $this->phone_number = $phone_number;
     }
 
-    public function setImagePath($image_path){
+    public static function constructFromDB($id)
+    {
+        $query = "SELECT * FROM users WHERE id = '$id'";
+        $res = CRUD::Select($query)[0];
+        return new User($id, $res["name"], $res["email"], $res["password"], $res["image_path"], $res["phone_number"]);
+    }
+
+    public function setImagePath($image_path)
+    {
 
         $this->image_path = $image_path;
     }
-    
-    public function setPhoneNumber($phone_number){
+
+    public function setPhoneNumber($phone_number)
+    {
 
         $this->phone_number = $phone_number;
     }
 
-    public function getImagePath(){
+    public function getImagePath()
+    {
         return $this->image_path;
     }
 
-    public function getPhoneNumber(){
+    public function getPhoneNumber()
+    {
         return $this->phone_number;
     }
 
 
-    
 
-    public function logOut(){
 
-      
+    public function logOut()
+    {
+
     }
 
 }
@@ -49,3 +62,4 @@ class User extends PERSON{
 
 
 ?>
+
