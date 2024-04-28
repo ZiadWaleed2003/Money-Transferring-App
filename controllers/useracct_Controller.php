@@ -10,6 +10,7 @@ class useracct_Controller{
             return $result;
         }
         else{
+            echo "NO USERS TO SHOW";
             return false;
         }
     }
