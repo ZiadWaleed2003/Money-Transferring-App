@@ -4,6 +4,10 @@
         // Transaction Constants
         private static $cardNumberMAX = 16;
         private static $cardNumberMIN = 16;
+
+        private static $ipn_size = 6;
+        private static $ipn_max_time = 180; // sec
+
         private static $amountMAX = 99999;
         private static $transactionSTATUS = ['accepted', 'rejected'];
         private static $transactionTYPE = ['send', 'recieve'];
@@ -60,6 +64,21 @@
 
         public static function validateAmountAdd($current_amount, $add_amount){
             return true;
+        }
+
+        public static function validateIpnCheck($start_time, $send_time, $entered_ipn, $true_ipn){
+            
+            if( $send_time - $start_time > self::$ipn_max_time){
+                if($entered_ipn == $true_ipn){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
         }
 
         public static function validateTransactionStatus($transaction_status){

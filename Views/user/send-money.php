@@ -1,6 +1,18 @@
+<?php 
+    session_start();
+
+    if(!isset($_SESSION['user_id'])){
+        $_SESSION['user_id'] = 1;
+    }
+?>
+
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
+<?php require("../../controllers/CRUD.php");?>
+<?php require("../../Models/Formation.php");?>
+
+
 
 
 <!-- Transaction Start -->
@@ -29,32 +41,44 @@
         <div id="transaction-section-content" class="container-fluid pt-5">
             <div id="send-money-page" class="row justify-content-center">
                 <div class="bg-secondary rounded h-100 p-4 col-10">
-
-                    <form>
+                
+                    <form method="POST" action="../../controllers/TransactionsController.php">
                         <div class="mb-3">
+
                             <label for="" class="form-label h4" >Select Your Card</label>
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" required>
+                            <select name="transaction_sender_card_number" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" required>
+                                
                                 <option value="" class="text-muted" selected disabled>-- Open Cards list --</option>
-                                <option value="1" class="bg-danger text-white">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <?php
+                                    $cards = CRUD::Select("SELECT * FROM usercards WHERE user_id = $_SESSION[user_id] order by favourite desc");
+                                    foreach($cards as $card){
+                                        $card_number = Formation::showCardNumber($card['number']);
+                                        $classes = ($card['favourite'] == 1)? "bg-danger text-white": "";
+                                        
+                                        echo "<option value='$card[id]' class='$classes'>$card_number</option>";
+                                    }
+                                ?>
                             </select>
                         </div>
                         <div class="row mt-5">
                             <div class="col-6">
-                                <label class="form-label h4">Reciver Card</label>
-                                <input type="text" id="reciver-card" name="reciver-card" placeholder="1234 5678 9102 3456" class="form-control form-control-lg" required>
 
+                                <label class="form-label h4">Reciver Card</label>
+                                <input type="text" id="reciver-card" name="transaction_receiver_card_number" placeholder="1234 5678 9102 3456" class="form-control form-control-lg" required>
                             </div>
                             <div class="col-6">
+
                                 <label class="form-label h4">Amount</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="amount" name="amount" placeholder="12345" class="form-control form-control-lg" aria-label="Amount (to the nearest dollar)" required>
+                                
+                                    <input type="text" id="amount" name="transaction_amount" placeholder="12345" class="form-control form-control-lg" aria-label="Amount (to the nearest dollar)" required>
                                     <span class="input-group-text ">E£</span>
                                 </div>
                             </div>
                         </div>
 
+                        <input type="hidden" name="transaction_type" value="send">
+                        
                         <div class="alert alert-danger alert-dismissible fade" role="alert">
                             <i class="fa fa-exclamation-circle me-2"></i>An icon &amp; dismissing danger alert—check it out!
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -64,6 +88,7 @@
                             <button class="btn btn-lg btn-primary w-25 m-2" type="submit">Send Money</button>
                         </div>
                     </form>
+
 
                 </div>
             </div>

@@ -2,13 +2,14 @@
 class Formation
 {
     ////////////////////////////// Variables //////////////////////////////
-    private $cardNumberPattern = "/\D+/";
-    private $amountPattern = "/\D+/";
+    private static $cardNumberPattern = "/\D+/";
+    private static $amountPattern = "/\D+/";
     
-    private $transactionSTATUS = ['accepted', 'rejected'];
-    private $transactionTYPE = ['send', 'recieve'];
-
-    private $stringPattern = '/^[a-zA-Z0-9\s\.\,\'\"\:\;\-_]+$/';
+    private static $transactionTYPE = ['send', 'recieve'];
+    private static $transactionSTATUS = [ 'CANCELLED', 'Done'];
+    
+    private static $numberPattern = "/\D+/";
+    private static $stringPattern = '/^[a-zA-Z0-9\s\.\,\'\"\:\;\-_]+$/';
 
 
     ////////////////////////////// CONSTRUCT //////////////////////////////
@@ -84,4 +85,27 @@ class Formation
         return self::$transactionTYPE[$type] ?? null;
     }
 
+    public static function cleanIpn($ipns){
+        $complete_ipn ="";
+        foreach ($ipns as $ipn){
+            $complete_ipn .=$ipn;
+        }
+        return intval(self::cleanNumber($complete_ipn));
+    }
+
+    public static function showCardNumber($card_number){
+        $show_card_number = substr($card_number,0, 4);
+        $show_card_number .= ' ';
+        
+        for($i = 1; $i <= 8; $i++){
+            $show_card_number .= 'x';
+            if($i %4 == 0){
+                $show_card_number .= ' ';
+            }
+        }
+        $show_card_number .= ' ';
+        $show_card_number .= substr($card_number,12, 16);
+
+        return $show_card_number;
+    }
 }
