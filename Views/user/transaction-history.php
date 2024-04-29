@@ -14,7 +14,7 @@ $user = User::constructFromDB($active_user_id);
 <div class="container-fluid pt-4 px-4">
 
     <div class="row rounded justify-content-center mx-0">
-        <button type="button" class="btn btn-primary my-2 w-100">Export</button>
+        <button type="button" id="export" class="btn btn-primary my-2 w-100">Export</button>
         <div class="card col rounded mx-2 bg-secondary">
             <div class="card-body">
                 <h3 class="card-title">Personal Transaction History</h3>
@@ -34,7 +34,7 @@ $user = User::constructFromDB($active_user_id);
                         <?php
                         $res = $user->getBillHistory();
                         if ($res) {
-                            generateTable(["ID", "Sender", "Amount", "Acct.#"], $res);
+                            generateTable(["ID", "Sender", "Desc.", "Amount", "Acct.#"], $res);
                         }
                         ?>
                     </div>
@@ -47,7 +47,7 @@ $user = User::constructFromDB($active_user_id);
                         <?php
                         $res = $user->getDonationHistory();
                         if ($res) {
-                            generateTable(["ID", "Sender", "Amount", "Acct.#"], $res);
+                            generateTable(["ID", "Sender", "Desc.", "Amount", "Acct.#"], $res);
                         }
                         ?>
                     </div>
