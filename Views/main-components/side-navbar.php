@@ -34,7 +34,7 @@
             <a id="transactions" href="transactions.php" class="nav-item nav-link"><i class="bi bi-arrow-down-up"
                     style="transform: rotate(45deg);"></i> Transactions</a>
             <a id="blank" href="blank.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Blank</a>
-            <a id="transac" href="user/transaction-history.php" class="nav-item nav-link"><i
+            <a id="transac" href="transaction-history.php" class="nav-item nav-link"><i
                     class="fa fa-tachometer-alt me-2"></i>Transacations</a>
             <a id="Feedback" href="feedback.php" class="nav-item nav-link"><i
                     class="fa fa-tachometer-alt me-2"></i>Feedback</a>

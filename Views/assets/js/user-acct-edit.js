@@ -17,11 +17,9 @@ $(document).ready(function () {
     $("#edit-form").validate({
         rules: {
             profile_pass: {
-                required: true,
                 minlength: 8,
             },
             profile_repeat: {
-                required: true,
                 minlength: 8,
                 equalTo: "#passwordfirst",
             },
