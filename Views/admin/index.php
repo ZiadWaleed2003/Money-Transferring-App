@@ -1,6 +1,23 @@
 <?php require_once("../main-components/header.php")?>
 <?php require_once("../main-components/side-navbar.php")?>
 <?php require_once("../main-components/navbar.php")?>
+<?php  
+    require_once ("../../controllers/BankController.php");
+    require_once ("../../controllers/BillController.php");
+    require_once ("../../controllers/DonationController.php");
+    require_once ("../../controllers/useracct_Controller.php");
+    require_once ("../../Models/bank.php");
+    require_once ("../../Models/bill.php");
+    require_once ("../../Models/donation.php");
+    require_once ("../../Models/User.php");
+    $bankcontroller = new BankController;
+    $billcontroller = new BillController;
+    $donationcontroller = new DonationController;
+    $usercontroller = new useracct_Controller;
+
+
+
+?>
 
 
 <!-- blank Start -->
@@ -28,34 +45,19 @@
                         </thead>
                         <tbody>
                         <?php
-                                    $host = "localhost";
-                                    $username = "root";
-                                    $password = "";
-                                    $dbname = "moneyapp";
-                                    $conn = mysqli_connect($host, $username, $password, $dbname);
-
-                                    if (!$conn) {
-                                        die("Connection failed: " . mysqli_connect_error());
-                                    }
-
-                                    $sql = "SELECT id, name, email, phone_number, role FROM users";
-                                    $result = mysqli_query($conn, $sql);
-
-                                    if (mysqli_num_rows($result) > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            echo "<tr>";
-                                            echo "<th scope='row'>" . $row["id"] . "</th>";
-                                            echo "<td>" . $row["name"] . "</td>";
-                                            echo "<td>" . $row["email"] . "</td>";
-                                            echo "<td>" . $row["phone_number"] . "</td>";
-                                            echo "<td>" . $row["role"] . "</td>";
-                                            echo "</tr>";
-                                        }
-                                    } else {
-                                        echo "<tr><td colspan='4'>No users found</td></tr>";
-                                    }
-                                    mysqli_close($conn);
-                                    ?>
+                            $user = $usercontroller->viewAllusers();
+                            if($user){
+                                foreach($user as $users){
+                                    echo "<tr>";
+                                    echo "<td>". $users['id']. "</td>";
+                                    echo "<td>". $users['name']. "</td>";
+                                    echo "<td>". $users['email']. "</td>";
+                                    echo "<td>". $users['phone_number']. "</td>";
+                                    echo "<td>". $users['role']. "</td>";
+                                    echo "<tr>";
+                                }
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -76,8 +78,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            // PHP code to fetch and display data for the second table
+                        <?php
+                            $bill = $billcontroller->viewAllbills();
+                            if($bill){
+                                foreach($bill as $bills){
+                                    echo "<tr>";
+                                    echo "<td>". $bills['id']. "</td>";
+                                    echo "<td>". $bills['name']. "</td>";
+                                    echo "<td>". $bills['balance']. "</td>";
+                                    echo "<td>". $bills['account_number']. "</td>";
+                                    echo "<tr>";
+                                }
+                            }
                             ?>
                         </tbody>
                     </table>
@@ -99,8 +111,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            // PHP code to fetch and display data for the third table
+                        <?php
+                            $donation = $donationcontroller->viewAlldonations();
+                            if($donation){
+                                foreach($donation as $donations){
+                                    echo "<tr>";
+                                    echo "<td>". $donations['id']. "</td>";
+                                    echo "<td>". $donations['name']. "</td>";
+                                    echo "<td>". $donations['balance']. "</td>";
+                                    echo "<td>". $donations['account_number']. "</td>";
+                                    echo "<tr>";
+                                }
+                            }
                             ?>
                         </tbody>
                     </table>
@@ -121,7 +143,15 @@
                         </thead>
                         <tbody>
                             <?php
-                            // PHP code to fetch and display data for the fourth table
+                            $banks = $bankcontroller->viewAllbanks();
+                            if($banks){
+                                foreach($banks as $bank){
+                                    echo "<tr>";
+                                    echo "<td>". $bank['id']. "</td>";
+                                    echo "<td>". $bank['name']. "</td>";
+                                    echo "<tr>";
+                                }
+                            }
                             ?>
                         </tbody>
                     </table>

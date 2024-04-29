@@ -14,6 +14,13 @@
       }
     }
   }
+  if (isset($_POST["fav"])) {
+    if (!empty($_POST["cardId"])) {
+      if ($CardController->favCard($_POST["cardId"])) {
+        $cards=$CardController->getAllCards();
+      }
+    }
+  }
 
 
   
@@ -38,9 +45,9 @@
                               <tr>
                                   <th scope="col">ID</th>
                                   <th scope="col">Bank Name</th>
+                                  <th scope="col">Card Name Holder</th>
                                   <th scope="col">Card Number</th>
                                   <th scope="col">Fav</th>
-                                  <th scope="col"></th>
                                   <th scope="col">Edit</th>
                                   <th scope="col">Delete</th>
                               </tr>
@@ -52,21 +59,23 @@
                               <tr>
                                   <td><?php echo $card["id"]?></td>
                                   <td><?php echo $card["bank"]?></td>
+                                  <td><?php echo $card["name"]?></td>
                                   <td><?php echo $card["number"]?></td>
-                                  
                                   <td>
-                                    
-                                    <button class="icon-button">
+                                  <form action="card.php" method="POST">
+                                  <input type="hidden" name="cardId" value="<?php echo $card["id"] ?>">
+                                    <button type="submit" name="fav" class="icon-button">
                                       <i class="fas fa-heart"></i>
                                     </button>
+                                    </form>
                                   </td>
-                                  <td></td>
                                   <td>
                                       <a href="editcard.php?myValue=<?php echo $card["id"]?>">
                                     <button type="submit" name="edit" class="btn btn-outline-light ">
                                       <span class="bx bx-edit-alt"></span>
                                     </button></td>
                                      </a>
+                                  </td>
                                   <td>
                                   <form action="card.php" method="POST">
                                    <input type="hidden" name="cardId" value="<?php echo $card["id"] ?>">
