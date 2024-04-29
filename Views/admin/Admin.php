@@ -55,10 +55,10 @@
                             $bank->setName($_POST['bankname']);
                             $bank->setId($_POST['id']);
                             if($bankcontroller->addBank($bank)){
-                                echo "bank added";
+                                echo "BANK ADDED";
                             }
                             else{
-                                echo "error bank not added";
+                                echo "BANK ALREADY EXISTS";
                             }
 
                         }
@@ -91,10 +91,10 @@
                             $bill->setBillName($_POST['bill_name']);
                             $bill->setAcct_No($_POST['account_number']);
                             if($billcontroller->addBill($bill)){
-                                echo "bill added";
+                                echo "BILL ADDED";
                             }
                             else{
-                                echo "error bill not added";
+                                echo "BILL ALREADY EXISTS";
                             }
 
                         }
@@ -129,10 +129,10 @@
                             $donation->setName($_POST['name']);
                             $donation->setAcct_No($_POST['account_number']);
                             if($donationcontroller->adddonation($donation)){
-                                echo "donation added";
+                                echo "DONATION ADDED";
                             }
                             else{
-                                echo "error donation not added";
+                                echo "DONATION ALREADY EXISTS";
                             }
 
                         }

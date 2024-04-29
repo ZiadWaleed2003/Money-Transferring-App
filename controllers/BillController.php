@@ -37,6 +37,7 @@ class BillController{
                 return $result;
             }
             else{
+                echo "NO BILLS TO SHOW";
                 return false;
             }
         }

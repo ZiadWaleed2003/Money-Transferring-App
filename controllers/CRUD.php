@@ -24,6 +24,7 @@ class CRUD
 
         } else {
             echo "Error : " . mysqli_error($connection);
+
             return false;
         }
     }
@@ -47,9 +48,11 @@ class CRUD
                 $db->closeConnection();
                 return True;
             }
+
         } else {
             echo "Error : " . mysqli_error($connection);
             return false;
+
         }
 
 
@@ -65,6 +68,7 @@ class CRUD
 
             $result = $connection->query($query);
 
+
             if (!$result) {
                 echo "Error : " . mysqli_error($connection);
                 $db->closeConnection();
@@ -77,6 +81,7 @@ class CRUD
         } else {
 
             echo "Error : " . mysqli_error($connection);
+
             return false;
         }
     }
@@ -106,7 +111,9 @@ class CRUD
             }
         } else {
 
+
             echo "Error : " . mysqli_error($connection);
+
             return false;
         }
 
