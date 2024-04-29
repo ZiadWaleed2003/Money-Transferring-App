@@ -1,11 +1,10 @@
 <?php require_once ("../main-components/header.php") ?>
 <?php require_once ("../main-components/side-navbar.php") ?>
 <?php require_once ("../main-components/navbar.php") ?>
-<?php require_once ("../../controllers/user-acct-controller.php") ?>
 <?php require_once ("../../models/User.php") ?>
 
 <?php
-$active_user_id = 1; #TODO: replace with user id from sessions
+$active_user_id = 706; #TODO: replace with user id from sessions
 $user = User::constructFromDB($active_user_id);
 ?>
 
@@ -14,8 +13,7 @@ $user = User::constructFromDB($active_user_id);
     <div class="container-fluid pt-4 px-4">
         <div class="row">
             <div class="card flex-wrap bg-secondary col-3 mx-3 px-0">
-                <img src="../assets/img/testimonial-2.jpg" class="card-img-top acct-page-img w-100 mb-1"> #TODO: modify
-                with retrieve pic
+                <img src="<?php echo $user->getImagePath() ?>" class="card-img-top acct-page-img w-100 mb-1">
                 <div class="card-body px-3 py-1">
                     <h5 class="card-title">Personal Info</h5>
                     <p class="card-text">
