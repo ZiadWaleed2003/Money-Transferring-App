@@ -1241,6 +1241,49 @@ Version: '10.4.27-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribut
 2024-04-27 21:50:34 0 [Note] Server socket created on IP: '::'.
 =======
 >>>>>>> 0039f8fce67ad7f53ba988164f9366a0b2fd159a
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+2024-04-30  0:53:54 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-30  0:53:54 0 [Note] InnoDB: Uses event mutexes
+2024-04-30  0:53:54 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-30  0:53:54 0 [Note] InnoDB: Number of pools: 1
+2024-04-30  0:53:54 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-30  0:53:54 0 [Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M
+2024-04-30  0:53:54 0 [Note] InnoDB: Completed initialization of buffer pool
+2024-04-30  0:53:54 0 [Note] InnoDB: Starting crash recovery from checkpoint LSN=1270645
+2024-04-30  0:53:54 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2024-04-30  0:53:54 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2024-04-30  0:53:54 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2024-04-30  0:53:54 0 [Note] InnoDB: Setting file 'C:\xampp\mysql\data\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2024-04-30  0:53:54 0 [Note] InnoDB: File 'C:\xampp\mysql\data\ibtmp1' size is now 12 MB.
+2024-04-30  0:53:54 0 [Note] InnoDB: 10.4.27 started; log sequence number 1270654; transaction id 1158
+2024-04-30  0:53:54 0 [Note] InnoDB: Loading buffer pool(s) from C:\xampp\mysql\data\ib_buffer_pool
+2024-04-30  0:53:54 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-30  0:53:54 0 [Note] InnoDB: Buffer pool(s) load completed at 240430  0:53:54
+2024-04-30  0:53:54 0 [Note] Server socket created on IP: '::'.
+2024-04-30  1:02:43 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-30  1:02:43 0 [Note] InnoDB: Uses event mutexes
+2024-04-30  1:02:43 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-30  1:02:43 0 [Note] InnoDB: Number of pools: 1
+2024-04-30  1:02:43 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-30  1:02:43 0 [Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M
+2024-04-30  1:02:43 0 [Note] InnoDB: Completed initialization of buffer pool
+2024-04-30  1:02:43 0 [Note] InnoDB: Starting crash recovery from checkpoint LSN=879156
+2024-04-30  1:02:43 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2024-04-30  1:02:43 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2024-04-30  1:02:43 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2024-04-30  1:02:43 0 [Note] InnoDB: Setting file 'C:\xampp\htdocs\Money-Transferring-App\DB-data\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2024-04-30  1:02:43 0 [Note] InnoDB: File 'C:\xampp\htdocs\Money-Transferring-App\DB-data\ibtmp1' size is now 12 MB.
+2024-04-30  1:02:43 0 [Note] InnoDB: 10.4.27 started; log sequence number 879165; transaction id 1348
+2024-04-30  1:02:43 0 [Note] InnoDB: Loading buffer pool(s) from C:\xampp\htdocs\Money-Transferring-App\DB-data\ib_buffer_pool
+2024-04-30  1:02:43 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-30  1:02:43 0 [Note] Server socket created on IP: '::'.
+=======
+=======
+>>>>>>> 7e3c13c4ac001902e07481c5e9fb6a708b20f95d
+=======
+>>>>>>> 7e3c13c4ac001902e07481c5e9fb6a708b20f95d
 >>>>>>> 0897a822f6f3253712af1be68cbe8c51104e30b4
 2024-04-27 22:04:38 0 [Note] Starting MariaDB 10.4.32-MariaDB source revision c4143f909528e3fab0677a28631d10389354c491 as process 22532
 2024-04-27 22:04:38 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
@@ -1416,3 +1459,10 @@ Version: '10.4.27-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribut
 2024-04-29 23:00:56 0 [Note] Plugin 'FEEDBACK' is disabled.
 2024-04-29 23:00:56 0 [Note] InnoDB: Buffer pool(s) load completed at 240429 23:00:56
 2024-04-29 23:00:56 0 [Note] Server socket created on IP: '::'.
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 5467dd44e1d90cfc8524f0f86b86e86e067abe94
+=======
+>>>>>>> 7e3c13c4ac001902e07481c5e9fb6a708b20f95d
+=======
+>>>>>>> 7e3c13c4ac001902e07481c5e9fb6a708b20f95d

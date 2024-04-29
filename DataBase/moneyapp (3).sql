@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2024 at 01:50 AM
+-- Generation Time: Apr 30, 2024 at 12:25 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -32,6 +32,14 @@ CREATE TABLE `bank` (
   `name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `bank`
+--
+
+INSERT INTO `bank` (`id`, `name`) VALUES
+(1, 'QNB'),
+(2, 'CIB');
+
 -- --------------------------------------------------------
 
 --
@@ -42,10 +50,18 @@ CREATE TABLE `bankcards` (
   `id` int(11) NOT NULL,
   `user_mobile_number` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `number` int(11) NOT NULL,
+  `number` bigint(16) NOT NULL,
   `cvv` int(3) NOT NULL,
   `bank_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bankcards`
+--
+
+INSERT INTO `bankcards` (`id`, `user_mobile_number`, `name`, `number`, `cvv`, `bank_id`) VALUES
+(7, 1151617372, 'ziad adel', 1234567812345678, 111, 1),
+(8, 1151617372, 'ziad adel', 1234567812345678, 111, 1);
 
 -- --------------------------------------------------------
 
@@ -72,6 +88,13 @@ CREATE TABLE `donations` (
   `balance` double NOT NULL,
   `account_number` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `donations`
+--
+
+INSERT INTO `donations` (`id`, `name`, `balance`, `account_number`) VALUES
+(1, 'bassel bygrb haga !', 500000, 1234);
 
 -- --------------------------------------------------------
 
@@ -121,7 +144,9 @@ CREATE TABLE `requests` (
 CREATE TABLE `transactions` (
   `id` int(11) NOT NULL,
   `sender_id` int(11) NOT NULL,
+  `sender_card` int(16) NOT NULL,
   `reciever_id` int(11) NOT NULL,
+  `reciever_card` int(16) NOT NULL,
   `date` datetime NOT NULL,
   `status` enum('DONE','CANCELLED') NOT NULL,
   `description` text DEFAULT NULL,
@@ -137,13 +162,21 @@ CREATE TABLE `transactions` (
 CREATE TABLE `usercards` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `bank_id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
-  `number` int(11) NOT NULL,
+  `number` bigint(16) NOT NULL,
   `cvv` int(3) NOT NULL,
   `ipn_code` int(6) NOT NULL,
   `balance` double NOT NULL,
   `favourite` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `usercards`
+--
+
+INSERT INTO `usercards` (`id`, `user_id`, `bank_id`, `name`, `number`, `cvv`, `ipn_code`, `balance`, `favourite`) VALUES
+(111, 1, 1, 'Ziad Adel', 1234567812345678, 111, 56465, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -160,6 +193,13 @@ CREATE TABLE `users` (
   `role` int(11) NOT NULL,
   `image_path` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone_number`, `role`, `image_path`) VALUES
+(1, 'ADMIN', 'ADMIN1234@gmail.com', '1234', '', 1, NULL);
 
 --
 -- Indexes for dumped tables
@@ -182,13 +222,15 @@ ALTER TABLE `bankcards`
 -- Indexes for table `bills`
 --
 ALTER TABLE `bills`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `account_number` (`account_number`);
 
 --
 -- Indexes for table `donations`
 --
 ALTER TABLE `donations`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `account_number` (`account_number`);
 
 --
 -- Indexes for table `feedback`
@@ -216,15 +258,15 @@ ALTER TABLE `requests`
 -- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `sender_fk` (`sender_id`),
-  ADD KEY `reciever_fk` (`reciever_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `usercards`
 --
 ALTER TABLE `usercards`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `number` (`number`),
+  ADD KEY `card_bank_fk` (`bank_id`),
   ADD KEY `user_card_fk` (`user_id`);
 
 --
@@ -241,13 +283,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bank`
 --
 ALTER TABLE `bank`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `bankcards`
 --
 ALTER TABLE `bankcards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `bills`
@@ -259,7 +301,7 @@ ALTER TABLE `bills`
 -- AUTO_INCREMENT for table `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -289,13 +331,13 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `usercards`
 --
 ALTER TABLE `usercards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -330,14 +372,15 @@ ALTER TABLE `requests`
 -- Constraints for table `transactions`
 --
 ALTER TABLE `transactions`
-  ADD CONSTRAINT `reciever_usercard_fk` FOREIGN KEY (`reciever_id`) REFERENCES `usercards` (`id`),
-  ADD CONSTRAINT `sender_usercard_fk` FOREIGN KEY (`sender_id`) REFERENCES `usercards` (`id`);
+  ADD CONSTRAINT `reciever_fk` FOREIGN KEY (`reciever_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `sender_fk` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `usercards`
 --
 ALTER TABLE `usercards`
-  ADD CONSTRAINT `user_card_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `card_bank_fk` FOREIGN KEY (`bank_id`) REFERENCES `bank` (`id`),
+  ADD CONSTRAINT `user_card_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
