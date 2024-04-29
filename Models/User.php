@@ -26,6 +26,12 @@ class User extends PERSON
         return new User($id, $res["name"], $res["email"], $res["password"], $res["image_path"], $res["phone_number"]);
     }
 
+    public function writeToDB()
+    {
+        $query = "UPDATE users SET name = '$this->name', email = '$this->email', password = '$this->password', image_path = '$this->image_path', phone_number = '$this->phone_number' WHERE id = '$this->id'";
+        CRUD::Update($query);
+    }
+
     public function setImagePath($image_path)
     {
 
