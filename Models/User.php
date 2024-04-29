@@ -26,10 +26,48 @@ class User extends PERSON
         return new User($id, $res["name"], $res["email"], $res["password"], $res["image_path"], $res["phone_number"]);
     }
 
+    public static function quickLookUp($id)
+    {
+        $query = "SELECT name FROM users WHERE id = '$id'";
+        $res = CRUD::Select($query)[0];
+        return $res;
+    }
+
     public function writeToDB()
     {
         $query = "UPDATE users SET name = '$this->name', email = '$this->email', password = '$this->password', image_path = '$this->image_path', phone_number = '$this->phone_number' WHERE id = '$this->id'";
         CRUD::Update($query);
+    }
+
+    public function getTranscationHistory()
+    {
+        $query = "SELECT * FROM moneyapp.transactions WHERE sender_id = '$this->id' OR reciever_id = '$this->id';";
+        $res = CRUD::Select($query);
+        if (empty($res)) {
+            return 0;
+        } else {
+            return $res;
+        }
+    }
+    public function getBillHistory()
+    {
+        $query = "SELECT * FROM moneyapp.bills WHERE sender_id = '$this->id' ;";
+        $res = CRUD::Select($query);
+        if (empty($res)) {
+            return 0;
+        } else {
+            return $res;
+        }
+    }
+    public function getDonationHistory()
+    {
+        $query = "SELECT * FROM moneyapp.donations WHERE sender_id = '$this->id' ;";
+        $res = CRUD::Select($query);
+        if (empty($res)) {
+            return 0;
+        } else {
+            return $res;
+        }
     }
 
     public function setImagePath($image_path)
