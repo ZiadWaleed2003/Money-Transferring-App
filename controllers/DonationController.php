@@ -37,6 +37,7 @@ class DonationController{
                 return $result;
             }
             else{
+                echo "NO DONATIONS TO SHOW";
                 return false;
             }
         }
