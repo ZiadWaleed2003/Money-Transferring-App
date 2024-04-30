@@ -21,12 +21,12 @@ class Transaction
     private $status;
     private $description;
 
-    protected $conn;
+   // protected $conn;
     ////////////////////////////// CONSTRUCT //////////////////////////////
 
-    public function __construct($conn)
+    public function __construct()
     {
-        self::$conn = $conn;
+       // self::$conn = $conn;
     }
 
     ////////////////////////////// METHODS //////////////////////////////
@@ -296,6 +296,30 @@ class Transaction
                 throw new Exception("Unexpected Error - Transaction Failed");
             }
         } catch (Exception $e){
+            throw $e;
+        }
+    }
+    public function checkBalance()
+    {
+        $sender_card_number=self::getSenderCardNumber();
+
+        try{
+            $sql="SELECT * FROM  usercards WHERE number=$sender_card_number ";
+            $sender_card_data=CRUD::Select($sql);
+            if(count($sender_card_data)!=1  )
+            {
+                throw new Exception("not valid card number");
+
+
+            }
+            if($sender_card_data[0]["user_id"]!=$_SESSION['user']['id'])
+            {
+               throw new Exception ("please enter correct card number");
+            }
+            return $sender_card_data [0]["balance"];
+
+        }catch(Exception $e)
+        {
             throw $e;
         }
     }

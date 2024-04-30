@@ -1,3 +1,10 @@
+<?php 
+    session_start();
+    // session_destroy();
+
+    $amount= $_SESSION["transaction"]["check_balance"];
+    unset( $_SESSION["transaction"]["check_balance"]);
+?>
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
@@ -43,7 +50,11 @@
                 <div class="row m-auto pt-4 pb-4 bg-light col-6">
                     <div class="text-center">
                         <span class=" h1 display-6 text-black-50">Amount: &nbsp;</span>
-                        <span class ="h1 display-3 text-white">123456</span>
+                        <span class ="h1 display-3 text-white"> 
+                            <?php 
+                            echo $amount;
+                            ?>
+                        </span>
                         <span class="h4">E£</span>
                     </div>
                 </div>
