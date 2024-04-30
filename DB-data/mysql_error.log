@@ -1220,3 +1220,23 @@ Version: '10.4.27-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribut
 2024-04-27 12:09:15 0 [Note] Plugin 'FEEDBACK' is disabled.
 2024-04-27 12:09:15 0 [Note] Server socket created on IP: '::'.
 >>>>>>> 0039f8fce67ad7f53ba988164f9366a0b2fd159a
+2024-04-30  0:54:08 0 [Note] Starting MariaDB 10.4.28-MariaDB source revision c8f2e9a5c0ac5905f28b050b7df5a9ffd914b7e7 as process 14160
+2024-04-30  0:54:08 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2024-04-30  0:54:08 0 [Note] InnoDB: Uses event mutexes
+2024-04-30  0:54:08 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+2024-04-30  0:54:08 0 [Note] InnoDB: Number of pools: 1
+2024-04-30  0:54:08 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2024-04-30  0:54:08 0 [Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M
+2024-04-30  0:54:08 0 [Note] InnoDB: Completed initialization of buffer pool
+2024-04-30  0:54:08 0 [Note] InnoDB: Starting crash recovery from checkpoint LSN=3095514
+2024-04-30  0:54:08 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2024-04-30  0:54:08 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2024-04-30  0:54:08 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2024-04-30  0:54:08 0 [Note] InnoDB: Setting file 'C:\xampp\htdocs\Money-Transferring-App\DB-data\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2024-04-30  0:54:08 0 [Note] InnoDB: File 'C:\xampp\htdocs\Money-Transferring-App\DB-data\ibtmp1' size is now 12 MB.
+2024-04-30  0:54:08 0 [Note] InnoDB: Waiting for purge to start
+2024-04-30  0:54:08 0 [Note] InnoDB: 10.4.28 started; log sequence number 3095523; transaction id 1348
+2024-04-30  0:54:08 0 [Note] InnoDB: Loading buffer pool(s) from C:\xampp\htdocs\Money-Transferring-App\DB-data\ib_buffer_pool
+2024-04-30  0:54:08 0 [Note] Plugin 'FEEDBACK' is disabled.
+2024-04-30  0:54:08 0 [Note] InnoDB: Buffer pool(s) load completed at 240430  0:54:08
+2024-04-30  0:54:08 0 [Note] Server socket created on IP: '::'.
