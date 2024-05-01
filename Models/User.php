@@ -1,7 +1,7 @@
 <?php
 
 require_once "Person.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/controllers/CRUD.php";
+require_once "../../controllers/CRUD.php";
 
 class User extends PERSON
 {
@@ -41,7 +41,7 @@ class User extends PERSON
 
     public function getTranscationHistory()
     {
-        $query = "SELECT * FROM moneyapp.transactions WHERE sender_id = '$this->id' OR reciever_id = '$this->id';";
+        $query = "SELECT id, sender_id, reciever_id, date, status, description, amount FROM moneyapp.transactions WHERE (description='Receiving Money Transaction' OR description='Sending Money Transaction') AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
         $res = CRUD::Select($query);
         if (empty($res)) {
             return 0;
@@ -51,7 +51,8 @@ class User extends PERSON
     }
     public function getBillHistory()
     {
-        $query = "SELECT * FROM moneyapp.bills WHERE sender_id = '$this->id' ;";
+        $query = "SELECT id, sender_id, reciever_id, date, status, description, amount FROM moneyapp.transactions WHERE description='Bill' AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
+
         $res = CRUD::Select($query);
         if (empty($res)) {
             return 0;
@@ -61,12 +62,50 @@ class User extends PERSON
     }
     public function getDonationHistory()
     {
-        $query = "SELECT * FROM moneyapp.donations WHERE sender_id = '$this->id' ;";
+        $query = "SELECT id, sender_id, reciever_id, date, status, description, amount FROM moneyapp.transactions WHERE description='Donation' AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
         $res = CRUD::Select($query);
         if (empty($res)) {
             return 0;
         } else {
             return $res;
+        }
+    }
+
+    public function deleteAccount()
+    {
+        $query = "DELETE FROM moneyapp.users WHERE id ='$this->id';";
+        CRUD::Delete($query);
+    }
+
+    public function uploadPicture($file)
+    {
+        $upl_dir = $_SERVER['DOCUMENT_ROOT'] . "/views/assets/img/";
+        $file_path = $upl_dir . basename($file["name"]);
+        $file_type = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
+        $trgt = $this->id . "-img.";
+        $final = $upl_dir . $trgt . $file_type;
+        $uploadOk = 1;
+        $check = getimagesize($_FILES["profile_img"]["tmp_name"]);
+        if ($check !== false) {
+            $uploadOk = 1;
+        } else {
+            $uploadOk = 0;
+        }
+        if (
+            $file_type != "jpg" && $file_type != "png" && $file_type != "jpeg"
+            && $file_type != "gif"
+        ) {
+            $uploadOk = 0;
+        }
+        if ($uploadOk == 0) {
+        } else {
+            $file_pattern = $upl_dir . $trgt . "*";
+            array_map("unlink", glob($file_pattern));
+            if (move_uploaded_file($_FILES["profile_img"]["tmp_name"], $final)) {
+                return "/views/assets/img/" . $trgt . $file_type;
+            } else {
+                echo "Upload Error Occured";
+            }
         }
     }
 
