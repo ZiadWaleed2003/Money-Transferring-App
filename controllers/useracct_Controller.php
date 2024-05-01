@@ -1,6 +1,6 @@
 <?php
 require_once ("CRUD.php");
-session_start();
+
 
 
 class useracct_Controller{
