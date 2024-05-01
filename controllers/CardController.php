@@ -26,18 +26,25 @@ class CardController
             $check = "SELECT * From bankcards where bankcards.number ='$number' and bankcards.cvv='$cvv' ";
             $variable=CRUD::Select($check);
             if ($variable !=false){
+                if(count($variable)>1){
                 $bank_id=$card->getBankId();
                 $cardname=$card->getName();
                 $cardnumber=$card->getNumber();
                 $cardcvv=$card->getCvv();
                 $cardipn=$card->getIpnCode();
-            
+                
                 $query="insert into usercards(user_id,bank_id,name,number,cvv,ipn_code,balance,favourite) values ('1','$bank_id','$cardname','$cardnumber','$cardcvv','$cardipn','0000','0')";
                 $result=CRUD::Insert($query);
                  return true;
+                }
+                else
+                {
+                    echo "already Entered";
+                    return true;
+                }
             }
             else{
-                echo "Card not Found";
+                return false;
             }
             
 
@@ -50,7 +57,6 @@ class CardController
             return $result;
             }
             else{
-                echo"No Card Found";
                 return false;
             }
     }
