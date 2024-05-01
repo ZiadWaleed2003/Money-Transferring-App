@@ -315,15 +315,30 @@ class Transaction
         } catch (Exception $e){
             throw $e;
         }
-
-        $transaction_id_sql = "SELECT 'amount' FROM transactions WHERE sender_id = ".$this->getSenderCardNumber()." ORDER BY id DESC LIMIT 1";
-        $result = CRUD::Select($transaction_id_sql);
-
-        for($i=0; $i < 10 && !$result; $i++){
-            $result = CRUD::Select($transaction_id_sql);
-        }
-
-        self::setTransactionId($result[0]);
     }
-  
+    
+    public function checkBalance()
+    {
+        $sender_card_number=self::getSenderCardNumber();
+
+        try{
+            $sql="SELECT * FROM  usercards WHERE number=$sender_card_number ";
+            $sender_card_data=CRUD::Select($sql);
+            if(count($sender_card_data)!=1  )
+            {
+                throw new Exception("not valid card number");
+
+
+            }
+            if($sender_card_data[0]["user_id"]!=$_SESSION['user']['id'])
+            {
+               throw new Exception ("please enter correct card number");
+            }
+            return $sender_card_data [0]["balance"];
+
+        }catch(Exception $e)
+        {
+            throw $e;
+        }
+    }
 }

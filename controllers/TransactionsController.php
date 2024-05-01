@@ -88,6 +88,36 @@ class TransactionsController
         }
 
     }
+    public function checkBalance()
+    {
+        try{
+            session_start();
+
+                $sql = "SELECT `number` FROM usercards WHERE id = ".$_POST["sender_card_number"];
+
+            $transaction=new Transaction();
+            $transaction->setSenderCardNumber(CRUD::Select($sql)[0]['number'] ?? null);
+    
+            $senderAmount=$transaction->checkBalance();
+        
+            
+            echo "<script>alert('$senderAmount')</script>";
+            if (isset($senderAmount))
+            {
+
+                $_SESSION["transaction"]["check_balance"]=$senderAmount;
+                header('location: ../views/user/balanceshow.php');
+            exit();
+
+            }
+
+        }catch(Exception $e)
+        {
+            throw $e;
+        }
+
+    }
+  
 }
 
 ?>
@@ -112,6 +142,10 @@ class TransactionsController
             {
 
                 $transaction->startTransaction($_POST['transaction_type']);
+            }
+            else if(isset($_POST['transaction_type']) && $_POST['transaction_type']=="checkbalance")
+            {
+               $transaction->checkBalance();
             }
             else 
             {
