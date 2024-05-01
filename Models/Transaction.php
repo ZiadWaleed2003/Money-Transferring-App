@@ -216,6 +216,9 @@ class Transaction
             else if($type == 'donation'){
                 $sql = "SELECT * FROM donations WHERE `account_number` = $receiver_id";
             }
+            else if($type == 'bill'){
+                $sql = "SELECT * FROM bills WHERE `account_number` = $receiver_id";
+            }
 
             $receiver_card_data = CRUD::Select($sql);
 
@@ -303,6 +306,9 @@ class Transaction
             else if($transaction_type == 'donation'){
                 $sql = "SELECT * FROM donations WHERE `account_number` = $transaction_receiver_id";
             }
+            else if($transaction_type == 'bill'){
+                $sql = "SELECT * FROM bills WHERE `account_number` = $transaction_receiver_id";
+            }
             
 
             $receiver_card_data = CRUD::Select($sql)[0];
@@ -323,7 +329,12 @@ class Transaction
                                                                     VALUES ($transaction_sender_id, '$sender_card_number', $receiver_card_data[user_id], '$receiver_card_number', CURRENT_TIMESTAMP, '$transaction_status', $transaction_description, $transaction_amount)";
                     }
                     else if($transaction_type == 'donation'){
-                        $receiver_update_sql = "UPDATE donations SET balance = $receiver_card_data[balance] + $transaction_amount WHERE `account_number` = $receiver_card_number";
+                        $receiver_update_sql = "UPDATE donations SET balance = $receiver_card_data[balance] + $transaction_amount WHERE `account_number` = $transaction_receiver_id";
+                        $transaction_history_sql = "INSERT INTO transactions (sender_id, sender_card, reciever_id, date, status, description, amount)
+                                                                    VALUES ($transaction_sender_id, '$sender_card_number', $receiver_card_data[account_number], CURRENT_TIMESTAMP, '$transaction_status', '$transaction_description', $transaction_amount)";
+                    }
+                    else if($transaction_type == 'bill'){
+                        $receiver_update_sql = "UPDATE bills SET balance = $receiver_card_data[balance] + $transaction_amount WHERE `account_number` = $transaction_receiver_id";
                         $transaction_history_sql = "INSERT INTO transactions (sender_id, sender_card, reciever_id, date, status, description, amount)
                                                                     VALUES ($transaction_sender_id, '$sender_card_number', $receiver_card_data[account_number], CURRENT_TIMESTAMP, '$transaction_status', '$transaction_description', $transaction_amount)";
                     }

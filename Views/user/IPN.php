@@ -37,7 +37,7 @@ session_start();
 
                         echo '<a href="send-donation.php" class="h5">Send Donation</a>';
                     }
-                    else if($_SESSION['transaction']['type'] == 'payment'){
+                    else if($_SESSION['transaction']['type'] == 'bill'){
                         
                         echo '<a href="pay-payment.php" class="h5">Pay Payment</a>';
                     }

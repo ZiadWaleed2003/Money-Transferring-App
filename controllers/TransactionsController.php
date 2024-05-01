@@ -43,6 +43,15 @@ class TransactionsController
                 $check_Transaction_start->checkTransactionStart();
                 $transaction_start = true;
             }
+            else if($transaction_type === 'bill')
+            {
+                
+                $check_Transaction_start->setReceiverId($_POST['transaction_bill_account_number'] ?? null);
+                $check_Transaction_start->setType(3);
+                
+                $check_Transaction_start->checkTransactionStart();
+                $transaction_start = true;
+            }
             // ADD MORE TRANSACTION TYPES
 
         } 
@@ -74,7 +83,10 @@ class TransactionsController
             {
                 $_SESSION['transaction']['type'] = 'donation';
             }
-            var_dump($_SESSION['transaction']);
+            else if($transaction_type === 'bill')
+            {
+                $_SESSION['transaction']['type'] = 'bill';
+            }
 
             header('location: ../views/user/ipn.php');
             exit();
@@ -86,6 +98,9 @@ class TransactionsController
             }
             else if($transaction_type === 'donation'){
                 header('location: ../views/user/send-donation.php');
+            }
+            else if($transaction_type === 'bill'){
+                header('location: ../views/user/pay-payment.php');
             }
             
             exit();
@@ -165,10 +180,10 @@ class TransactionsController
 
 <?php
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $transaction = new TransactionsController();
-
 
     if (isset($_POST['transaction_ipn_time_submit'])) 
     {
@@ -176,9 +191,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $transaction->sendTransaction();
     }
 
-    else if (isset($_POST['transaction_type']) && in_array($_POST['transaction_type'], array('send', 'reqeust', 'donation', 'payment'))) 
+    else if (isset($_POST['transaction_type']) && in_array($_POST['transaction_type'], array('send', 'reqeust', 'donation', 'bill'))) 
     {
-
+     
         $transaction->startTransaction($_POST['transaction_type']);
     }
 
