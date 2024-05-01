@@ -41,7 +41,7 @@ class User extends PERSON
 
     public function getTranscationHistory()
     {
-        $query = "SELECT * FROM moneyapp.transactions WHERE sender_id = (description='Receiving Money Transaction' or description='Sending Money Transaction') AND ('$this->id' OR reciever_id = '$this->id');";
+        $query = "SELECT * FROM moneyapp.transactions WHERE (description='Receiving Money Transaction' OR description='Sending Money Transaction') AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
         $res = CRUD::Select($query);
         if (empty($res)) {
             return 0;
@@ -51,7 +51,7 @@ class User extends PERSON
     }
     public function getBillHistory()
     {
-        $query = "SELECT * FROM moneyapp.transactions WHERE sender_id = description='Bill' AND ('$this->id' OR reciever_id = '$this->id');";
+        $query = "SELECT * FROM moneyapp.transactions WHERE description='Bill' AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
 
         $res = CRUD::Select($query);
         if (empty($res)) {
@@ -62,7 +62,7 @@ class User extends PERSON
     }
     public function getDonationHistory()
     {
-        $query = "SELECT * FROM moneyapp.transactions WHERE sender_id = description='Donation' AND ('$this->id' OR reciever_id = '$this->id');";
+        $query = "SELECT * FROM moneyapp.transactions WHERE description='Donation' AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
         $res = CRUD::Select($query);
         if (empty($res)) {
             return 0;
