@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2024 at 12:25 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: May 01, 2024 at 02:27 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -76,6 +76,14 @@ CREATE TABLE `bills` (
   `account_number` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `bills`
+--
+
+INSERT INTO `bills` (`id`, `name`, `balance`, `account_number`) VALUES
+(1, 'Cairo Electric', 0, 103),
+(2, 'Cairo Hydro', 0, 102);
+
 -- --------------------------------------------------------
 
 --
@@ -94,7 +102,8 @@ CREATE TABLE `donations` (
 --
 
 INSERT INTO `donations` (`id`, `name`, `balance`, `account_number`) VALUES
-(1, 'bassel bygrb haga !', 500000, 1234);
+(203, 'Shoe the Children', 0, 407),
+(204, 'Feed the Babies', 0, 405);
 
 -- --------------------------------------------------------
 
@@ -107,6 +116,13 @@ CREATE TABLE `feedback` (
   `user_id` int(11) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `user_id`, `description`) VALUES
+(1, 103, 'el app dah 3zmah. Ana ms7t InstaPay 5las');
 
 -- --------------------------------------------------------
 
@@ -153,6 +169,18 @@ CREATE TABLE `transactions` (
   `amount` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `sender_id`, `sender_card`, `reciever_id`, `reciever_card`, `date`, `status`, `description`, `amount`) VALUES
+(1, 101, 1, 102, 3, '2024-04-01 09:00:00', 'DONE', 'Sending Money Transaction', 50),
+(2, 101, 2, 103, 4, '2024-04-02 10:30:00', 'DONE', 'Sending Money Transaction', 100),
+(3, 102, 3, 104, 5, '2024-04-03 14:45:00', 'DONE', 'Bill', 75),
+(4, 102, 4, 105, 6, '2024-04-04 17:15:00', 'DONE', 'Sending Money Transaction', 25),
+(5, 103, 5, 106, 1, '2024-04-05 19:20:00', 'DONE', 'Sending Money Transaction', 200),
+(6, 103, 6, 17, 2, '2024-04-06 22:00:00', 'DONE', 'Sending Money Transaction', 80);
+
 -- --------------------------------------------------------
 
 --
@@ -176,6 +204,12 @@ CREATE TABLE `usercards` (
 --
 
 INSERT INTO `usercards` (`id`, `user_id`, `bank_id`, `name`, `number`, `cvv`, `ipn_code`, `balance`, `favourite`) VALUES
+(1, 101, 1, 'John Doe Card', 1234567890123456, 123, 123456, 1000, 1),
+(2, 101, 2, 'John Doe Bank Card', 9876543210987654, 456, 654321, 5000, 0),
+(3, 102, 1, 'Jane Smith Card', 1111222233334444, 789, 789012, 2500, 1),
+(4, 102, 2, 'Jane Smith Bank Card', 4444333322221111, 12, 210987, 7500, 0),
+(5, 103, 1, 'Alice Johnson Card', 9999888877776666, 345, 345678, 3000, 1),
+(6, 103, 2, 'Alice Johnson Bank C', 6666777788889999, 678, 876543, 6000, 0),
 (111, 1, 1, 'Ziad Adel', 1234567812345678, 111, 56465, 0, 0);
 
 -- --------------------------------------------------------
@@ -199,7 +233,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone_number`, `role`, `image_path`) VALUES
-(1, 'ADMIN', 'ADMIN1234@gmail.com', '1234', '', 1, NULL);
+(1, 'ADMIN', 'ADMIN1234@gmail.com', '1234', '', 1, NULL),
+(101, 'John Doe', 'john.doe@example.com', 'password123', '1234567890', 0, '/views/assets/img/1-img.png'),
+(102, 'Jane Smith', 'jane.smith@example.com', 'securepass', '0987654321', 0, '/views/assets/img/2-img.png'),
+(103, 'Alice Johnson', 'alice.johnson@example.com', 'p@ssw0rd', '5551234567', 0, '/views/assets/img/3-img.png');
 
 --
 -- Indexes for dumped tables
@@ -258,7 +295,9 @@ ALTER TABLE `requests`
 -- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `reciever_fk` (`reciever_id`),
+  ADD KEY `sender_fk` (`sender_id`);
 
 --
 -- Indexes for table `usercards`
@@ -295,19 +334,19 @@ ALTER TABLE `bankcards`
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 
 --
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `image`
@@ -325,7 +364,7 @@ ALTER TABLE `requests`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `usercards`
@@ -337,7 +376,7 @@ ALTER TABLE `usercards`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- Constraints for dumped tables
@@ -367,13 +406,6 @@ ALTER TABLE `image`
 ALTER TABLE `requests`
   ADD CONSTRAINT `reciever_req_fk` FOREIGN KEY (`reciever_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `sender_req_fk` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `transactions`
---
-ALTER TABLE `transactions`
-  ADD CONSTRAINT `reciever_fk` FOREIGN KEY (`reciever_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `sender_fk` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `usercards`
