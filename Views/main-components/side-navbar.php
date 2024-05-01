@@ -11,10 +11,10 @@
         </a>
 
         <a href="account-view.php">
-
             <div class="d-flex align-items-center ms-4 mb-4">
                 <div class="position-relative">
-                    <img class="rounded-circle" src="../assets/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                    <img class="rounded-circle" src="/views/assets/img/user.jpg" alt=""
+                        style="width: 40px; height: 40px;">
                     <div
                         class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
                     </div>
@@ -34,7 +34,7 @@
             <a id="transactions" href="transactions.php" class="nav-item nav-link"><i class="bi bi-arrow-down-up"
                     style="transform: rotate(45deg);"></i> Transactions</a>
             <a id="blank" href="blank.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Blank</a>
-            <a id="transac" href="user/transaction-history.php" class="nav-item nav-link"><i
+            <a id="transac" href="transaction-history.php" class="nav-item nav-link"><i
                     class="fa fa-tachometer-alt me-2"></i>Transacations</a>
             <a id="Feedback" href="feedback.php" class="nav-item nav-link"><i
                     class="fa fa-tachometer-alt me-2"></i>Feedback</a>

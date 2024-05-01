@@ -41,7 +41,7 @@ class User extends PERSON
 
     public function getTranscationHistory()
     {
-        $query = "SELECT * FROM moneyapp.transactions WHERE sender_id = '$this->id' OR reciever_id = '$this->id';";
+        $query = "SELECT * FROM moneyapp.transactions WHERE sender_id = (description='Receiving Money Transaction' or description='Sending Money Transaction') AND ('$this->id' OR reciever_id = '$this->id');";
         $res = CRUD::Select($query);
         if (empty($res)) {
             return 0;
@@ -51,7 +51,8 @@ class User extends PERSON
     }
     public function getBillHistory()
     {
-        $query = "SELECT * FROM moneyapp.bills WHERE sender_id = '$this->id' ;";
+        $query = "SELECT * FROM moneyapp.transactions WHERE sender_id = description='Bill' AND ('$this->id' OR reciever_id = '$this->id');";
+
         $res = CRUD::Select($query);
         if (empty($res)) {
             return 0;
@@ -61,13 +62,19 @@ class User extends PERSON
     }
     public function getDonationHistory()
     {
-        $query = "SELECT * FROM moneyapp.donations WHERE sender_id = '$this->id' ;";
+        $query = "SELECT * FROM moneyapp.transactions WHERE sender_id = description='Donation' AND ('$this->id' OR reciever_id = '$this->id');";
         $res = CRUD::Select($query);
         if (empty($res)) {
             return 0;
         } else {
             return $res;
         }
+    }
+
+    public function deleteAccount()
+    {
+        $query = "DELETE FROM moneyapp.users WHERE id ='$this->id';";
+        CRUD::Delete($query);
     }
 
     public function setImagePath($image_path)
