@@ -68,7 +68,7 @@
 
         public static function validateIpnCheck($start_time, $send_time, $entered_ipn, $true_ipn){
             
-            if( $send_time - $start_time > self::$ipn_max_time){
+            if( $send_time - $start_time <= self::$ipn_max_time){
                 if($entered_ipn == $true_ipn){
                     return true;
                 }

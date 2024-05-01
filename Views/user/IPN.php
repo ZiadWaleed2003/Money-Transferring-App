@@ -1,4 +1,6 @@
-<?php session_start();?>
+<?php 
+session_start();
+?>
 
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
@@ -27,15 +29,15 @@
                 &nbsp;
                 <?php
 
-                    if($_SESSION['transaction_type'] == 'send'){
+                    if($_SESSION['transaction']['type'] == 'send'){
                         
                         echo '<a href="send-money.php" class="h5">Send Money</a>';
                     }
-                    else if($_SESSION['transaction_type'] == 'donation'){
+                    else if($_SESSION['transaction']['type'] == 'donation'){
 
                         echo '<a href="send-donation.php" class="h5">Send Donation</a>';
                     }
-                    else if($_SESSION['transaction_type'] == 'payment'){
+                    else if($_SESSION['transaction']['type'] == 'payment'){
                         
                         echo '<a href="pay-payment.php" class="h5">Pay Payment</a>';
                     }
@@ -56,7 +58,7 @@
                 <div class="bg-secondary rounded h-100 p-4 col-12 pb-5">
                     <div class="card-number text-center">
                         <span class="text-light h4">Card number:</span>
-                        <span class="text-muted h4">&nbsp;<?php echo Formation::showCardNumber($_SESSION['transaction_sender_card_number']);?></span>
+                        <span class="text-muted h4">&nbsp;<?php echo Formation::showCardNumber($_SESSION['transaction']['sender_card_number']);?></span>
                     </div>
                     <div class="line"></div>
                     <form method="POST" action="../../controllers/TransactionsController.php">

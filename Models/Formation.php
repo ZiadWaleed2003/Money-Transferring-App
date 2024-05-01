@@ -15,7 +15,7 @@ class Formation
     ////////////////////////////// CONSTRUCT //////////////////////////////
     public function __construct()
     {
-        $this->cardNumberPattern = "/\D+/";
+        $this->cardNumberPattern = "/\D/";
         $this->amountPattern = "/\D+/";
         $this->stringPattern = '/^[a-zA-Z0-9\s\.\,\'\"\:\;\-_]+$/';
     }
@@ -23,13 +23,13 @@ class Formation
 
     ////////////////////////////// METHODS //////////////////////////////
     public static function cleanNumber($str){
-        return preg_replace(self::$amountPattern, '', $str);
+        return preg_replace(self::$cardNumberPattern, "", $str);
     }
     
     private static function cleanString($string)
     {
         $string = trim($string);
-        $string = preg_replace(self::$stringPattern, '', $string);
+        $string = preg_replace(self::$stringPattern, "", $string);
         return $string;
     }
 
@@ -90,6 +90,8 @@ class Formation
         foreach ($ipns as $ipn){
             $complete_ipn .=$ipn;
         }
+        var_dump(intval(self::cleanNumber($complete_ipn)));
+        echo "<br>";
         return intval(self::cleanNumber($complete_ipn));
     }
 

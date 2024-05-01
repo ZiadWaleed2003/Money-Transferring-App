@@ -1,8 +1,10 @@
 <?php 
-    session_start();
+    session_start(); //EDITS AFTER SESSION
+    // session_destroy();
 
-    if(!isset($_SESSION['user_id'])){
-        $_SESSION['user_id'] = 1;
+    //EDITS AFTER SESSION
+    if(!isset($_SESSION['user']['id'])){
+        $_SESSION['user']['id'] = 1;
     }
 ?>
 
@@ -50,7 +52,7 @@
                                 
                                 <option value="" class="text-muted" selected disabled>-- Open Cards list --</option>
                                 <?php
-                                    $cards = CRUD::Select("SELECT * FROM usercards WHERE user_id = $_SESSION[user_id] order by favourite desc");
+                                    $cards = CRUD::Select("SELECT * FROM usercards WHERE user_id = ".$_SESSION['user']['id']." order by favourite desc");
                                     foreach($cards as $card){
                                         $card_number = Formation::showCardNumber($card['number']);
                                         $classes = ($card['favourite'] == 1)? "bg-danger text-white": "";
@@ -79,11 +81,20 @@
 
                         <input type="hidden" name="transaction_type" value="send">
                         
-                        <div class="alert alert-danger alert-dismissible fade" role="alert">
-                            <i class="fa fa-exclamation-circle me-2"></i>An icon &amp; dismissing danger alert—check it out!
+                        <?php
+                            // session_start(); //EDITS AFTER SESSION
+
+                            if(isset($_SESSION['transaction']['error_message'])):
+                        ?>
+                        <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                            <i class="fa fa-exclamation-circle me-2"></i>
+                            <?php
+                                echo $_SESSION['transaction']['error_message'];
+                                unset($_SESSION['transaction']['error_message']);
+                            ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        
+                        <?php endif;?>
                         <div class="row justify-content-center">
                             <button class="btn btn-lg btn-primary w-25 m-2" type="submit">Send Money</button>
                         </div>

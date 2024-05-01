@@ -20,20 +20,23 @@ class Transaction
     private $type;
     private $status;
     private $description;
-
-    protected $conn;
+    
+    private $conn;
     ////////////////////////////// CONSTRUCT //////////////////////////////
 
-    public function __construct($conn)
+    public function __construct()
     {
-        self::$conn = $conn;
+
     }
 
     ////////////////////////////// METHODS //////////////////////////////
     // Setters
-    public function setTransactionId()
+    public function setConnection($conn)
     {
-        $transaction_id = CRUD::Select("SELECT COUNT(*) FROM transactions");
+        // $this->$conn = $conn;
+    }
+    public function setTransactionId($transaction_id)
+    {
         $this->transaction_id = intval($transaction_id);
     }
 
@@ -53,7 +56,7 @@ class Transaction
     }
     public function setIpn($IPN)
     {
-        $this->amount = Formation::cleanIpn($IPN);
+        $this->ipn = Formation::cleanIpn($IPN);
     }
 
     public function setDate()
@@ -77,6 +80,10 @@ class Transaction
     }
 
     // Getters
+    public function getConnection()
+    {
+        return $this->conn;
+    }
     public function getTransactionId()
     {
         return $this->transaction_id;
@@ -180,10 +187,12 @@ class Transaction
                                         $receiver_card_data = $receiver_card_data[0];
 
                                         // Check the Relativity of the Card Account to the Logged User  !!(SECOND STEP)!!
-                                        if ($sender_card_data['user_id'] == $_SESSION['user_id']) {
+                                        if ($sender_card_data['user_id'] == $_SESSION['user']['id']) {
 
                                             // Check Account Balance  !!(THIRD STEP)!!
                                             if (Validator::validateAmountSubtract($sender_card_data['balance'], $amount)) {
+                                                return true;
+
                                             } else {
                                                 throw new Exception('!! NO ENOUGH ACCOUNT BALANCE !!');
                                             }
@@ -229,37 +238,43 @@ class Transaction
          */
 
         // Get All needed Data
+        
         $sender_card_number = $this->getSenderCardNumber();
         $receiver_card_number = $this->getReceiverCardNumber();
-
+        
         $transaction_amount = $this->getAmount();
         $transaction_status = $this->getStatus();
+        $transaction_date = $this->getDate();
         
         $ipn_to_check = $this->getIpn();
 
+        
         try {
 
             // Here Get Data of each Sender and Receiver Cards data From DB
             $sql = "SELECT * FROM usercards WHERE `number` = $sender_card_number";
-            $sender_card_data = CRUD::Select($sql);
+            $sender_card_data = CRUD::Select($sql)[0];
 
-            $sql = "SELECT * FROM usercards WHERE number == $receiver_card_number";
-            $receiver_card_data = CRUD::Select($sql);
+            $sql = "SELECT * FROM usercards WHERE `number` = $receiver_card_number";
+            $receiver_card_data = CRUD::Select($sql)[0];
+
+
 
             // Check IPN of Sender Card !!(THIRD STEP)!!
             if (Validator::validateIpnCheck($transaction_check_time_start, time(), $ipn_to_check, $sender_card_data['ipn_code'])) {
-
+                
                 // Check There Is Enough Balance to required Transaction Amount
                 if (Validator::validateAmountSubtract($sender_card_data['balance'], $transaction_amount)) {
-
+                    
                     $sender_update_sql = "UPDATE usercards SET balance = $sender_card_data[balance] - $transaction_amount WHERE number = $sender_card_number";
-
+                    
                     $receiver_update_sql = "UPDATE usercards SET balance = $receiver_card_data[balance] + $transaction_amount WHERE number = $receiver_card_number";
-
-                    $transaction_history_sql = "INSERT INTO transactions (sender_id, reciever_id, date, status, description, amount) VALUES($sender_card_number, $receiver_card_number, CURDATE(), $transaction_status, 'Sending Money Transaction', $transaction_amount)";
-
+                    
+                    $transaction_history_sql = "INSERT INTO transactions (sender_id, sender_card, reciever_id, reciever_card, date, status, description, amount)
+                                                                  VALUES ($sender_card_data[user_id], '$sender_card_number', $receiver_card_data[user_id], '$receiver_card_number', CURRENT_TIMESTAMP, '$transaction_status', 'Sending Money Transaction', $transaction_amount)";
+                    // var_dump($transaction_history_sql);
                     self::checkout($sender_update_sql, $receiver_update_sql, $transaction_history_sql);
-            
+                    
                 } else {
                     throw new Exception("Invalid Transaction Amount");
                 }
@@ -267,36 +282,48 @@ class Transaction
                 throw new Exception("!! WRONG IPN CODE !!");
             }
         } catch (Exception $e) {
-
+            
             throw $e;
         }
     }
-  
+
+
     private function checkout($sender_sql, $receiver_sql, $transaction_sql)
     {
+        
         try{
             if($sender_sql && $receiver_sql && $transaction_sql){
                 
                 $result = CRUD::Update($sender_sql);
                 if(!$result){
-                    throw new Exception("Unexpected Error - Transaction Failed");
+                    throw new Exception("Transaction Failed - ERROR(9001)");
                 }
-
+                
                 $result = CRUD::Update($receiver_sql);
                 if(!$result){
-                    throw new Exception("Unexpected Error - Transaction Failed");
+                    throw new Exception("Transaction Failed - ERROR(9002)");
                 }
                 
                 $result = CRUD::Insert($transaction_sql);
                 if(!$result){
-                    throw new Exception("Unexpected Error - Transaction Failed");
+                    throw new Exception("Transaction Failed - ERROR(9003)");
                 }
             }
             else {
-                throw new Exception("Unexpected Error - Transaction Failed");
+                throw new Exception("Transaction Failed - ERROR(9000)");
             }
         } catch (Exception $e){
             throw $e;
         }
+
+        $transaction_id_sql = "SELECT 'amount' FROM transactions WHERE sender_id = ".$this->getSenderCardNumber()." ORDER BY id DESC LIMIT 1";
+        $result = CRUD::Select($transaction_id_sql);
+
+        for($i=0; $i < 10 && !$result; $i++){
+            $result = CRUD::Select($transaction_id_sql);
+        }
+
+        self::setTransactionId($result[0]);
     }
+  
 }
