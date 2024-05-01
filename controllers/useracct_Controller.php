@@ -1,5 +1,6 @@
 <?php
 require_once ("CRUD.php");
+session_start();
 
 
 class useracct_Controller{
@@ -13,6 +14,18 @@ class useracct_Controller{
             echo "NO USERS TO SHOW";
             return false;
         }
+    }
+
+
+    public function feedback($feedback){
+       $query="insert into feedback(user_id,description) values (1,'$feedback') ";
+       $result=CRUD::Update($query);
+       if($result !=false){
+        return true;
+       }
+       else{
+        return false;
+       }
     }
 }
 

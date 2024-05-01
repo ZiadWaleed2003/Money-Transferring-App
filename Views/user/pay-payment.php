@@ -1,6 +1,17 @@
+<?php 
+    session_start(); //EDITS AFTER SESSION
+    // session_destroy();
+
+    //EDITS AFTER SESSION
+    if(!isset($_SESSION['user']['id'])){
+        $_SESSION['user']['id'] = 1;
+    }
+?>
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
+<?php require("../../controllers/CRUD.php");?>
+<?php require("../../Models/Formation.php");?>
 
 
 <!-- Transaction Start -->
@@ -21,7 +32,7 @@
                 &nbsp;
                 /
                 &nbsp;
-                <a href="send-donation.php" class="h5 text-primary">Pay Payment</a>
+                <a href="pay-payment.php" class="h5 text-primary">Pay Payment</a>
 
             </span>
         </div>
@@ -30,39 +41,63 @@
             <div id="send-money-page" class="row justify-content-center">
                 <div class="bg-secondary rounded h-100 p-4 col-10">
 
-                    <form>
+                    <form method="POST" action="../../controllers/TransactionsController.php">
                         <div class="mb-3">
                             <label for="" class="form-label h4">Select Your Card</label>
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" required>
+                            <select class="form-select form-select-lg mb-3" name="transaction_sender_card_number" aria-label=".form-select-lg example" required>
                                 <option value="" class="text-muted" selected disabled>-- Open Cards list --</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <?php
+                                    $cards = CRUD::Select("SELECT * FROM usercards WHERE user_id = ".$_SESSION['user']['id']." order by favourite desc");
+                                    foreach($cards as $card){
+                                        $card_number = Formation::showCardNumber($card['number']);
+                                        $classes = ($card['favourite'] == 1)? "bg-danger text-white": "";
+                                        
+                                        echo "<option value='$card[id]' class='$classes'>$card_number</option>";
+                                    }
+                                ?>
                             </select>
                         </div>
                         <div class="row mt-5">
                             <div class="col-6">
                                 <label for="" class="form-label h4">Select Payment</label>
-                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" required>
+                                <select class="form-select form-select-lg mb-3" name="transaction_bill_account_number" aria-label=".form-select-lg example" required>
                                     <option value="" class="text-muted" selected disabled>-- Open payments list --</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <?php
+                                    $bills = CRUD::Select("SELECT * FROM bills");
+                                    foreach($bills as $bill){
+                                        $bill_account_number = $bill['account_number'];
+                                        $bill_name = Formation::capitalizeWords($bill['name']);
+
+                                        echo "<option value='$bill_account_number' class=''>$bill_name</option>";
+                                    }
+                                ?>
                                 </select>
                             </div>
                             <div class="col-6">
                                 <label class="form-label h4">Amount</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="amount" name="amount" placeholder="12345" class="form-control form-control-lg" aria-label="Amount (to the nearest dollar)" required>
+                                    <input type="text" id="amount" name="transaction_amount" placeholder="12345" class="form-control form-control-lg" aria-label="Amount (to the nearest dollar)" required>
                                     <span class="input-group-text ">E£</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="alert alert-danger alert-dismissible fade" role="alert">
-                            <i class="fa fa-exclamation-circle me-2 show"></i>An icon &amp; dismissing danger alert—check it out!
+                        <?php
+                            // session_start(); //EDITS AFTER SESSION
+
+                            if(isset($_SESSION['transaction']['error_message'])):
+                        ?>
+                        <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                            <i class="fa fa-exclamation-circle me-2"></i>
+                            <?php
+                                echo $_SESSION['transaction']['error_message'];
+                                unset($_SESSION['transaction']['error_message']);
+                            ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
+                        <?php endif;?>
+
+                        <input type="hidden" name="transaction_type" value="bill">
 
                         <div class="row justify-content-center">
                             <button class="btn btn-lg btn-primary w-25" type="submit">Pay Payment</button>

@@ -3,3 +3,8 @@ test
 test.php
 css/test.css
 js/test.js
+DB-data
+<<<<<<< HEAD
+=======
+temp/tmp
+>>>>>>> master

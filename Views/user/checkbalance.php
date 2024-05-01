@@ -1,6 +1,17 @@
+<?php 
+    session_start();
+    // session_destroy();
+
+
+    if(!isset($_SESSION['user']['id'])){
+        $_SESSION['user']['id'] = 1;
+    }
+?>
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
+<?php require("../../controllers/CRUD.php");?>
+<?php require("../../Models/Formation.php");?>
 
 
 
@@ -32,7 +43,7 @@
         <div class="container-fluid pt-5">
             <div class="row justify-content-center h-100 p-5">
                 
-                <form action="" >
+                <form action="../../controllers/TransactionsController.php"  method="POST" >
                     <div class="flex-column justify-content-center align-items-center text-center">
 
                         <div class="row p-3">
@@ -41,13 +52,20 @@
 
                         <div class="row col-4 pb-5 m-auto">
                                                         
-                            <select id="card-select" class="form-select form-select-lg mb-3 text-center" name="card" required>
-                                <option value="1">1234 - 1234 - 1234 - 1234</option>
-                                <option value="2">1234 - 1234 - 1234 - 1234</option>
-                                <option value="3">1234 - 1234 - 1234 - 1234</option>
+                            <select id="card-select" class="form-select form-select-lg mb-3 text-center" name="sender_card_number" required>
+                               
+                                <?php
+                                    $cards = CRUD::Select("SELECT * FROM usercards WHERE user_id = ".$_SESSION['user']['id']." order by favourite desc");
+                                    foreach($cards as $card){
+                                        $card_number = Formation::showCardNumber($card['number']);
+                                        $classes = ($card['favourite'] == 1)? "bg-danger text-white": "";
+
+                                        echo "<option value='$card[id]' class='$classes'>$card_number</option>";
+                                    }
+                                ?>
                             </select>
                         </div>
-                        
+                        <input type="hidden" name="transaction_type" value="checkbalance">
                         <div>
                             <button type="submit" class="btn btn-lg btn-primary m-2 w-25">Show Balance</button>
                         </div>

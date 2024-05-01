@@ -11,7 +11,7 @@ class DBConnection
 
     public function __construct(){
 
-        $this->DB_host = 'localhost' ;
+        $this->DB_HOST = 'localhost' ;
         $this->DB_USER = 'root' ;
         $this->DB_PASSWORD = '' ;
         $this->DB_NAME = 'moneyapp' ;
