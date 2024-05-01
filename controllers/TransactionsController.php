@@ -174,6 +174,42 @@ class TransactionsController
             throw $e;
         }
     }
+
+    public function requestMoney()
+    {
+        $request_money = new Transaction();
+        try{
+            $request_money->setSenderCardNumber($_POST['transaction_receiver_card_number'] ?? null);
+            
+            $sql = "SELECT `number` FROM usercards WHERE id = $_POST[transaction_sender_card_number]";
+            $request_money->setReceiverCardNumber(CRUD::Select($sql)[0]['number'] ?? null);
+            $request_money->setReceiverId($_SESSION['user']['id'] ?? null);
+            
+            $request_money->setAmount($_POST['transaction_amount'] ?? null);
+
+
+            $request_money->requestMoney();
+            
+            
+            $_SESSION['request']['error_message'] = "request done successful";
+
+
+
+            
+
+        }
+        catch (Exception $e){
+            $_SESSION['request']['error_message'] = $e->getMessage();
+        }
+        finally{
+
+            header('location: ../views/user/recievemoney.php');
+            exit();
+
+        }
+
+        
+    }
 }
 
 ?>
@@ -200,6 +236,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     else if (isset($_POST['transaction_type']) && $_POST['transaction_type'] == "checkbalance") 
     {
         $transaction->checkBalance();
+    }
+    else if (isset($_POST['transaction_type']) && $_POST['transaction_type'] == "request") 
+    {
+        $transaction->requestMoney();
     }
     
     else

@@ -408,4 +408,93 @@ class Transaction
             throw $e;
         }
     }
+
+    public function requestMoney()
+    {
+        $sender_card_number=$this->getSenderCardNumber();
+        $receiver_card_number=$this->getReceiverCardNumber();
+        $amount=$this->getAmount();
+        $receiver_id=$this->getReceiverId();
+
+        try {
+
+            
+
+
+            // Check if Sender and Receiver not the same
+            if ($sender_card_number == $receiver_card_number) {
+
+                throw new Exception("Can't Send money to the Same Sending Card");
+            }
+
+
+            // Here check Validation of Sender Card Number if (Sending | Receiving) operation
+            if (!Validator::validateCardNumber($sender_card_number)) {
+                
+                throw new Exception("Invalid Sender Card Number");
+            }
+
+
+            // Here check Validation of Receiver Card Number if (Sending | Receiving) operation
+            if (!validator::validateCardNumber($receiver_card_number)) {
+
+                throw new Exception("Invalid Receiver Card Number");
+            }
+
+
+            // Here Get Data of each Sender and Receiver data From DB
+            $sql = "SELECT * FROM usercards WHERE `number` = $sender_card_number";
+            $sender_card_data = CRUD::Select($sql);
+
+            $sql = "SELECT * FROM usercards WHERE `number` = $receiver_card_number";
+            $receiver_card_data = CRUD::Select($sql);
+
+
+            // Here check Exitance of This Sender Card Account !!(FIRST STEP)!!
+            if (count($sender_card_data) != 1) {
+
+                throw new Exception("Not Valid Sender Data");
+            }
+
+
+            // Here check Exitance of This Receiver Card Account  !!(FIRST STEP)!!
+            if (count($receiver_card_data) != 1) {
+            
+                throw new Exception("Not Valid Receiver Data");
+            }
+
+
+            // Here Set data in an single Dimension Associative Array
+            $sender_card_data = $sender_card_data[0];
+            $receiver_card_data = $receiver_card_data[0];
+
+            
+            // Check the Relativity of the Card Account to the Logged User  !!(SECOND STEP)!!
+            if ($receiver_card_data['user_id'] != $receiver_id) {
+                
+                throw new Exception("Unexpected Error (1001)");
+            }
+            
+            if(!Validator::validateAmount($amount)){
+                 
+                throw new Exception("Not valid Amount");
+            }
+
+            $sql="INSERT INTO requests(sender_id, reciever_id, amount, description, date) 
+                             VALUES ($sender_card_data[id],$receiver_card_data[id],$amount,'flossss wnby ya homar', CURRENT_TIMESTAMP)";
+             
+            $result=CRUD::Insert($sql);
+            
+            if(!$result)
+            {
+                throw new Exception("ont valid request");
+            }
+
+
+            
+        } 
+        catch (Exception $e) {
+            throw $e;
+        }
+    }
 }
