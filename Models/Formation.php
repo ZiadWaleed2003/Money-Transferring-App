@@ -2,14 +2,18 @@
 class Formation
 {
     ////////////////////////////// Variables //////////////////////////////
-    private static $cardNumberPattern = "/\D+/";
-    private static $amountPattern = "/\D+/";
+    private static $cardNumberPattern = "/\D/";
+    private static $amountPattern = "/\D/";
     
-    private static $transactionTYPE = ['send', 'recieve'];
+    private static $transactionTYPE = ['send', 'recieve', 'donation', 'bill']; 
+    private static $transactionDESCRIPTION = ['send' => 'Sending Money Transaction', 
+                                                'recieve' => 'Receiving Money Transaction', 
+                                                    'donation' => 'Donation', 
+                                                        'bill' => 'Bill']; 
     private static $transactionSTATUS = [ 'CANCELLED', 'Done'];
     
-    private static $numberPattern = "/\D+/";
-    private static $stringPattern = '/^[a-zA-Z0-9\s\.\,\'\"\:\;\-_]+$/';
+    private static $numberPattern = "/\D/";
+    private static $stringPattern = '/^[a-zA-Z0-9\s\.\,\'\"\:\;\-_]$/';
 
 
     ////////////////////////////// CONSTRUCT //////////////////////////////
@@ -17,13 +21,14 @@ class Formation
     {
         $this->cardNumberPattern = "/\D/";
         $this->amountPattern = "/\D+/";
-        $this->stringPattern = '/^[a-zA-Z0-9\s\.\,\'\"\:\;\-_]+$/';
+        $this->stringPattern = '/^[a-zA-Z0-9\s\.\,\'\"\:\;\-_]$/';
     }
 
 
     ////////////////////////////// METHODS //////////////////////////////
     public static function cleanNumber($str){
-        return preg_replace(self::$cardNumberPattern, "", $str);
+        $number = preg_replace(self::$numberPattern, "", $str);
+        return intval($number);
     }
     
     private static function cleanString($string)
@@ -69,8 +74,15 @@ class Formation
     public static function cleanDescription($description)
     {
         $description = self::cleanString($description);
-        $description = self::capitalizeFirstLetter($description);
-        return $description;
+        if(isset(self::$transactionDESCRIPTION[$description])){
+
+            $description = self::$transactionDESCRIPTION[$description];
+        }
+        else{
+            
+            $description = self::capitalizeFirstLetter($description);
+        }
+        return self::capitalizeFirstLetter($description);
     }
 
     public static function cleanTransactionStatus($status)
@@ -81,8 +93,10 @@ class Formation
 
     public static function cleanTransactionType($type)
     {
-        $type = self::cleanNumber($type);
-        return self::$transactionTYPE[$type] ?? null;
+        $type = trim($type);
+        $number = self::cleanNumber($type);
+
+        return ($number == $type)? self::$transactionTYPE[$type] : self::cleanString($type);
     }
 
     public static function cleanIpn($ipns){
@@ -90,8 +104,6 @@ class Formation
         foreach ($ipns as $ipn){
             $complete_ipn .=$ipn;
         }
-        var_dump(intval(self::cleanNumber($complete_ipn)));
-        echo "<br>";
         return intval(self::cleanNumber($complete_ipn));
     }
 

@@ -8,6 +8,7 @@
         private static $ipn_size = 6;
         private static $ipn_max_time = 180; // sec
 
+        private static $amountMIN = 10;
         private static $amountMAX = 99999;
         private static $transactionSTATUS = ['accepted', 'rejected'];
         private static $transactionTYPE = ['send', 'recieve'];
@@ -44,7 +45,7 @@
         }
 
         public static function validateAmount($amount){
-            if(self::validateMax($amount, self::$amountMAX) && self::validateMin($amount, 0)){
+            if(self::validateMax($amount, self::$amountMAX) && self::validateMin($amount, self::$amountMIN)){
                 return true;
             }
             else{

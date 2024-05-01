@@ -42,7 +42,7 @@ session_start();
                         echo '<a href="pay-payment.php" class="h5">Pay Payment</a>';
                     }
                     else{
-                        header('location; index.php');
+                        header('location: index.php');
                     }
                 ?>
                 &nbsp;
@@ -90,6 +90,20 @@ session_start();
                             
                             <input type="hidden" name="transaction_ipn_time_submit" value="<?php echo time();?>">
                         </div>
+                        <?php
+                            // session_start(); //EDITS AFTER SESSION
+
+                            if(isset($_SESSION['transaction']['error_message'])):
+                        ?>
+                        <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                            <i class="fa fa-exclamation-circle me-2"></i>
+                            <?php
+                                echo $_SESSION['transaction']['error_message'];
+                                unset($_SESSION['transaction']['error_message']);
+                            ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php endif;?>
                         <div class="row justify-content-center pt-5">
                             <button class="btn btn-lg btn-primary w-25 m-2" type="submit">Submit IPN</button>
                         </div>
