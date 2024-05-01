@@ -1,7 +1,7 @@
 <?php
 
 require_once "Person.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/controllers/CRUD.php";
+require_once "../../controllers/CRUD.php";
 
 class User extends PERSON
 {

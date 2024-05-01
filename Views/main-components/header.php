@@ -23,19 +23,19 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Libraries Stylesheet -->
-    <link href="/views/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="/views/assets/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="../assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../assets/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="/views/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="/views/assets/css/style.css" rel="stylesheet">
-    <link href="/views/assets/css/Iconstylefav.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/Iconstylefav.css" rel="stylesheet">
 
     <?php if (file_exists("../assets/css/" . pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME) . ".css")): ?>
         <link rel="stylesheet" type="text/css"
-            href="/views/assets/css/<?php echo pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME); ?>.css">
+            href="../assets/css/<?php echo pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME); ?>.css">
     <?php endif; ?>
 
 </head>
