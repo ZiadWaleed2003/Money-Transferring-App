@@ -23,7 +23,7 @@ class CRUD
             }
 
         } else {
-            echo "Error : " . mysqli_error($connection);
+            echo "Error : " ;
 
             return false;
         }
@@ -50,7 +50,7 @@ class CRUD
             }
 
         } else {
-            echo "Error : " . mysqli_error($connection);
+            echo "Error : " ;
             return false;
 
         }
@@ -80,7 +80,7 @@ class CRUD
 
         } else {
 
-            echo "Error : " . mysqli_error($connection);
+            echo "Error : " ;
 
             return false;
         }
@@ -112,7 +112,7 @@ class CRUD
         } else {
 
 
-            echo "Error : " . mysqli_error($connection);
+            echo "Error : ";
 
             return false;
         }

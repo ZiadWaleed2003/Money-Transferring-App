@@ -26,10 +26,12 @@ if(isset($_POST['OtpSubmit'])){
 
                 if($embedds != false){
 
+                    // ToDo : continue the validation of the data and inserting it to the DB
+              
+                    //     $embd_serialized = serialize($embedds);
                     
-                    
-                   
-
+                //    $query = 
+                //    $sql = "INSERT INTO `image` (`id`, `user_id`, `vector_data`) VALUES ('1', '10', '$embd_serialized')";
 
                 }
 
