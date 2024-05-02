@@ -41,8 +41,14 @@ session_start();
                         
                         echo '<a href="pay-payment.php" class="h5">Pay Payment</a>';
                     }
+                    else if($_SESSION['transaction']['type'] == 'receive'){
+                        
+                        echo '<a href="requistlist.php" class="h5">Request List</a>';
+                    }
                     else{
-                        header('location: index.php');
+
+                        echo "<script> window.location.href='index.php';</script>";
+                        exit();
                     }
                 ?>
                 &nbsp;

@@ -179,7 +179,7 @@ class Transaction
 
         try {
 
-            if (!in_array($type, ['send', 'recieve', 'donation', 'bill'])) {
+            if (!in_array($type, ['send', 'receive', 'donation', 'bill'])) {
 
                 throw new Exception('Invalid Transaction Type');
             }
@@ -326,7 +326,7 @@ class Transaction
                     if(in_array($transaction_type, ['send', 'receive'])){
                         $receiver_update_sql = "UPDATE usercards SET balance = $receiver_card_data[balance] + $transaction_amount WHERE `number` = $receiver_card_number";
                         $transaction_history_sql = "INSERT INTO transactions (sender_id, sender_card, reciever_id, reciever_card, date, status, description, amount)
-                                                                    VALUES ($transaction_sender_id, '$sender_card_number', $receiver_card_data[user_id], '$receiver_card_number', CURRENT_TIMESTAMP, '$transaction_status', $transaction_description, $transaction_amount)";
+                                                                    VALUES ($transaction_sender_id, '$sender_card_number', $receiver_card_data[user_id], '$receiver_card_number', CURRENT_TIMESTAMP, '$transaction_status', '$transaction_description', $transaction_amount)";
                     }
                     else if($transaction_type == 'donation'){
                         $receiver_update_sql = "UPDATE donations SET balance = $receiver_card_data[balance] + $transaction_amount WHERE `account_number` = $transaction_receiver_id";
@@ -365,16 +365,17 @@ class Transaction
                 if(!$result){
                     throw new Exception("Transaction Failed - ERROR(9001)");
                 }
-                
+                    
                 $result = CRUD::Update($receiver_sql);
                 if(!$result){
                     throw new Exception("Transaction Failed - ERROR(9002)");
                 }
-                
+
                 $result = CRUD::Insert($transaction_sql);
                 if(!$result){
                     throw new Exception("Transaction Failed - ERROR(9003)");
                 }
+                
             }
             else {
                 throw new Exception("Transaction Failed - ERROR(9000)");
@@ -386,18 +387,18 @@ class Transaction
     
     public function checkBalance()
     {
-        $sender_card_number=self::getSenderCardNumber();
+        $sender_card_number = self::getSenderCardNumber();
 
         try{
-            $sql="SELECT * FROM  usercards WHERE number=$sender_card_number ";
-            $sender_card_data=CRUD::Select($sql);
-            if(count($sender_card_data)!=1  )
+            $sql = "SELECT * FROM usercards WHERE number = $sender_card_number";
+            $sender_card_data = CRUD::Select($sql);
+            if( count( $sender_card_data ) != 1 )
             {
                 throw new Exception("not valid card number");
 
 
             }
-            if($sender_card_data[0]["user_id"]!=$_SESSION['user']['id'])
+            if($sender_card_data[0]["user_id"] != $_SESSION['user']['id'])
             {
                throw new Exception ("please enter correct card number");
             }

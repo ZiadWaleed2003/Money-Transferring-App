@@ -19,51 +19,107 @@ class TransactionsController
 
         try {
 
-            $sql = "SELECT `number` FROM usercards WHERE id = $_POST[transaction_sender_card_number]";
-            $check_Transaction_start->setSenderCardNumber(CRUD::Select($sql)[0]['number'] ?? null);
 
-            $check_Transaction_start->setSenderId($_SESSION['user']['id'] ?? null);
             
-            $check_Transaction_start->setAmount($_POST['transaction_amount'] ?? null);
-            
-            if ($transaction_type === 'send') {
-
+            if ($transaction_type === 'send') 
+            {
+                
+                $sql = "SELECT `number` FROM usercards WHERE id = $_POST[transaction_sender_card_number]";
+                $check_Transaction_start->setSenderCardNumber(CRUD::Select($sql)[0]['number'] ?? null);
+                $check_Transaction_start->setSenderId($_SESSION['user']['id'] ?? null);
+                
                 $check_Transaction_start->setReceiverCardNumber($_POST['transaction_receiver_card_number'] ?? null);
+                
                 $check_Transaction_start->setType(0);
-
+                $check_Transaction_start->setAmount($_POST['transaction_amount'] ?? null);
+                
                 $check_Transaction_start->checkTransactionStart();
                 $transaction_start = true;
             }
+            else if($transaction_type === 'receive')
+            {
+                
+                if(isset($_POST['request_status']) && $_POST['request_status'] === 'accept')
+                {
+                    $request_id = $_POST['request_id'];
+                    $user_id = $_SESSION['user']['id'];
+                    $sql = "SELECT rs.sender_id, rs.amount, uc.number AS sender_card_number, uc_alias.number AS receiver_card_number
+                            FROM requests AS rs
+                            INNER JOIN usercards AS uc ON rs.sender_id = uc.id
+                            INNER JOIN usercards AS uc_alias ON rs.reciever_id = uc_alias.id
+                            WHERE rs.id = $request_id";
+                    
+                    $request_data = CRUD::Select($sql)[0];
+                    
+                    
+                    $check_Transaction_start->setSenderCardNumber($request_data['sender_card_number'] ?? null);
+                    $check_Transaction_start->setSenderId($user_id ?? null);
+                    
+                    $check_Transaction_start->setReceiverCardNumber($request_data['receiver_card_number'] ?? null);
+                    
+                    $check_Transaction_start->setType(1);
+                    $check_Transaction_start->setAmount($request_data['amount'] ?? null);
+                    
+                    $check_Transaction_start->checkTransactionStart();
+                    $_SESSION['request']['id'] = $request_id;
+                    $transaction_start = true;
+                }
+                else 
+                {
+                    
+                    $sql = "DELETE FROM requests WHERE id = $_POST[request_id]";
+                    $result = CRUD::Delete($sql);
+                    
+                    if(!$result)
+                    {
+                        throw new Exception("Unsuccessful reqeust Delete");
+                    }
+                }
+                
+            }
             else if($transaction_type === 'donation')
             {
-
+                
+                $sql = "SELECT `number` FROM usercards WHERE id = $_POST[transaction_sender_card_number]";
+                $check_Transaction_start->setSenderCardNumber(CRUD::Select($sql)[0]['number'] ?? null);
+                $check_Transaction_start->setSenderId($_SESSION['user']['id'] ?? null);
+                
+                
                 $check_Transaction_start->setReceiverId($_POST['transaction_donation_account_number'] ?? null);
+                
                 $check_Transaction_start->setType(2);
+                $check_Transaction_start->setAmount($_POST['transaction_amount'] ?? null);
                 
                 $check_Transaction_start->checkTransactionStart();
                 $transaction_start = true;
             }
             else if($transaction_type === 'bill')
             {
+                $sql = "SELECT `number` FROM usercards WHERE id = $_POST[transaction_sender_card_number]";
+                $check_Transaction_start->setSenderCardNumber(CRUD::Select($sql)[0]['number'] ?? null);
+                $check_Transaction_start->setSenderId($_SESSION['user']['id'] ?? null);
                 
                 $check_Transaction_start->setReceiverId($_POST['transaction_bill_account_number'] ?? null);
+                
                 $check_Transaction_start->setType(3);
+                $check_Transaction_start->setAmount($_POST['transaction_amount'] ?? null);
                 
                 $check_Transaction_start->checkTransactionStart();
                 $transaction_start = true;
             }
             // ADD MORE TRANSACTION TYPES
-
+            
+            
         } 
         catch (Exception $e)
-         {
-
+        {
+            
             $_SESSION['transaction']['error_message'] = $e->getMessage();
             $transaction_start = false;
         }
-
-
-        if ($transaction_start) 
+        
+        
+        if (isset($transaction_start) && $transaction_start) 
         {
             
             $_SESSION['transaction']['sender_card_number'] = $check_Transaction_start->getSenderCardNumber();
@@ -74,10 +130,14 @@ class TransactionsController
             
             $_SESSION['transaction']['amount'] = $check_Transaction_start->getAmount();
             $_SESSION['transaction']['check_time_start'] = time() + 60;
-
+            
             if($transaction_type === 'send')
             {
                 $_SESSION['transaction']['type'] = 'send';
+            }
+            else if($transaction_type === 'receive')
+            {
+                $_SESSION['transaction']['type'] = 'receive';
             }
             else if($transaction_type === 'donation')
             {
@@ -87,7 +147,7 @@ class TransactionsController
             {
                 $_SESSION['transaction']['type'] = 'bill';
             }
-
+            
             header('location: ../views/user/ipn.php');
             exit();
         } 
@@ -95,6 +155,9 @@ class TransactionsController
         {
             if($transaction_type === 'send'){
                 header('location: ../views/user/send-money.php');
+            }
+            else if($transaction_type === 'receive'){
+                header('location: ../views/user/requistlist.php');
             }
             else if($transaction_type === 'donation'){
                 header('location: ../views/user/send-donation.php');
@@ -143,6 +206,12 @@ class TransactionsController
             $_SESSION['transaction']['error_message'] = $e->getMessage();
             // $transaction_status = false;
         } finally {
+            if(isset($_SESSION['request']['id'])){
+                $sql = "DELETE FROM requests WHERE id = " . $_SESSION['request']['id'];
+                CRUD::Delete($sql);
+
+                unset($_SESSION['request']);
+            }
 
             $_SESSION['transaction']['id'] = $transaction_id ?? "??????????";
             header('location: ../views/user/view_transactions_status.php');
@@ -196,8 +265,8 @@ class TransactionsController
             $_SESSION['request']['success_message'] = "request done successful";
         }
         catch (Exception $e){
+
             $_SESSION['request']['error_message'] = $e->getMessage();
-            // var_dump($_SESSION['request']['error_message']);
         }
         finally{
 
@@ -205,8 +274,6 @@ class TransactionsController
             exit();
 
         }
-
-        
     }
 }
 
@@ -225,9 +292,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $transaction->sendTransaction();
     }
 
-    else if (isset($_POST['transaction_type']) && in_array($_POST['transaction_type'], array('send', 'reqeust', 'donation', 'bill'))) 
+    else if (isset($_POST['transaction_type']) && in_array($_POST['transaction_type'], array('send', 'receive', 'donation', 'bill'))) 
     {
-     
         $transaction->startTransaction($_POST['transaction_type']);
     }
 
