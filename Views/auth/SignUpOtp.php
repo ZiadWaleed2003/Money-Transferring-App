@@ -1,9 +1,13 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>ElZowZat & Bassel</title>
+    <title>Elzozat and Bassel - Bootstrap 5 Admin Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -42,57 +46,43 @@
         <!-- Spinner End -->
 
 
-        <!-- Sign Up Start -->
+        <!-- Sign In Start -->
         <div class="container-fluid">
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="home.html" class="">
+                            <a href="index.php" class="">
                                 <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>ElZowzat and Bassel</h3>
                             </a>
-                            <h3>Sign Up</h3>
                         </div>
-                        <form action="../../controllers/SignUpController.php" method="post" enctype="multipart/form-data">
+                        <br>
+                        <!-- should replace that with the email taken from the user -->
+                     <form action="../../controllers/RegisterOtpController.php" method="post" enctype="multipart/form-data" id="signupForm">
+                            <div>
+                                <?php
+
+                                    if(isset($_SESSION['email'])){
+                                        $email = $_SESSION['email'];
+                                    }else{
+                                        $email = "your email";
+                                    }
+                                    echo "<h4>We have sent the OTP code to ".$email."</h4>";
+                                ?>
+                            </div>
+                            <br>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingText" placeholder="jhondoe" name="username">
-                                <label for="floatingText">Username</label>
+                                <input type="text" class="form-control" id="floatingInput" placeholder="XXX-XXX" name='otp'>
+                                <label for="floatingInput">Enter the 6 digit code</label>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
-                                <label for="floatingInput">Email address</label>
-                            </div>
-                            <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-                                <label for="floatingPassword">Password</label>
-                            </div>
-                            <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password" name="password">
-                                <label for="floatingPassword">Confirm Password</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingText" placeholder="1234567890" name="phone">
-                                <label for="floatingText">Phone Number</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingText" placeholder="IPN code" name="ipn">
-                                <label for="floatingText">IPN code</label>
-                            </div>
-                            <!-- File input for image -->
-                            <div class="mb-3">
-                                <label for="image" class="form-label">Profile Image</label>
-                                <input class="form-control" type="file" id="image" name="image">
-                            </div>
-                                <a href="">Forgot Password</a>
-                            </div>
-                            <button type="submit" name="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
+                            <button type="submit" name="OtpSubmit" class="btn btn-primary py-3 w-100 mb-4">Submit</button>
                         </form>
-                        <p class="text-center mb-0">Already have an Account? <a href="signin.html">Sign In</a></p>
+                        <p class="text-center mb-0">Don't have an Account? <a href="signup.html">Sign Up</a></p>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Sign Up End -->
+        <!-- Sign In End -->
     </div>
 
     <!-- JavaScript Libraries -->
