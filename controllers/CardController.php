@@ -51,7 +51,7 @@ class CardController
 
     }
     public function getAllCards(){
-        $query="select usercards.id,bank.name as 'bank',usercards.name,usercards.number from usercards,bank where usercards.bank_id=bank.id";
+        $query="select usercards.id,bank.name as 'bank',usercards.name,usercards.number,favourite from usercards,bank where usercards.bank_id=bank.id";
             $result=CRUD::Select($query);
             if($result){
             return $result;

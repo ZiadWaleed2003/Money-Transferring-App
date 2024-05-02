@@ -64,16 +64,16 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Card Number</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword1" name="cardnumber" placeholder="1234 5678 9102 3456">
+                                    <input type="text" class="form-control" id="cardnumber" name="cardnumber" placeholder="1234 5678 9102 3456">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">CVV Number</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword1" name="cvv" placeholder="eg. 177">
+                                    <input type="text" class="form-control" id="cardcvv" name="cvv" placeholder="eg. 177">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">IPN Code Number</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword1" name="ipn">
+                                    <input type="text" class="form-control" id="cardipn" name="ipn">
                                 </div>
                                 <button type="submit" name="add"class="btn btn-primary">Add</button>
                             </form>

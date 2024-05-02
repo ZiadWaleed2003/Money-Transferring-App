@@ -65,7 +65,7 @@
                                   <form action="card.php" method="POST">
                                   <input type="hidden" name="cardId" value="<?php echo $card["id"] ?>">
                                     <button type="submit" name="fav" class="icon-button">
-                                      <i class="fas fa-heart"></i>
+                                      <i class="fas fa-heart <?php echo ($card["favourite"]==1)? 'text-danger':'' ?>" ></i>
                                     </button>
                                     </form>
                                   </td>
