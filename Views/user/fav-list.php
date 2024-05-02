@@ -57,7 +57,7 @@
                                   <form action="fav-list.php" method="POST">
                                   <input type="hidden" name="cardId" value="<?php echo $card["id"] ?>">
                                     <button type="submit" name="fav" class="icon-button">
-                                      <i class="fas fa-heart"></i>
+                                      <i class="fas fa-heart text-danger"></i>
                                     </button>
                                     </form>
                                   </td>
@@ -83,8 +83,8 @@
                                   <th scope="col">Card Number</th>
                                   <th scope="col">Fav</th>
                                   <th scope="col"></th>
-                                  <th scope="col">Edit</th>
-                                  <th scope="col">Delete</th>
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
                               </tr>
                               <tr>
                                   <td>No Card Exists</td>
