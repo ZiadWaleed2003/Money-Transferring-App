@@ -1,29 +1,47 @@
 <?php
+session_start();
 
-if (isset($_POST['register']))
+require("../Models/SignUp.php");
+
+if (isset($_POST['submit']))
 {
     $user_name 		= trim(htmlspecialchars($_POST['username']));
-	$email 			= trim(htmlspecialchars($_POST['email']));
-	$phone_number	= trim(htmlspecialchars($_POST['phone']));
-	$password 		= trim(htmlspecialchars($_POST['password']));
+	  $email 			  = trim(htmlspecialchars($_POST['email']));
+	  $phone_number	= trim(htmlspecialchars($_POST['phone']));
+	  $password 		= trim(htmlspecialchars($_POST['password']));
 
-    $ipn_code       = trim(htmlspecialchars($_POST['ipn']));
+    $ipn_code     = trim(htmlspecialchars($_POST['ipn']));
 
-    $img            = $_FILES['image'];
+    $img          = $_FILES['image'];
+ 
+    $imageFile    = $img["tmp_name"];
+    $imagename    = $img['name'];
     
-    //image processing
+    if (isset($imageFile)) {
+
+
+
+      // send and verify the otp first !
+
+        
+
+
+      ###############
+
+      // sending the image to the model to get the vector embeddings
+
+      Signup::sendingApiRequest($imageFile , $imagename);
+
+
+      //Saving the image of the user to use it as a PP
+
+      Signup::saveUserImage($img);  
     
-    $img_name = $img['name'];
-    $img_type = $img['type'];
-    $img_error = $img['error'];
-    $img_tmp = $img['tmp_name'];
-    $img_size = $img['size'];
-    $img_ext = pathinfo($img_name,PATHINFO_EXTENSION);
-    $img_newname = uniqid()."." . $img_ext;
+      
+      
+    }
 
-    //move the image to the uploaded iamges folder
 
-    move_uploaded_file($img_tmp,"../uploaded_images/$img_newname");
+
 }
-
 ?>
