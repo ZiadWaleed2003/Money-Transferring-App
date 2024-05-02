@@ -28,17 +28,17 @@ class Signup{
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             
             $data = json_decode($response, true); // Decode as associative array
-
+            curl_close($ch);
+            
             if($httpCode == 400){
         
-                $_SESSION['responseSignup'] = $data['response'];
-                header("location:../controllers/testSignup.php");
+                return false;
+
                 
               }else{
                 
-                $_SESSION['responseSignup'] = $data['response'];
+                return array_values($data['response']);
                 
-                header("location:testSignup.php");
               }
               
               
@@ -46,7 +46,6 @@ class Signup{
               echo "Error: Missing image";
             }
             
-            curl_close($ch);
 
     }
 
@@ -65,6 +64,8 @@ class Signup{
           // move the image to the uploaded iamges folder
     
           move_uploaded_file($img_tmp,"../uploaded_images/$img_newname");
+
+          return "../uploaded_images/$img_newname";
     }
 
 

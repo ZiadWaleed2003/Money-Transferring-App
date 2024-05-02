@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -49,11 +48,12 @@ class moneySystem{
          
                 $mail->Send();
 
-                $_SESSION['otp'] = $otp;
-
                 echo "Message Sent OK\n";
+                return  $otp;
         
             } catch ( Exception $e) {
+
+                return false;
         
                 echo $e->errorMessage(); //Pretty error messages from PHPMailer
             
