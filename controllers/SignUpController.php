@@ -10,7 +10,7 @@ if (isset($_POST['submit']))
 	  $_SESSION['email'] 			  = trim(htmlspecialchars($_POST['email']));
 	  $_SESSION['phone_number']	= trim(htmlspecialchars($_POST['phone']));
 	  $_SESSION['password ']		= trim(htmlspecialchars($_POST['password']));
-    $_SESSION['ipn_code']     = trim(htmlspecialchars($_POST['ipn']));
+
 
     $img          = $_FILES['image'];
  
@@ -34,11 +34,6 @@ if (isset($_POST['submit']))
         // sending the image to the model to get the vector embeddings
 
           header("location:../Views/auth/SignUpOtp.php");
-
-          // Signup::sendingApiRequest($imageFile , $imagename);
-
-
-        //Saving the image of the user to use it as a PP
       
     }
 

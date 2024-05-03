@@ -27,11 +27,36 @@ if(isset($_POST['OtpSubmit'])){
                 if($embedds != false){
 
                     // ToDo : continue the validation of the data and inserting it to the DB
-              
-                    //     $embd_serialized = serialize($embedds);
+
+                    $user_name    = $_SESSION['user_name'];
+                    $email        = $_SESSION['email'];
+                    $password     = $_SESSION['password '];
+                    $phone_number = $_SESSION['phone_number'];
+                    $image_path   = $_SESSION['img_path'];
                     
-                //    $query = 
-                //    $sql = "INSERT INTO `image` (`id`, `user_id`, `vector_data`) VALUES ('1', '10', '$embd_serialized')";
+              
+                    $embd_serialized = serialize($embedds);
+                    
+                   $query =  "INSERT INTO `users` (`name`, `email`, `password`, `phone_number`, `role`, `image_path`) 
+                   VALUES ('$user_name', '$email', '$password', '$phone_number', '1', '$image_path')";
+         
+
+                    
+                   $user_id = CRUD::Insert($query);
+
+                   $sql = "INSERT INTO `image` (`user_id`, `vector_data`) VALUES ( '$user_id', '$embd_serialized')";
+
+                   $result = CRUD::Insert($sql);
+
+                   if($result != false){
+                        
+                        $_SESSION['SignUpTest'] = 'SignUp done!';
+                        header("location:testSignup.php");
+                    }else{
+                        
+                        $_SESSION['SignUpTest'] = 'SignUp not done something wrong!';
+                        header("location:testSignup.php");
+                   }
 
                 }
 
