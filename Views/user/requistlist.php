@@ -1,6 +1,14 @@
+<?php 
+    session_start(); //EDITS AFTER SESSION
+
+    //EDITS AFTER SESSION
+$_SESSION['user']['id'] = 4;
+?>
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
+<?php require("../../controllers/CRUD.php");?>
+<?php require("../../Models/Formation.php");?>
 
 
 
@@ -39,56 +47,69 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col"> Name</th>
+                                        <th scope="col">Name</th>
                                         <th scope="col">Amount</th>
                                         <th scope="col">description of requist</th>
+                                        <th scope="col">Req. Card</th>
                                         <th scope="col"></th>
                                         <th scope="col"></th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>zeyad hussam </td>
-                                        <td>300</td>
-                                        <td>i want this money </td>
-                                        <td>
-                                            <button class="btn btn-success m2">accept</button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-danger m2">refuse</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>mohamed</td>
-                                        <td>30000</td>
-                                        <td>xxxxxxxxxxxxxxxxxxx</td>
-                                        <td>
-                                            <button class="btn btn-success m2">accept</button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-danger m2">refuse</button>
-                                        </td>
+                                    <?php
+                                        $user_id = $_SESSION['user']['id'];
+                                        // var_dump($user_id);
+                                        $sql = "SELECT rs.id, rs.sender_id, rs.reciever_id, rs.amount, rs.description, rs.date, u_2.name, uc.number
+                                                FROM requests AS rs
+                                                INNER JOIN usercards AS uc ON rs.sender_id = uc.id AND uc.user_id = $user_id
+                                                INNER JOIN usercards AS uc_alias ON rs.reciever_id = uc_alias.id
+                                                INNER JOIN users AS u_1 ON u_1.id = uc.user_id
+                                                INNER JOIN users AS u_2 ON u_2.id = uc_alias.user_id";
 
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>adel</td>
-                                        <td>6000</td>
-                                        <td>zzzzzzzzzzzzzzzzz</td>
-                                        <td>
-                                            <button class="btn btn-success m2">accept</button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-danger m2">refuse</button>
-                                        </td>
-                                    </tr>
+                                        $requests = CRUD::Select($sql);
+
+                                        $i = 0;
+                                        foreach ($requests as $request){
+                                            $i++;
+                                            echo   "<tr>
+                                                        <th scope='row'>$i</th>
+                                                        <td class='text-capitalize'>$request[name]</td>
+                                                        <td>$request[amount]</td>
+                                                        <td>$request[description]</td>
+                                                        <td>".Formation::showCardNumber($request['number'])."</td>
+                                                        <td>
+                                                            <button class='btn btn-success m action-button' data-action='accept' data-id='$request[id]'>Accept</button>
+                                                        </td>
+                                                        <td>
+                                                            <button class='btn btn-danger m2 action-button' data-action='refuse' data-id='$request[id]'>Refuse</button>
+                                                        </td>
+                
+                                                    </tr>";
+                                        }
+                                    ?>
+                                    
                                 </tbody>
                             </table>
+                            <form id="go" method="POST" action="../../controllers/TransactionsController.php">
+                                <input type="hidden" name="transaction_type" value="receive">
+                            </form>
                         </div>
                     </div>
+                    <?php
+                            // session_start(); //EDITS AFTER SESSION
+
+                            if(isset($_SESSION['transaction']['error_message'])):
+                        ?>
+                        <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                            <i class="fa fa-exclamation-circle me-2"></i>
+                            <?php
+                                echo $_SESSION['transaction']['error_message'];
+                                unset($_SESSION['transaction']['error_message']);
+                            ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php endif;?>
                 </div>
             </div>
         </div>

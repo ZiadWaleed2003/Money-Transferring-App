@@ -5,9 +5,9 @@ class Formation
     private static $cardNumberPattern = "/\D/";
     private static $amountPattern = "/\D/";
     
-    private static $transactionTYPE = ['send', 'recieve', 'donation', 'bill']; 
+    private static $transactionTYPE = ['send', 'receive', 'donation', 'bill']; 
     private static $transactionDESCRIPTION = ['send' => 'Sending Money Transaction', 
-                                                'recieve' => 'Receiving Money Transaction', 
+                                                'receive' => 'Receiving Money Transaction', 
                                                     'donation' => 'Donation', 
                                                         'bill' => 'Bill']; 
     private static $transactionSTATUS = [ 'CANCELLED', 'Done'];
