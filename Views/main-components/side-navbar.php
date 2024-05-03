@@ -1,45 +1,40 @@
 <!-- Sidebar Start -->
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-secondary navbar-dark">
-        <a href="index.php" class="navbar-brand mx-4 mb-3">
-            <h3 class="text-primary">
-                <!-- Logo Icon -->
-                <i class="fa fa-user-edit me-2"></i>
-                <!-- Logo Name -->
-                ElZowZat & Bassel
-            </h3>
+        <a href="index.php" class="navbar-brand mx-4 mb-3 d-flex align-items-baseline">
+            <!-- Logo Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-bank text-primary" viewBox="0 0 16 16">
+                <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
+            </svg>
+            <!-- Logo Name -->
+            <span class="h6 ms-2 text-primary" style="font-size: 1.45rem">ElZowZat & Bassel</span>
         </a>
-
-        <a href="account-view.php">
-            <div class="d-flex align-items-center ms-4 mb-4">
-                <div class="position-relative">
-                    <img class="rounded-circle" src="../assets/img/user.jpg" alt=""
-                        style="width: 40px; height: 40px;">
-                    <div
-                        class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
-                    </div>
-                </div>
-                <div class="ms-3">
-                    <h6 class="mb-0">ElZowZat</h6>
-                    <span>User</span>
-                </div>
-            </div>
-        </a>
+        <div class="line" style="margin: -2rem 2rem"></div>
+        <div class="container-fluid fade spacaes">
+            <br><br>
+        </div>
         <div class="navbar-nav w-100">
-            <a id="ADMIN" href="../admin/index.php" class="nav-item nav-link"><i
-                    class="fa fa-tachometer-alt me-2"></i>admin</a>
 
-            <a id="card" href="card.php" class="nav-item nav-link"><i class="bi bi-arrow-down-up"
-                    style="transform: rotate(45deg);"></i> Cards</a>
-            <a id="transactions" href="transactions.php" class="nav-item nav-link"><i class="bi bi-arrow-down-up"
-                    style="transform: rotate(45deg);"></i> Transactions</a>
-            <a id="blank" href="blank.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Blank</a>
-            <a id="transac" href="transaction-history.php" class="nav-item nav-link"><i
-                    class="fa fa-tachometer-alt me-2"></i>Transacations</a>
-            <a id="Feedback" href="feedback.php" class="nav-item nav-link"><i
-                    class="fa fa-tachometer-alt me-2"></i>Feedback</a>
-
-
+            <a id="card" href="card.php" class="nav-item nav-link">
+                <i class="bi bi-credit-card-fill"></i>
+                Cards
+            </a>
+            <a id="transactions" href="transactions.php" class="nav-item nav-link">
+                <i class="bi bi-arrow-down-up" style="transform: rotate(45deg);"></i> 
+                    Transactions
+                </a>
+            <a id="transaction-history" href="transaction-history.php" class="nav-item nav-link">
+                <i class="bi bi-file-earmark-zip-fill"></i>
+                History
+            </a>
+            <a id="FAQ" href="FAQ.php" class="nav-item nav-link">
+                <i class="bi bi-arrow-down-up" style="transform: rotate(45deg);"></i> 
+                FAQ
+            </a>
+            <a id="feedback" href="feedback.php" class="nav-item nav-link">
+                <i class="bi bi-pencil-square"></i>
+                Feedback
+            </a>
         </div>
     </nav>
 </div>

@@ -81,7 +81,7 @@
                     </div>
                     
                     <div class="col-sm-6 col-xl-3">
-                        <a id="transactions-history" class="options" href="#">
+                        <a id="transactions-history" class="options" href="transaction-history.php">
                             <div class="bg-dark flex-column align-items-center justify-content-center p-4">
                                 <h3 class="m-0 text-center p-2">Transactions History</h3>
                             </div>

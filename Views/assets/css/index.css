@@ -1,0 +1,10 @@
+.section-icon{
+    border-radius: 6px;
+    background-color: var(--accent);
+    
+    transition-duration: 0.3s;
+}
+.section-icon:hover{
+    transform: scale(0.95);
+    box-shadow: inset 0px 0px 10px 2px rgba(255, 255, 255, 0.192);
+}

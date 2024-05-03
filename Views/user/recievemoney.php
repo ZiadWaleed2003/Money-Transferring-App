@@ -3,9 +3,8 @@ session_start();
 // session_destroy();
 
 
-if (!isset($_SESSION['user']['id'])) {
-    $_SESSION['user']['id'] = 1;
-}
+$_SESSION['user']['id'] = 1;
+
 ?>
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
@@ -46,7 +45,7 @@ if (!isset($_SESSION['user']['id'])) {
 
                     <form action="../../controllers/TransactionsController.php" method="POST">
                         <div class="mb-3">
-                            <label for="" class="form-label h4">Select the Card</label>
+                            <label for="" class="form-label h4 text-capitalize">Select the Card</label>
                             <select class="form-select form-select-lg mb-3" name="transaction_receiver_card_number" aria-label=".form-select-lg example" required>
                                 <option value="" class="text-muted" selected disabled> Open Cards list </option>
                                 <?php
@@ -62,7 +61,7 @@ if (!isset($_SESSION['user']['id'])) {
                         </div>
                         <div class="row mt-5">
                             <div class="col-6">
-                                <label class="form-label h4">sender Card number</label>
+                                <label class="form-label h4 text-capitalize">sender Card number</label>
                                 <input type="text" id="sender-card" name="transaction_sender_card_number" placeholder="1234 5678 9102 3456" class="form-control form-control-lg" required>
 
                             </div>
@@ -76,7 +75,7 @@ if (!isset($_SESSION['user']['id'])) {
                         </div>
 
                         <?php if (isset($_SESSION['request']['error_message'])) :?>
-                            <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                            <div class="alert alert-danger alert-dismissible text-center text-capitalize" role="alert">
                                 <i class="fa fa-exclamation-circle me-2"></i>
                                 <?php
                                 echo $_SESSION['request']['error_message'];
@@ -86,7 +85,7 @@ if (!isset($_SESSION['user']['id'])) {
                             </div>
                         <?php elseif (isset($_SESSION['request']['success_message'])) : ?>
 
-                            <div class="alert alert-success alert-dismissible text-center" role="alert">
+                            <div class="alert alert-success alert-dismissible text-center text-capitalize" role="alert">
                                 <i class="fa fa-exclamation-circle me-2"></i>
                                 <?php
                                 echo $_SESSION['request']['success_message'];

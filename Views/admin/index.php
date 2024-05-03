@@ -1,5 +1,5 @@
 <?php require_once("../main-components/header.php")?>
-<?php require_once("../main-components/side-navbar.php")?>
+<?php require_once("../main-components/admin-side-navbar.php")?>
 <?php require_once("../main-components/navbar.php")?>
 <?php  
     require_once ("../../controllers/BankController.php");
@@ -21,9 +21,9 @@
 
 
 <!-- blank Start -->
-<div class="col-sm-6 col-xl-3">
+<div class="">
     <a id="Admin" class="options" href="Admin.php">
-        <button type="button" class="btn btn-outline-light m-2">DASHBOARD</button>
+        <button type="button" class="btn btn-primary btn-block ms-4 mt-4" style="width: 97%;">Add Account</button>
     </a>
 </div>
 <div class="container-fluid pt-4 px-4">
