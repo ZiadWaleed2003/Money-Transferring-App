@@ -44,20 +44,32 @@ if(isset($_POST['OtpSubmit'])){
                     
                    $user_id = CRUD::Insert($query);
 
-                   $sql = "INSERT INTO `image` (`user_id`, `vector_data`) VALUES ( '$user_id', '$embd_serialized')";
+                   if($user_id != false){
 
-                   $result = CRUD::Insert($sql);
-
-                   if($result != false){
+                       
+                        $sql = "INSERT INTO `image` (`user_id`, `vector_data`) VALUES ( '$user_id', '$embd_serialized')";
+    
+                       $result = CRUD::Insert($sql);
+    
+                       if($result != false){
+                            session_destroy();
+                            header("location:../Views/auth/SignUpComplete.html");
+                        }else{
+                            
+                            header("location:SignUpOtp.php");
+                        }
                         
-                        $_SESSION['SignUpTest'] = 'SignUp done!';
-                        header("location:testSignup.php");
                     }else{
                         
-                        $_SESSION['SignUpTest'] = 'SignUp not done something wrong!';
-                        header("location:testSignup.php");
+                        header("location:SignUpOtp.php");
+                        
                    }
 
+
+                }else{
+
+
+                    header("location:signup.html");
                 }
 
 
