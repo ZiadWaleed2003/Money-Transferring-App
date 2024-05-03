@@ -34,7 +34,7 @@ $(document).ready(function() {
     });
 
     // Control Validation and visibility of Reviver Card Number
-    $('#sender-card').on("keypress", function(event){
+    $('#receiver-card').on("keypress", function(event){
         // Prevent to add the last input to value
         event.preventDefault();
 

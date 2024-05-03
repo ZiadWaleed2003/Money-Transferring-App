@@ -3,9 +3,7 @@
     // session_destroy();
 
     //EDITS AFTER SESSION
-    if(!isset($_SESSION['user']['id'])){
-        $_SESSION['user']['id'] = 1;
-    }
+    $_SESSION['user']['id'] = 1;
 ?>
 
 <?php require_once("../main-components/header.php") ?>
@@ -66,7 +64,7 @@
                             <div class="col-6">
 
                                 <label class="form-label h4">Reciver Card</label>
-                                <input type="text" id="reciver-card" name="transaction_receiver_card_number" placeholder="1234 5678 9102 3456" class="form-control form-control-lg" required>
+                                <input type="text" id="receiver-card" name="transaction_receiver_card_number" placeholder="1234 5678 9102 3456" class="form-control form-control-lg" required>
                             </div>
                             <div class="col-6">
 

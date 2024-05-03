@@ -43,6 +43,7 @@ class TransactionsController
                 {
                     $request_id = $_POST['request_id'];
                     $user_id = $_SESSION['user']['id'];
+
                     $sql = "SELECT rs.sender_id, rs.amount, uc.number AS sender_card_number, uc_alias.number AS receiver_card_number
                             FROM requests AS rs
                             INNER JOIN usercards AS uc ON rs.sender_id = uc.id
@@ -50,7 +51,6 @@ class TransactionsController
                             WHERE rs.id = $request_id";
                     
                     $request_data = CRUD::Select($sql)[0];
-                    
                     
                     $check_Transaction_start->setSenderCardNumber($request_data['sender_card_number'] ?? null);
                     $check_Transaction_start->setSenderId($user_id ?? null);
@@ -117,56 +117,59 @@ class TransactionsController
             $_SESSION['transaction']['error_message'] = $e->getMessage();
             $transaction_start = false;
         }
-        
-        
-        if (isset($transaction_start) && $transaction_start) 
+        finally
         {
-            
-            $_SESSION['transaction']['sender_card_number'] = $check_Transaction_start->getSenderCardNumber();
-            $_SESSION['transaction']['receiver_card_number'] = $check_Transaction_start->getReceiverCardNumber();
-            
-            $_SESSION['transaction']['sender_id'] = $check_Transaction_start->getSenderId();
-            $_SESSION['transaction']['receiver_id'] = $check_Transaction_start->getReceiverId();
-            
-            $_SESSION['transaction']['amount'] = $check_Transaction_start->getAmount();
-            $_SESSION['transaction']['check_time_start'] = time() + 60;
-            
-            if($transaction_type === 'send')
+        
+            if (isset($transaction_start) && $transaction_start) 
             {
-                $_SESSION['transaction']['type'] = 'send';
-            }
-            else if($transaction_type === 'receive')
+                
+                $_SESSION['transaction']['sender_card_number'] = $check_Transaction_start->getSenderCardNumber();
+                $_SESSION['transaction']['receiver_card_number'] = $check_Transaction_start->getReceiverCardNumber();
+                
+                $_SESSION['transaction']['sender_id'] = $check_Transaction_start->getSenderId();
+                $_SESSION['transaction']['receiver_id'] = $check_Transaction_start->getReceiverId();
+                
+                $_SESSION['transaction']['amount'] = $check_Transaction_start->getAmount();
+                $_SESSION['transaction']['check_time_start'] = time() + 60;
+                
+                if($transaction_type === 'send')
+                {
+                    $_SESSION['transaction']['type'] = 'send';
+                }
+                else if($transaction_type === 'receive')
+                {
+                    $_SESSION['transaction']['type'] = 'receive';
+                }
+                else if($transaction_type === 'donation')
+                {
+                    $_SESSION['transaction']['type'] = 'donation';
+                }
+                else if($transaction_type === 'bill')
+                {
+                    $_SESSION['transaction']['type'] = 'bill';
+                }
+                
+                // var_dump($_SESSION['transaction']);
+                header('location: ../views/user/ipn.php');
+                exit();
+            } 
+            else
             {
-                $_SESSION['transaction']['type'] = 'receive';
+                if($transaction_type === 'send'){
+                    header('location: ../views/user/send-money.php');
+                }
+                else if($transaction_type === 'receive'){
+                    header('location: ../views/user/requistlist.php');
+                }
+                else if($transaction_type === 'donation'){
+                    header('location: ../views/user/send-donation.php');
+                }
+                else if($transaction_type === 'bill'){
+                    header('location: ../views/user/pay-payment.php');
+                }
+                
+                exit();
             }
-            else if($transaction_type === 'donation')
-            {
-                $_SESSION['transaction']['type'] = 'donation';
-            }
-            else if($transaction_type === 'bill')
-            {
-                $_SESSION['transaction']['type'] = 'bill';
-            }
-            
-            header('location: ../views/user/ipn.php');
-            exit();
-        } 
-        else
-        {
-            if($transaction_type === 'send'){
-                header('location: ../views/user/send-money.php');
-            }
-            else if($transaction_type === 'receive'){
-                header('location: ../views/user/requistlist.php');
-            }
-            else if($transaction_type === 'donation'){
-                header('location: ../views/user/send-donation.php');
-            }
-            else if($transaction_type === 'bill'){
-                header('location: ../views/user/pay-payment.php');
-            }
-            
-            exit();
         }
     }
 
@@ -185,7 +188,6 @@ class TransactionsController
         $transaction->setAmount($_SESSION['transaction']['amount']) ?? null;
         
         $transaction->setDate();
-        $transaction->setStatus(1);
         
         $transaction->setType($_SESSION['transaction']['type'] ?? null);
         $transaction->setDescription($_SESSION['transaction']['type'] ?? null);
@@ -195,26 +197,55 @@ class TransactionsController
             $_POST['transaction_ipn_3'] ?? null, $_POST['transaction_ipn_4'] ?? null,
             $_POST['transaction_ipn_5'] ?? null, $_POST['transaction_ipn_6'] ?? null,
         ));
-
-
+        
+        
         try {
-
-            $transaction_id = $transaction->sendMoney($_SESSION['transaction']['check_time_start']);
-            // $transaction_status = true;
+            
+            $transaction->setStatus(1);
+            $transaction->sendMoney($_SESSION['transaction']['check_time_start']);
+            $transaction_status = true;
         } catch (Exception $e) {
-
+            
+            $transaction->setStatus(0);
             $_SESSION['transaction']['error_message'] = $e->getMessage();
-            // $transaction_status = false;
+            $transaction_status = false;
         } finally {
             if(isset($_SESSION['request']['id'])){
                 $sql = "DELETE FROM requests WHERE id = " . $_SESSION['request']['id'];
                 CRUD::Delete($sql);
-
+                
                 unset($_SESSION['request']);
             }
 
-            $_SESSION['transaction']['id'] = $transaction_id ?? "??????????";
+            $sender_id = $transaction->getSenderId();
+            $_SESSION['transaction']['sender_name'] = CRUD::Select("SELECT name FROM users WHERE $sender_id = id")[0]['name'];
+            
+            $transaction_type = $transaction->getType();
+
+            if(in_array($transaction_type, ['send', 'receive'])){
+                $receiver_card_number = $transaction->getReceiverCardNumber();
+                $receiver_name_sql = "  SELECT u.name FROM usercards AS uc 
+                                        INNER JOIN users AS u 
+                                        ON u.id = uc.user_id AND uc.number = $receiver_card_number";
+            }
+            else if($transaction_type == 'donation'){
+                $receiver_id = $transaction->getReceiverId();
+                $receiver_name_sql = "SELECT name FROM donations WHERE `account_number` = $receiver_id";
+            }
+            else if($transaction_type == 'bill'){
+                $receiver_id = $transaction->getReceiverId();
+                $receiver_name_sql = "SELECT name FROM bills WHERE `account_number` = $receiver_id";
+            }
+
+            $_SESSION['transaction']['receiver_name'] = CRUD::Select($receiver_name_sql)[0]['name'];
+            $_SESSION['transaction']['receiver_name'] = CRUD::Select($receiver_name_sql)[0]['name'];
+
+            $_SESSION['transaction']['status'] = $transaction->getStatus();
+            $_SESSION['transaction']['date'] = $transaction->getDate();
+
+            $_SESSION['transaction']['id'] = $transaction->getTransactionId() ?? "????????????";
             header('location: ../views/user/view_transactions_status.php');
+
             exit();
         }
     }
