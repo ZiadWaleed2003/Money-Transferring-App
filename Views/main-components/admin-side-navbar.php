@@ -10,28 +10,7 @@
             <span class="h6 ms-2 text-primary" style="font-size: 1.45rem">ElZowZat & Bassel</span>
         </a>
         <div class="line" style="margin: -2rem 2rem"></div>
-        <div class="container-fluid fade spacaes">
-            <br><br>
-        </div>
-        <div class="navbar-nav w-100">
-
-            <a id="card" href="card.php" class="nav-item nav-link">
-                <i class="bi bi-credit-card-fill"></i>
-                Cards
-            </a>
-            <a id="transactions" href="transactions.php" class="nav-item nav-link">
-                <i class="bi bi-arrow-down-up" style="transform: rotate(45deg);"></i> 
-                    Transactions
-                </a>
-            <a id="transaction-history" href="transaction-history.php" class="nav-item nav-link">
-                <i class="bi bi-file-earmark-zip-fill"></i>
-                History
-            </a>
-            <a id="feedback" href="feedback.php" class="nav-item nav-link">
-                <i class="bi bi-pencil-square"></i>
-                Feedback
-            </a>
-        </div>
+        
     </nav>
 </div>
 <!-- Sidebar End -->

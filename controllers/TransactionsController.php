@@ -210,16 +210,18 @@ class TransactionsController
             $_SESSION['transaction']['error_message'] = $e->getMessage();
             $transaction_status = false;
         } finally {
-            if(isset($_SESSION['request']['id'])){
+            
+            
+            if(isset($_SESSION['request']['id']) && $transaction->getStatus() === Formation::cleanTransactionStatus(1)){
                 $sql = "DELETE FROM requests WHERE id = " . $_SESSION['request']['id'];
                 CRUD::Delete($sql);
                 
                 unset($_SESSION['request']);
             }
-
+            
+            
             $sender_id = $transaction->getSenderId();
             $_SESSION['transaction']['sender_name'] = CRUD::Select("SELECT name FROM users WHERE $sender_id = id")[0]['name'];
-            
             $transaction_type = $transaction->getType();
 
             if(in_array($transaction_type, ['send', 'receive'])){
