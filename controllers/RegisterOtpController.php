@@ -27,12 +27,49 @@ if(isset($_POST['OtpSubmit'])){
                 if($embedds != false){
 
                     // ToDo : continue the validation of the data and inserting it to the DB
-              
-                    //     $embd_serialized = serialize($embedds);
-                    
-                //    $query = 
-                //    $sql = "INSERT INTO `image` (`id`, `user_id`, `vector_data`) VALUES ('1', '10', '$embd_serialized')";
 
+                    $user_name    = $_SESSION['user_name'];
+                    $email        = $_SESSION['email'];
+                    $password     = $_SESSION['password '];
+                    $phone_number = $_SESSION['phone_number'];
+                    $image_path   = $_SESSION['img_path'];
+                    
+              
+                    $embd_serialized = serialize($embedds);
+                    
+                   $query =  "INSERT INTO `users` (`name`, `email`, `password`, `phone_number`, `role`, `image_path`) 
+                   VALUES ('$user_name', '$email', '$password', '$phone_number', '1', '$image_path')";
+         
+
+                    
+                   $user_id = CRUD::Insert($query);
+
+                   if($user_id != false){
+
+                       
+                        $sql = "INSERT INTO `image` (`user_id`, `vector_data`) VALUES ( '$user_id', '$embd_serialized')";
+    
+                       $result = CRUD::Insert($sql);
+    
+                       if($result != false){
+                            session_destroy();
+                            header("location:../Views/auth/SignUpComplete.html");
+                        }else{
+                            
+                            header("location:SignUpOtp.php");
+                        }
+                        
+                    }else{
+                        
+                        header("location:SignUpOtp.php");
+                        
+                   }
+
+
+                }else{
+
+
+                    header("location:signup.html");
                 }
 
 

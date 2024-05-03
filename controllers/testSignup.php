@@ -1,6 +1,6 @@
 <?php
 session_start();
 
-print_r($_SESSION['responseSignup']);
+echo "<h1>".$_SESSION['SignUpTest']."</h1>";
 
 ?>
