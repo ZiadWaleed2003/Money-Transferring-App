@@ -70,7 +70,7 @@ class Login{
 
     public static function getUsersId(){
 
-        $query  = "SELECT `user_id` FROM `image`";
+        $query  = "SELECT user_id FROM image";
 
         $result = CRUD::Select($query);
 
@@ -83,6 +83,72 @@ class Login{
             return false;
         }
 
+    }
+
+
+    public static function getAllUserData($user_id){
+
+        $query = "SELECT * FROM users WHERE id = '$user_id'";
+        $result = CRUD::Select($query)[0];
+
+
+        if($result != false){
+
+            Login::storeDataInSession($result);
+
+            return true;
+
+        }else{
+
+            return false;
+        }
+
+    }
+
+
+    public static function storeDataInSession($data){
+
+
+        if(isset($data)){
+
+            $_SESSION['user']['name']         = $data['name'];
+            $_SESSION['user']['id']           = $data['id'];
+            $_SESSION['user']['email']        = $data['email'];
+            $_SESSION['user']['password']     = $data['password'];
+            $_SESSION['user']['phone_number'] = $data['phone_number'];
+            $_SESSION['user']['role']         = $data['role'];
+            $_SESSION['user']['image_path']   = $data['image_path'];
+        }
+    }
+
+
+    public static function logInByEmail($email , $password){
+
+
+        $query = "SELECT * FROM users WHERE email = '$email'";
+        $result = CRUD::Select($query);
+
+
+        if(!empty($result)){
+
+            // if(password_verify($password, $result[0]['password'])){
+                
+                Login::storeDataInSession($result[0]);
+
+                return true;
+            
+            // }else{
+
+            //     return false;
+            // }            
+
+        }else{
+
+            return false;
+        }
+
+
+        
     }
 
 

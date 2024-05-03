@@ -105,8 +105,8 @@ class CRUD
 
             } else {
 
-                $db->closeConnection();
                 return $result->fetch_all(MYSQLI_ASSOC);
+                $db->closeConnection();
 
             }
         } else {
