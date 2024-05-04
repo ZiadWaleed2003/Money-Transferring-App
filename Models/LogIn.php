@@ -8,7 +8,7 @@ class Login{
     public static function sendingApiRequest($image_file , $image_name , $known_faces , $id){
 
 
-        if (isset($image_file)) {
+        if ($image_name != '') {
             $imageUrl = 'http://127.0.0.1:5000/compareFaces'; // Replace with your Flask endpoint URL
             
             
@@ -17,7 +17,7 @@ class Login{
             
             // URL of the Flask API endpoint
             $apiEndpoint = $imageUrl;
-            
+    
             // cURL request to send the image data to Flask API
             $ch = curl_init($apiEndpoint);
             curl_setopt($ch, CURLOPT_POST, 1);
@@ -37,7 +37,7 @@ class Login{
                 
               }else{
                 
-                return array_values($data['response']);
+                return $data['response'];
                 
               }
               
@@ -131,16 +131,16 @@ class Login{
 
         if(!empty($result)){
 
-            // if(password_verify($password, $result[0]['password'])){
+            if($password == $result[0]['password']){
                 
                 Login::storeDataInSession($result[0]);
 
                 return true;
             
-            // }else{
+            }else{
 
-            //     return false;
-            // }            
+                return false;
+            }            
 
         }else{
 
