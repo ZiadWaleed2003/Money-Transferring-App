@@ -1,9 +1,9 @@
-<?php 
-    session_start();
-    // session_destroy();
+<?php
+session_start();
+// session_destroy();
 
-    $amount= $_SESSION["transaction"]["check_balance"];
-    unset( $_SESSION["transaction"]["check_balance"]);
+$amount = $_SESSION["transaction"]["check_balance"];
+// unset( $_SESSION["transaction"]["check_balance"]);
 ?>
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
@@ -26,7 +26,11 @@
 
         <div class="col-12 text-center pb-5">
             <span id="links-tracking">
-                <a href="transactions.php" class="h5">Home Page</a>
+                <a href="index.php" class="h5">Home Page</a>
+                &nbsp;
+                /
+                &nbsp;
+                <a href="transactions.php" class="h5">Transaction</a>
                 &nbsp;
                 /
                 &nbsp;
@@ -50,8 +54,8 @@
                 <div class="row m-auto pt-4 pb-4 bg-light col-6">
                     <div class="text-center">
                         <span class=" h1 display-6 text-black-50">Amount: &nbsp;</span>
-                        <span class ="h1 display-3 text-white"> 
-                            <?php 
+                        <span class="h1 display-3 text-white">
+                            <?php
                             echo $amount;
                             ?>
                         </span>

@@ -39,11 +39,11 @@ class Transaction
     {
         // $this->$conn = $conn;
     }
-    public function setSenderId($id)
+    public function setSenderId($id, $card_number = null)
     {
         $this->sender_id = Formation::cleanNumber($id);
     }
-    public function setReceiverId($id)
+    public function setReceiverId($id, $card_number = null)
     {
         $this->receiver_id = Formation::cleanNumber($id);
     }
@@ -58,14 +58,43 @@ class Transaction
         $this->transaction_id = Formation::cleanNumber($transaction_id);
     }
 
-    public function setSenderCardNumber($sender_card_number)
+    public function setSenderCardNumber($data)
     {
-        $this->sender_card_number = Formation::cleanCardNumber($sender_card_number);
+
+        if(isset($data['sender_card_number']) && $data['sender_card_number']){
+            
+            $this->sender_card_number = Formation::cleanCardNumber($data['sender_card_number']);
+        }
+        else if ( isset($data['sender_card_id']) && $data['sender_card_id'] ){
+    
+            $sql = "SELECT `number` FROM usercards WHERE id = $data[sender_card_id]";
+            $result = CRUD::Select($sql)[0]['number'];
+    
+            $this->sender_card_number = Formation::cleanCardNumber($result);
+        }
+        else{
+    
+            $this->sender_card_number = null;
+        }
     }
 
-    public function setReceiverCardNumber($receiver_card_number)
+    public function setReceiverCardNumber($data)
     {
-        $this->receiver_card_number = Formation::cleanCardNumber($receiver_card_number);
+        if(isset($data['receiver_card_number']) && $data['receiver_card_number']){
+            
+            $this->receiver_card_number = Formation::cleanCardNumber($data['receiver_card_number']);
+        }
+        else if ( isset($data['receiver_card_id']) && $data['receiver_card_id'] ){
+
+            $sql = "SELECT `number` FROM usercards WHERE id = $data[receiver_card_id] ";
+            $result = CRUD::Select($sql)[0]['number'];
+
+            $this->receiver_card_number = Formation::cleanCardNumber($result);
+        }
+        else{
+
+            $this->receiver_card_number = null;
+        }
     }
 
     public function setAmount($amount)
@@ -162,6 +191,28 @@ class Transaction
     {
         if (Validator::validateCardNumber($card_number)) {
         }
+    }
+
+    public function getRequestData($request_id)
+    {
+        
+        $sql = "SELECT rs.sender_id, rs.amount, uc.number AS sender_card_number, uc_alias.number AS receiver_card_number
+        FROM requests AS rs
+        INNER JOIN usercards AS uc ON rs.sender_id = uc.id
+        INNER JOIN usercards AS uc_alias ON rs.reciever_id = uc_alias.id
+        WHERE rs.id = $request_id";
+
+        $request_data = CRUD::Select($sql)[0];
+
+        return $request_data;
+    }
+
+    public function deleteRequest($request_id)
+    {
+        $sql = "DELETE FROM requests WHERE id = $request_id";
+        $result = CRUD::Delete($sql);
+
+        return $result;
     }
 
     public function checkTransactionStart()
@@ -271,7 +322,6 @@ class Transaction
     // Send Money
     public function sendMoney($transaction_check_time_start)
     {
-        session_start();
         /**    
          * @First: Check validation of Card Number Account from (sender and receiver)
          * Second: Check the Sender Card Number related to The user logged credentials
@@ -361,7 +411,8 @@ class Transaction
                 }
             }
         } catch (Exception $e) {
-            
+            var_dump($e->getMessage());
+            exit();
             throw $e;
         }
     }
@@ -406,19 +457,20 @@ class Transaction
         try{
             $sql = "SELECT * FROM usercards WHERE number = $sender_card_number";
             $sender_card_data = CRUD::Select($sql);
+
             if( count( $sender_card_data ) != 1 )
             {
                 throw new Exception("not valid card number");
-
-
             }
+
             if($sender_card_data[0]["user_id"] != $_SESSION['user']['id'])
             {
                throw new Exception ("please enter correct card number");
             }
-            return $sender_card_data [0]["balance"];
 
-        }catch(Exception $e)
+            return $sender_card_data [0]["balance"];
+        }
+        catch(Exception $e)
         {
             throw $e;
         }
@@ -427,9 +479,11 @@ class Transaction
     public function requestMoney()
     {
         $sender_card_number=$this->getSenderCardNumber();
+        
         $receiver_card_number=$this->getReceiverCardNumber();
-        $amount=$this->getAmount();
         $receiver_id=$this->getReceiverId();
+
+        $amount=$this->getAmount();
         
         try {
             

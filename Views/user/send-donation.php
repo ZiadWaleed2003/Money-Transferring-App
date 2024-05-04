@@ -1,23 +1,23 @@
-<?php 
-    session_start(); //EDITS AFTER SESSION
-    // session_destroy();
+<?php
+session_start(); //EDITS AFTER SESSION
+// session_destroy();
 
-    //EDITS AFTER SESSION
-    if(!isset($_SESSION['user']['id'])){
-        $_SESSION['user']['id'] = 1;
-    }
+//EDITS AFTER SESSION
+if (!isset($_SESSION['user']['id'])) {
+    $_SESSION['user']['id'] = 1;
+}
 ?>
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
-<?php require("../../controllers/CRUD.php");?>
-<?php require("../../Models/Formation.php");?>
+<?php require("../../controllers/CRUD.php"); ?>
+<?php require("../../Models/Formation.php"); ?>
 
 
 <!-- Transaction Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="row bg-secondary rounded align-items-center justify-content-center mx-0 p-5">
-        
+
         <div class="container back-to-previous" onclick="window.history.back()">
             <a class="text-decoration-underline"><i class="bi bi-chevron-left me-1"></i>back</a>
         </div>
@@ -28,7 +28,11 @@
 
         <div class="col-12 text-center pb-5">
             <span id="links-tracking">
-                <a href="transactions.php" class="h5">Home Page</a>
+                <a href="index.php" class="h5">Home Page</a>
+                &nbsp;
+                /
+                &nbsp;
+                <a href="transactions.php" class="h5">Transaction</a>
                 &nbsp;
                 /
                 &nbsp;
@@ -44,16 +48,16 @@
                     <form method="POST" action="../../controllers/TransactionsController.php">
                         <div class="mb-3">
                             <label for="" class="form-label h4">Select Your Card</label>
-                            <select class="form-select form-select-lg mb-3" name="transaction_sender_card_number" aria-label=".form-select-lg example" required>
+                            <select class="form-select form-select-lg mb-3" name="transaction_sender_card_id" aria-label=".form-select-lg example" required>
                                 <option value="" class="text-muted" selected disabled>-- Open Cards list --</option>
                                 <?php
-                                    $cards = CRUD::Select("SELECT * FROM usercards WHERE user_id = ".$_SESSION['user']['id']." order by favourite desc");
-                                    foreach($cards as $card){
-                                        $card_number = Formation::showCardNumber($card['number']);
-                                        $classes = ($card['favourite'] == 1)? "bg-danger text-white": "";
-                                        
-                                        echo "<option value='$card[id]' class='$classes'>$card_number</option>";
-                                    }
+                                $cards = CRUD::Select("SELECT * FROM usercards WHERE user_id = " . $_SESSION['user']['id'] . " order by favourite desc");
+                                foreach ($cards as $card) {
+                                    $card_number = Formation::showCardNumber($card['number']);
+                                    $classes = ($card['favourite'] == 1) ? "bg-danger text-white" : "";
+
+                                    echo "<option value='$card[id]' class='$classes'>$card_number</option>";
+                                }
                                 ?>
                             </select>
                         </div>
@@ -64,13 +68,13 @@
                                     <option value="" class="text-muted" selected disabled>-- Open list --</option>
                                     <?php
                                     $donations = CRUD::Select("SELECT * FROM donations");
-                                    foreach($donations as $donation){
+                                    foreach ($donations as $donation) {
                                         $donation_account_number = $donation['account_number'];
                                         $donation_name = Formation::capitalizeWords($donation['name']);
 
                                         echo "<option value='$donation_account_number' class=''>$donation_name</option>";
                                     }
-                                ?>
+                                    ?>
                                 </select>
                             </div>
                             <div class="col-6">
@@ -85,19 +89,19 @@
                         <input type="hidden" name="transaction_type" value="donation">
 
                         <?php
-                            // session_start(); //EDITS AFTER SESSION
+                        // session_start(); //EDITS AFTER SESSION
 
-                            if(isset($_SESSION['transaction']['error_message'])):
+                        if (isset($_SESSION['transaction']['error_message'])) :
                         ?>
-                        <div class="alert alert-danger alert-dismissible text-center" role="alert">
-                            <i class="fa fa-exclamation-circle me-2"></i>
-                            <?php
+                            <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                                <i class="fa fa-exclamation-circle me-2"></i>
+                                <?php
                                 echo $_SESSION['transaction']['error_message'];
                                 unset($_SESSION['transaction']['error_message']);
-                            ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        <?php endif;?>
+                                ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php endif; ?>
 
                         <div class="row justify-content-center">
                             <button class="btn btn-lg btn-primary w-25" type="submit">Send Donation</button>
