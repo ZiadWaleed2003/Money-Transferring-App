@@ -1,7 +1,13 @@
 <?php
 
 require_once "Person.php";
-require_once "../../controllers/CRUD.php";
+?>
+<?php
+if (pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME) == "AcctEditController") {
+    require_once "CRUD.php";
+} else {
+    require_once "../../controllers/CRUD.php";
+}
 
 class User extends PERSON
 {
@@ -35,13 +41,16 @@ class User extends PERSON
 
     public function writeToDB()
     {
-        $query = "UPDATE users SET name = '$this->name', email = '$this->email', password = '$this->password', image_path = '$this->image_path', phone_number = '$this->phone_number' WHERE id = '$this->id'";
+        $query = "UPDATE users SET name = '$this->name', email = '$this->email', password = '$this->password', image_path =
+'$this->image_path', phone_number = '$this->phone_number' WHERE id = '$this->id'";
         CRUD::Update($query);
     }
 
     public function getTranscationHistory()
     {
-        $query = "SELECT id, sender_id, reciever_id, date, status, description, amount FROM moneyapp.transactions WHERE (description='Receiving Money Transaction' OR description='Sending Money Transaction') AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
+        $query = "SELECT id, sender_id, reciever_id, date, status, description, amount FROM moneyapp.transactions WHERE
+(description='Receiving Money Transaction' OR description='Sending Money Transaction') AND (sender_id = '$this->id' OR
+reciever_id = '$this->id');";
         $res = CRUD::Select($query);
         if (empty($res)) {
             return 0;
@@ -51,7 +60,8 @@ class User extends PERSON
     }
     public function getBillHistory()
     {
-        $query = "SELECT id, sender_id, reciever_id, date, status, description, amount FROM moneyapp.transactions WHERE description='Bill' AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
+        $query = "SELECT id, sender_id, reciever_id, date, status, description, amount FROM moneyapp.transactions WHERE
+description='Bill' AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
 
         $res = CRUD::Select($query);
         if (empty($res)) {
@@ -62,7 +72,8 @@ class User extends PERSON
     }
     public function getDonationHistory()
     {
-        $query = "SELECT id, sender_id, reciever_id, date, status, description, amount FROM moneyapp.transactions WHERE description='Donation' AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
+        $query = "SELECT id, sender_id, reciever_id, date, status, description, amount FROM moneyapp.transactions WHERE
+description='Donation' AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
         $res = CRUD::Select($query);
         if (empty($res)) {
             return 0;
@@ -79,7 +90,7 @@ class User extends PERSON
 
     public function uploadPicture($file)
     {
-        $upl_dir = "../views/assets/img/";
+        $upl_dir = "/views/assets/img/";
         $file_path = $upl_dir . basename($file["name"]);
         $file_type = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
         $trgt = $this->id . "-img.";

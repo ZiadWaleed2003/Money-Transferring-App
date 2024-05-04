@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../..//models/User.php" ?>
+require_once "../models/User.php" ?>
 
 <?php
 $active_user_id = $_SESSION['user']['id'];  #TODO: replace with user id from sessions
