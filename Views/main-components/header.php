@@ -1,3 +1,15 @@
+<?php
+    require("../../controllers/SessionController.php");
+    
+    SessionController::checkUserLogin();
+    SessionController::checkTransaction($keep_transactions_session);
+    SessionController::checkTransactionRequest($keep_transactions_request_session);
+
+    if(isset($check_take_ipn) && $check_take_ipn){
+        SessionController::checkTakeIpn();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

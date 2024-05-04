@@ -1,7 +1,8 @@
-<?php
-session_start();
+<?php 
+    $check_take_ipn = true;
+    $keep_transaction_session = true;
+    $keep_transaction_request_session = true;
 ?>
-
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
