@@ -10,12 +10,16 @@ if(isset($_POST['SignInSubmit'])){
     
 
 
-    if(isset($email)){
+    if($email != ''){
         
         $result = Login::logInByEmail($email , $password);
         
         
         if($result){
+
+            // echo $_SESSION['user']['password'];
+
+            // echo "<br>" . $password;
             
             header("location:../Views/user");
 
@@ -28,7 +32,7 @@ if(isset($_POST['SignInSubmit'])){
 
     
 
-    }elseif (isset($img) and (isset($email) == null)){
+    }else if (isset($img) and $email == ''){
 
 
         $image_file = $img['tmp_name'];
@@ -37,31 +41,65 @@ if(isset($_POST['SignInSubmit'])){
         $id = Login::getUsersId(); 
         $known_faces = Login::getUsersEmbds();
 
-        print_r( $known_faces);
+        $unserialized_faces = [];
+        $ids = [];
+
+        
 
 
-        // $response = LogIn::sendingApiRequest($image_file , $image_name , $known_faces , $id);
+        for($i = 0 ; $i  < count($id) ; $i++){
+ 
+            array_push($ids , $id[$i]['user_id']);
+             
+        }
+
+        
+        
 
 
-        // if($response != "Unkown"){
+
+       for($i = 0 ; $i  < count($known_faces) ; $i++){
+
+            $x = unserialize($known_faces[$i]['vector_data']);
+          
+            $unserialized_faces [] = $x;
+        }
 
 
-        //     Login::getAllUserData($response);
+        
+
+    
+        
+
+        $response = LogIn::sendingApiRequest($image_file , $image_name , $unserialized_faces , $id);
+
+        // echo $response[0];
+
+
+        if($response[0] != "Unknown"){
+
+
+
+            Login::getAllUserData($response[0]);
             
-        //     if($_SESSION['user']['password'] == $password){
+            if($_SESSION['user']['password'] == $password){
                 
-        //         header("location:../Views/user");
+                header("location:../Views/user");
                 
-        //     }else{
+            }else{
                 
-        //         // handle the wrong credentials
-        //     }
+                // handle the wrong credentials
+            }
             
             
+        }else{
+
+            echo "<h1> A7aaa neeeek </h1>";
+        }
+
+
+
     }
-
-
-
 }
 
 

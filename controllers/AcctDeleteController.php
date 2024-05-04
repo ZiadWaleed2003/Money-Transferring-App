@@ -1,8 +1,10 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/views/main-components/header.php" ?>
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/views/main-components/side-navbar.php" ?>
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/views/main-components/navbar.php" ?>
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/models/User.php";
-$active_user_id = 101; #TODO: replace with user id from sessions
+<?php
+session_start();
+require_once "../../views/main-components/header.php" ?>
+<?php require_once "../../views/main-components/side-navbar.php" ?>
+<?php require_once "../../views/main-components/navbar.php" ?>
+<?php require_once "../../models/User.php";
+$active_user_id = $_SESSION['user']['id'];  #TODO: replace with user id from sessions
 $user = User::constructFromDB($active_user_id);
 $user->deleteAccount()
     ?>
@@ -23,7 +25,7 @@ $user->deleteAccount()
 <!-- blank End -->
 
 
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . "/views/main-components/footer.php" ?>
+<?php require_once "../../views/main-components/footer.php" ?>
 
 
 
