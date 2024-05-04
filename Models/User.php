@@ -79,7 +79,7 @@ class User extends PERSON
 
     public function uploadPicture($file)
     {
-        $upl_dir = $_SERVER['DOCUMENT_ROOT'] . "/views/assets/img/";
+        $upl_dir = "../views/assets/img/";
         $file_path = $upl_dir . basename($file["name"]);
         $file_type = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
         $trgt = $this->id . "-img.";

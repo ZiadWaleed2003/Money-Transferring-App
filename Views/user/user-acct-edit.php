@@ -1,4 +1,6 @@
-<?php require_once ("../main-components/header.php") ?>
+<?php
+session_start();
+require_once ("../main-components/header.php") ?>
 <?php require_once ("../main-components/side-navbar.php") ?>
 <?php require_once ("../main-components/navbar.php") ?>
 
