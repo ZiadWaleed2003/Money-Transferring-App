@@ -1,9 +1,10 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/views/main-components/basic-table.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . "/models/User.php";
+session_start();
+require_once '../../vendor/autoload.php';
+require_once '../../views/main-components/basic-table.php';
+require_once "../../models/User.php";
 
-$active_user_id = 101; #TODO: replace with user id from sessions
+$active_user_id = $_SESSION['user']['id'];  #TODO: replace with user id from sessions
 $user = User::constructFromDB($active_user_id);
 $transes = $user->getTranscationHistory();
 if ($transes) {
