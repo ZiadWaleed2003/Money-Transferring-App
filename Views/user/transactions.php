@@ -13,7 +13,11 @@
         
         <div class="col-12 text-center pb-5">
             <span id="links-tracking">
-                <a href="transactions.php" class="h5 text-primary">Home Page</a>
+            <a href="index.php" class="h5">Home Page</a>
+                &nbsp;
+                /
+                &nbsp;
+                <a class="h5 text-primary">Transaction</a>
 
             </span>
         </div>

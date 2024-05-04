@@ -30,7 +30,11 @@ $_SESSION['user']['id'] = 1;
 
         <div class="col-12 text-center pb-5">
             <span id="links-tracking">
-                <a href="transactions.php" class="h5">Home Page</a>
+                <a href="index.php" class="h5">Home Page</a>
+                &nbsp;
+                /
+                &nbsp;
+                <a href="transactions.php" class="h5">Transaction</a>
                 &nbsp;
                 /
                 &nbsp;
@@ -46,7 +50,7 @@ $_SESSION['user']['id'] = 1;
                     <form action="../../controllers/TransactionsController.php" method="POST">
                         <div class="mb-3">
                             <label for="" class="form-label h4 text-capitalize">Select the Card</label>
-                            <select class="form-select form-select-lg mb-3" name="transaction_receiver_card_number" aria-label=".form-select-lg example" required>
+                            <select class="form-select form-select-lg mb-3" name="transaction_receiver_card_id" aria-label=".form-select-lg example" required>
                                 <option value="" class="text-muted" selected disabled> Open Cards list </option>
                                 <?php
                                 $cards = CRUD::Select("SELECT * FROM usercards WHERE user_id = " . $_SESSION['user']['id'] . " order by favourite desc");
@@ -74,28 +78,29 @@ $_SESSION['user']['id'] = 1;
                             </div>
                         </div>
 
-                        <?php if (isset($_SESSION['request']['error_message'])) :?>
+                        <?php if (isset($_SESSION['transaction']['error_message'])) : ?>
                             <div class="alert alert-danger alert-dismissible text-center text-capitalize" role="alert">
                                 <i class="fa fa-exclamation-circle me-2"></i>
                                 <?php
-                                echo $_SESSION['request']['error_message'];
-                                unset($_SESSION['request']['error_message']);
+                                echo $_SESSION['transaction']['error_message'];
+                                unset($_SESSION['transaction']['error_message']);
                                 ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        <?php elseif (isset($_SESSION['request']['success_message'])) : ?>
+                        <?php elseif (isset($_SESSION['transaction']['success_message'])) : ?>
 
                             <div class="alert alert-success alert-dismissible text-center text-capitalize" role="alert">
                                 <i class="fa fa-exclamation-circle me-2"></i>
                                 <?php
-                                echo $_SESSION['request']['success_message'];
-                                unset($_SESSION['request']['success_message']);
+                                echo $_SESSION['transaction']['success_message'];
+                                unset($_SESSION['transaction']['success_message']);
                                 ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        <?php endif;
-                        ?>
+                        <?php endif; ?>
+
                         <input type="hidden" name="transaction_type" value="request">
+
                         <div class="row justify-content-center">
 
                             <button class="btn btn-lg btn-primary w-25 m-2" type="submit">DONE</button>
