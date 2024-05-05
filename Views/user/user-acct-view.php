@@ -1,8 +1,13 @@
 <?php
-require_once ("../main-components/header.php") ?>
-<?php require_once ("../main-components/side-navbar.php") ?>
-<?php require_once ("../main-components/navbar.php") ?>
-<?php require_once ("../../models/User.php") ?>
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+};
+
+require_once("../main-components/header.php") ?>
+<?php require_once("../main-components/side-navbar.php") ?>
+<?php require_once("../main-components/navbar.php") ?>
+<?php require_once("../../models/User.php") ?>
 
 <?php
 $active_user_id = $_SESSION['user']['id'];  #TODO: replace with user id from sessions
@@ -20,8 +25,8 @@ $user = User::constructFromDB($active_user_id);
                     <p class="card-text">
                     <h6 class="text-muted">Name:</h6>
                     <p><?php
-                    echo $user->getName();
-                    ?></p>
+                        echo $user->getName();
+                        ?></p>
                     <h6 class="text-muted">Country:</h6>
                     <p>Egypt</p>
                     </p>
@@ -32,18 +37,18 @@ $user = User::constructFromDB($active_user_id);
                     <h3 class="card-title mb-xl-5">Account Info</h3>
                     <h5 class="text-muted">Email Address:</h5>
                     <p><?php
-                    echo $user->getEmail();
-                    ?></p>
+                        echo $user->getEmail();
+                        ?></p>
                     <h5 class="text-muted">Phone Number:</h5>
                     <p><?php
-                    echo $user->getPhoneNumber()
+                        echo $user->getPhoneNumber()
                         ?></p>
                     <h5 class="text-muted">Account Password:</h5>
                     <p>*****</p>
                     <h5 class="text-muted">Recovery Email:</h5>
                     <p><?php
-                    echo $user->getEmail();
-                    ?></p>
+                        echo $user->getEmail();
+                        ?></p>
                     <button type="button" id="edit" class="btn btn-primary">Edit</button>
                     <button type="button" id="delete" class="btn btn-primary">Delete</button>
                 </div>
@@ -74,5 +79,4 @@ $user = User::constructFromDB($active_user_id);
 </div>
 <!-- blank End -->
 
-<?php require_once ("../main-components/footer.php") ?>
-
+<?php require_once("../main-components/footer.php") ?>

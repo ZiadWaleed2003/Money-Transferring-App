@@ -1,9 +1,18 @@
+<?php
+if (isset($_SESSION['user'])) {
+    header("Location: '../views/user/index.php'");
+}
+
+if (isset($_SESSION['admin'])) {
+    header("Location: '../views/admin/index.php'");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>ElZowZat & Bassel</title>
+    <title>Elzozat and Bassel - Bootstrap 5 Admin Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -14,8 +23,8 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
-    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -42,59 +51,32 @@
         <!-- Spinner End -->
 
 
-        <!-- Sign Up Start -->
+        <!-- Sign In Start -->
         <div class="container-fluid">
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="home.html" class="">
+                            <a href="index.php" class="">
                                 <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>ElZowzat and Bassel</h3>
                             </a>
-                            <h3>Sign Up</h3>
                         </div>
-                        
-                        <form action="../../controllers/SignUpController.php" method="post" enctype="multipart/form-data"  id= "SignUpForm">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingText" placeholder="jhondoe" name="username" required>
-                                <label for="floatingText">Username</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" required>
-                                <label for="floatingInput">Email address</label>
-                            </div>
-                            <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
-                                <label for="floatingPassword">Password</label>
-                            </div>
-                            <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password" name="ConfirmPassword" required>
-                                <label for="floatingPassword">Confirm Password</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingText" placeholder="1234567890" name="phone" required>
-                                <label for="floatingText">Phone Number</label>
-                            </div>
-                            <!-- File input for image -->
-                            <div class="mb-3">
-                                <label for="image" class="form-label">Profile Image</label>
-                                <input class="form-control" type="file" id="image" name="image">
-                                <br>
-                            <button type="submit" name="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
-                        </form>
-                        <p class="text-center mb-0">Already have an Account? <a href="signin.php">Sign In</a></p>
+                        <br>
+                        <div>
+                            <h4>Registeration is Completed ! 🫡🥳</h4>
+                        </div>
+                        <br>
+                        <a href="home.php">Click here to get back to the Home Page</a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Sign Up End -->
+        <!-- Sign In End -->
     </div>
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/SignUpValidation.js"></script>
     <script src="../assets/lib/chart/chart.min.js"></script>
     <script src="../assets/lib/easing/easing.min.js"></script>
     <script src="../assets/lib/waypoints/waypoints.min.js"></script>
@@ -102,7 +84,6 @@
     <script src="../assets/lib/tempusdominus/js/moment.min.js"></script>
     <script src="../assets/lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="../assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    
 
     <!-- Template Javascript -->
     <script src="../assets/js/main.js"></script>

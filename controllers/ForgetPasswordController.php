@@ -1,9 +1,12 @@
 <?php
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+};
 
 
-require ("../Models/moneySystem.php");
-require ("../Models/LogIn.php");
+require("../Models/moneySystem.php");
+require("../Models/LogIn.php");
 
 
 if (isset($_POST['forgetPasswordButton'])) {
@@ -21,18 +24,11 @@ if (isset($_POST['forgetPasswordButton'])) {
 
         Login::storeDataInSession($result[0]);
 
-        print ($_SESSION['otp']);
+        print($_SESSION['otp']);
 
         header("location:../Views/auth/ForgetPasswordOTP.php");
-
-
     } else {
 
         header("location:../Views/auth/forget-password.php?error=1");
     }
-
-
-
 }
-?>
-
