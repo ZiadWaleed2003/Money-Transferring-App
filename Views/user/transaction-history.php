@@ -4,7 +4,7 @@
 <?php require_once ("../main-components/basic-table.php") ?>
 <?php
 require_once '../../models/User.php';
-$active_user_id = 1; #TODO: replace with user id from sessions
+$active_user_id = $_SESSION['user']['id']; #TODO: replace with user id from sessions
 $user = User::constructFromDB($active_user_id);
 ?>
 

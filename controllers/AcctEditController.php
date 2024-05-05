@@ -11,11 +11,12 @@ $user = User::constructFromDB($active_user_id);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = empty($_POST["profile_email"]) ? $user->getEmail() : clean_input($_POST["profile_email"]);
     $password = empty($_POST["profile_pass"]) ? $user->getPassword() : clean_input($_POST["profile_pass"]);
-    $img_path = !isset($_FILES["profile_img"]) ? $user->getImagePath() : $user->uploadPicture($_FILES["profile_img"]);
+    $img_path = empty($_FILES["profile_img"]["tmp_name"]) ? $user->getImagePath() : $user->uploadPicture($_FILES["profile_img"]);
     $user->setEmail($email);
     $user->setPassword($password);
     $user->setImagePath($img_path);
     $user->writeToDB();
+    $user->reloadUserSession();
     header("Location: /views/user/user-acct-view.php");
     die();
 }

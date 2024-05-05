@@ -1,14 +1,15 @@
 <?php
-require("../Models/LogIn.php");
+session_start();
+require ("../Models/LogIn.php");
 
-
-if(isset($_POST['SignInSubmit'])){
+if (isset($_POST['SignInSubmit'])) {
 
 
     $email = htmlspecialchars(trim($_POST['email'])) ?? null;
     $password = $_POST['password'] ?? null;
     $img = $_FILES['image'] ?? null;
-    
+
+    $_SESSION['error_message'];
 
 
     if($email != ''){
@@ -21,78 +22,84 @@ if(isset($_POST['SignInSubmit'])){
             header("location: ../views/user/index.php");
             exit();
 
-        }else{
+        } else {
 
-            echo "Error 404 ";
-                // handle the wrong credentials
+
+            header("location:../Views/auth/signin.php?error=1");
+
         }
 
 
-    
 
-    }else if (isset($img) and $email == ''){
+
+    } else if (isset($img) and $email == '') {
 
 
         $image_file = $img['tmp_name'];
         $image_name = $img['name'];
 
-        $id = Login::getUsersId(); 
+        $extension = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
+
+        $allowedExtensions = array('jpg', 'jpeg', 'png');
+
+        if (!in_array($extension, $allowedExtensions)) {
+
+            header("location:../Views/auth/signin.php?error=1");
+        }
+
+
+        $id = Login::getUsersId();
         $known_faces = Login::getUsersEmbds();
 
         $unserialized_faces = [];
         $ids = [];
 
-        
 
 
-        for($i = 0 ; $i  < count($id) ; $i++){
- 
-            array_push($ids , $id[$i]['user_id']);
-             
+
+        for ($i = 0; $i < count($id); $i++) {
+
+            array_push($ids, $id[$i]['user_id']);
+
         }
 
-        
-        
 
-
-
-       for($i = 0 ; $i  < count($known_faces) ; $i++){
+        for ($i = 0; $i < count($known_faces); $i++) {
 
             $x = unserialize($known_faces[$i]['vector_data']);
-          
-            $unserialized_faces [] = $x;
+
+            $unserialized_faces[] = $x;
         }
 
 
-        
 
-    
-        
-
-        $response = LogIn::sendingApiRequest($image_file , $image_name , $unserialized_faces , $id);
-
-        // echo $response[0];
+        $response = LogIn::sendingApiRequest($image_file, $image_name, $unserialized_faces, $id);
 
 
-        if($response[0] != "Unknown"){
+
+
+        if ($response[0] != "Unknown") {
 
 
 
             Login::getAllUserData($response[0]);
-            
-            if($_SESSION['user']['password'] == $password){
-                
-                header("location:../Views/user");
-                
-            }else{
-                
-                // handle the wrong credentials
-            }
-            
-            
-        }else{
 
-            echo "<h1> A7aaa neeeek </h1>";
+            if ($_SESSION['user']['password'] == $password) {
+
+                header("location:../Views/user");
+
+            } else {
+
+
+
+                header("location:../Views/auth/signin.php?error=1");
+
+            }
+
+
+        } else {
+
+            header("location:../Views/auth/signin.php?error=1");
         }
 
 
@@ -101,5 +108,5 @@ if(isset($_POST['SignInSubmit'])){
 }
 
 
-
 ?>
+

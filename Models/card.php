@@ -1,5 +1,5 @@
 <?php
-
+require "Formation.php";
     class Card{
         private $id;
         private $user_id;
@@ -49,7 +49,7 @@
     }
 
     public function setNumber($number) {
-        $this->number = $number;
+        $this->number = Formation::cleanCardNumber($number);
     }
 
     public function getCvv() {
