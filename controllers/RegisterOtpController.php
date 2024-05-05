@@ -6,12 +6,10 @@ require ("../Models/SignUp.php");
 require ("CRUD.php");
 
 if (isset($_POST['OtpSubmit'])) {
-if (isset($_POST['OtpSubmit'])) {
 
     $otp = trim(htmlspecialchars($_POST['otp']));
 
 
-    if (isset($otp)) {
     if (isset($otp)) {
 
         $sys_otp = $_SESSION['otp'];
@@ -74,14 +72,6 @@ if (isset($_POST['OtpSubmit'])) {
                 }
 
 
-                // }else{
-
-
-                //     header("location:signup.html");
-                // }
-
-
-            } else {
             } else {
 
                 unlink($_SESSION['img_path']);
