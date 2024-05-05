@@ -8,35 +8,44 @@ if(isset($_POST['SignInSubmit'])){
     $password = sha1(htmlspecialchars(trim($_POST['password'])));
     $img = $_FILES['image'];
     
-
-
+    $_SESSION['error_message'];
+    
+    
     if($email != ''){
         
         $result = Login::logInByEmail($email , $password);
         
         
         if($result){
-
-            // echo $_SESSION['user']['password'];
-
-            // echo "<br>" . $password;
+            
             
             header("location:../Views/user");
-
+            
         }else{
-
-            echo "Error 404 ";
-                // handle the wrong credentials
+            
+        
+            header("location:../Views/auth/signin.php?error=1");
+            
         }
-
-
-    
-
+        
+        
+        
+        
     }else if (isset($img) and $email == ''){
-
-
+        
+        
         $image_file = $img['tmp_name'];
         $image_name = $img['name'];
+        
+        $extension = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
+        
+        $allowedExtensions = array('jpg', 'jpeg', 'png');
+        
+        if (!in_array($extension, $allowedExtensions)) {
+            
+            header("location:../Views/auth/signin.php?error=1");
+        }
+
 
         $id = Login::getUsersId(); 
         $known_faces = Login::getUsersEmbds();
@@ -53,10 +62,6 @@ if(isset($_POST['SignInSubmit'])){
              
         }
 
-        
-        
-
-
 
        for($i = 0 ; $i  < count($known_faces) ; $i++){
 
@@ -65,21 +70,17 @@ if(isset($_POST['SignInSubmit'])){
             $unserialized_faces [] = $x;
         }
 
-
-        
-
-    
         
 
         $response = LogIn::sendingApiRequest($image_file , $image_name , $unserialized_faces , $id);
 
-        // echo $response[0];
+        
 
 
         if($response[0] != "Unknown"){
 
 
-
+            
             Login::getAllUserData($response[0]);
             
             if($_SESSION['user']['password'] == $password){
@@ -88,20 +89,22 @@ if(isset($_POST['SignInSubmit'])){
                 
             }else{
                 
-                // handle the wrong credentials
+               
+
+                header("location:../Views/auth/signin.php?error=1");
+                
             }
             
             
         }else{
-
-            echo "<h1> A7aaa neeeek </h1>";
+            
+            header("location:../Views/auth/signin.php?error=1");
         }
 
 
 
     }
 }
-
 
 
 ?>

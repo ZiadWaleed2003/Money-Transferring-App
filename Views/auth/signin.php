@@ -59,7 +59,7 @@
                                 <label for="floatingInput">Email address</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password"  required>
                                 <label for="floatingPassword">Password</label>
                             </div>
 
@@ -68,6 +68,11 @@
                                 <label for="image" class="form-label"> OR Sign in with your Image !</label>
                                 <input class="form-control" type="file" id="image" name="image">
                             </div>
+                            <?php
+                               if (isset($_GET['error'])) {
+                                echo "<p class='error' , color='#ff6347'>Invalid Credentials.</p>";
+                              }
+                            ?>
                             <button type="submit" name="SignInSubmit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
                        </form>
                         <div class="d-flex align-items-center justify-content-between mb-4">
