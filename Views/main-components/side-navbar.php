@@ -23,11 +23,11 @@
                 <i class="bi bi-arrow-down-up" style="transform: rotate(45deg);"></i> 
                     Transactions
                 </a>
-            <a id="transaction-history" href="transaction-history.php" class="nav-item nav-link">
+            <a id="history" href="transaction-history.php" class="nav-item nav-link">
                 <i class="bi bi-file-earmark-zip-fill"></i>
                 History
             </a>
-            <a id="FAQ" href="FAQ.php" class="nav-item nav-link">
+            <a id="faq" href="FAQ.php" class="nav-item nav-link">
                 <i class="bi bi-arrow-down-up" style="transform: rotate(45deg);"></i> 
                 FAQ
             </a>

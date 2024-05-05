@@ -1,12 +1,13 @@
 <?php
 require("../Models/LogIn.php");
 
+
 if(isset($_POST['SignInSubmit'])){
 
 
-    $email = htmlspecialchars(trim($_POST['email']));
-    $password = sha1(htmlspecialchars(trim($_POST['password'])));
-    $img = $_FILES['image'];
+    $email = htmlspecialchars(trim($_POST['email'])) ?? null;
+    $password = $_POST['password'] ?? null;
+    $img = $_FILES['image'] ?? null;
     
 
 
@@ -14,14 +15,11 @@ if(isset($_POST['SignInSubmit'])){
         
         $result = Login::logInByEmail($email , $password);
         
-        
+
         if($result){
-
-            // echo $_SESSION['user']['password'];
-
-            // echo "<br>" . $password;
             
-            header("location:../Views/user");
+            header("location: ../views/user/index.php");
+            exit();
 
         }else{
 

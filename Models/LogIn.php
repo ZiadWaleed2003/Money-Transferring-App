@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require("../controllers/CRUD.php");
 
 class Login{
@@ -125,16 +126,15 @@ class Login{
     public static function logInByEmail($email , $password){
 
 
-        $query = "SELECT * FROM users WHERE email = '$email'";
+        $query = "SELECT * FROM users WHERE email = '$email'";        
         $result = CRUD::Select($query);
-
-
+        
         if(!empty($result)){
-
-            if($password == $result[0]['password']){
+            
+            if( password_verify($password, $result[0]['password']) ){
                 
                 Login::storeDataInSession($result[0]);
-
+                
                 return true;
             
             }else{

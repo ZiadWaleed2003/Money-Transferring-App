@@ -1,9 +1,11 @@
 <?php
+
     require("../../controllers/SessionController.php");
     
     SessionController::checkUserLogin();
-    SessionController::checkTransaction($keep_transactions_session);
-    SessionController::checkTransactionRequest($keep_transactions_request_session);
+
+    SessionController::checkTransaction($keep_transactions_session ?? null);
+    SessionController::checkTransactionRequest($keep_transactions_request_session ?? null);
 
     if(isset($check_take_ipn) && $check_take_ipn){
         SessionController::checkTakeIpn();

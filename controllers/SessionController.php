@@ -7,7 +7,7 @@ class SessionController{
     private static $user_must_data = ['name', 'id', 'email', 'role'];
 
     public static function checkLogin(){
-        
+
         if(!isset($_SESSION['user'])){
             header("location: ../auth/home.html");
             exit();
@@ -17,22 +17,25 @@ class SessionController{
             header("location: ../auth/home.html");
             exit();
         }
+
+        return true;
     }
 
     public static function checkUserLogin()
     {
         $login_done = self::checkLogin();
-
+        
         if(!$login_done){
             header("location: ../auth/home.html");
             exit();
         }
 
-        if($_SESSION['user']['role'] == 0){
+        if($_SESSION['user']['role'] != 0){
             header("location: ../auth/home.html");
             exit();
         }
     
+
         $must_exist = self::$user_must_data;
         foreach($must_exist as $check_one){
             if(!isset($_SESSION['user'][$check_one])){
@@ -43,6 +46,7 @@ class SessionController{
                 exit();
             }
         }
+        return true;
     }
     
     public static function checkAdminLogin()
