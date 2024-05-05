@@ -55,14 +55,21 @@
                         <br>
                         <!-- should replace that with the email taken from the user -->
                         <div>
-                            <h4>We have sent the OTP code to example@gmail.com</h4>
+                            <h4>We have sent the OTP code to your email</h4>
                         </div>
                         <br>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Enter the 6 digit code</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Submit</button>
+                        <form action="../../controllers/ChangePasswordController.php" method="post" enctype="multipart/form-data"  id= "SignInForm">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="new_password">
+                                <label for="floatingInput">Enter the 6 digit code</label>
+                            </div>
+                            <?php
+                               if (isset($_GET['error'])) {
+                                echo "<p class='error' , color='#ff6347'>Please try again</p>";
+                              }
+                            ?>
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="NewPasswordButton">Submit</button>
+                        </form>
                         <p class="text-center mb-0">Don't have an Account? <a href="signup.html">Sign Up</a></p>
                     </div>
                 </div>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>ElZowZat & Bassel</title>
+    <title>Elzozat and Bassel - Bootstrap 5 Admin Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -48,36 +48,28 @@
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="home.html" class="">
+                            <a href="index.php" class="">
                                 <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>ElZowzat and Bassel</h3>
                             </a>
-                            <h3>Sign In</h3>
                         </div>
-                      <form action="../../controllers/SignInController.php" method="post" enctype="multipart/form-data"  id= "SignInForm">
+                        <br>
+                        <!-- should replace that with the email taken from the user -->
+                        <div>
+                            <h4>We have sent the OTP code to your email</h4>
+                        </div>
+                        <br>
+                        <form action="../../controllers/ForgetPasswordOTPController.php" method="post" enctype="multipart/form-data"  id= "SignInForm">
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
-                                <label for="floatingInput">Email address</label>
-                            </div>
-                            <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password"  required>
-                                <label for="floatingPassword">Password</label>
-                            </div>
-
-                            <!-- File input for image -->
-                            <div class="mb-3">
-                                <label for="image" class="form-label"> OR Sign in with your Image !</label>
-                                <input class="form-control" type="file" id="image" name="image">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="otp">
+                                <label for="floatingInput">Enter the 6 digit code</label>
                             </div>
                             <?php
                                if (isset($_GET['error'])) {
-                                echo "<p class='error' , color='#ff6347'>Invalid Credentials.</p>";
+                                echo "<p class='error' , color='#ff6347'>Invalid Code.</p>";
                               }
                             ?>
-                            <button type="submit" name="SignInSubmit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                       </form>
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <a href="forget-password.php">Forgot Password</a>
-                        </div>
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="OTPButton">Submit</button>
+                        </form>
                         <p class="text-center mb-0">Don't have an Account? <a href="signup.html">Sign Up</a></p>
                     </div>
                 </div>
@@ -102,5 +94,3 @@
 </body>
 
 </html>
-
-

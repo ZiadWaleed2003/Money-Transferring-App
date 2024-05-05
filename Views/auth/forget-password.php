@@ -58,11 +58,18 @@
                             <h4>We will send an OTP code to your email</h4>
                         </div>
                         <br>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Enter your Email address</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Send Code</button>
+                        <form action="../../controllers/ForgetPasswordController.php" method="post" enctype="multipart/form-data"  id= "SignInForm">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+                                <label for="floatingInput">Enter your Email address</label>
+                            </div>
+                            <?php
+                               if (isset($_GET['error'])) {
+                                echo "<p class='error' , color='#ff6347'>Email doesn't exist!</p>";
+                              }
+                            ?>
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="forgetPasswordButton">Send Code</button>
+                        </form>
                         <p class="text-center mb-0">Don't have an Account? <a href="signup.html">Sign Up</a></p>
                     </div>
                 </div>

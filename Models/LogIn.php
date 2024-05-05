@@ -152,5 +152,21 @@ class Login{
     }
 
 
+    public static function changePassword($new_password , $id){
+
+        $query = "UPDATE users SET password='$new_password' WHERE id='$id'";
+        
+        $result = CRUD::Update($query);
+
+        if($result){
+
+            return $result;
+            
+        }else{
+            return false;
+        }
+    }
+
+
 }
 ?>
