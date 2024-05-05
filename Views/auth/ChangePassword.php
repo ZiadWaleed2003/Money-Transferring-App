@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,8 +17,9 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
-    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet">
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -34,7 +38,8 @@
 <body>
     <div class="container-fluid position-relative d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner"
+            class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -55,20 +60,28 @@
                         <br>
                         <!-- should replace that with the email taken from the user -->
                         <div>
-                            <h4>We have sent the OTP code to your email</h4>
+                            <h4>Create your new password</h4>
                         </div>
                         <br>
-                        <form action="../../controllers/ChangePasswordController.php" method="post" enctype="multipart/form-data"  id= "SignInForm">
+                        <form action="../../controllers/ChangePasswordController.php" method="post"
+                            enctype="multipart/form-data" id="changeForm">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="new_password">
-                                <label for="floatingInput">Enter the 6 digit code</label>
+                                <input type="password" class="form-control" id="floatingpassword"
+                                    placeholder="name@example.com" name="new_password">
+                                <label for="floatingpassword">New Password</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingrepeat"
+                                    placeholder="name@example.com" name="password_repeat">
+                                <label for="floatingrepeat">Repeat Password</label>
                             </div>
                             <?php
-                               if (isset($_GET['error'])) {
+                            if (isset($_GET['error'])) {
                                 echo "<p class='error' , color='#ff6347'>Please try again</p>";
-                              }
+                            }
                             ?>
-                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="NewPasswordButton">Submit</button>
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4"
+                                name="NewPasswordButton">Continue</button>
                         </form>
                         <p class="text-center mb-0">Don't have an Account? <a href="signup.html">Sign Up</a></p>
                     </div>
@@ -80,8 +93,10 @@
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/lib/chart/chart.min.js"></script>
+    <script src="../assets/js/change-password.js"></script>
     <script src="../assets/lib/easing/easing.min.js"></script>
     <script src="../assets/lib/waypoints/waypoints.min.js"></script>
     <script src="../assets/lib/owlcarousel/owl.carousel.min.js"></script>
