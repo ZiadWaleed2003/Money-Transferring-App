@@ -18,7 +18,7 @@ class useracct_Controller{
 
 
     public function feedback($feedback){
-       $query="insert into feedback(user_id,description) values (1,'$feedback') ";
+       $query="insert into feedback(user_id,description) values (".$_SESSION["user"]["id"].",'$feedback') ";
        $result=CRUD::Update($query);
        if($result !=false){
         return true;
