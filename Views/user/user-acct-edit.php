@@ -20,7 +20,8 @@ require_once ("../main-components/header.php") ?>
                     <label for="emailaddress" class="form-label">Edit email address</label>
                     <input name="profile_email" type="email" class="form-control" id="emailaddress"
                         aria-describedby="emailHelp"">
-                    <div id=" emailHelp" class="form-text">We'll never share your email with anyone else.
+                    <div id=" emailHelp" class="form-text">We'll never share your email with anyone else. Any fields
+                    left empty will not be edited.
                 </div>
             </div>
             <div class="mb-3">
