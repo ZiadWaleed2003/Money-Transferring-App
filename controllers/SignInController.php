@@ -1,6 +1,9 @@
 <?php
-session_start();
-require ("../Models/LogIn.php");
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+};
+require("../Models/LogIn.php");
 
 if (isset($_POST['SignInSubmit'])) {
 
@@ -12,26 +15,20 @@ if (isset($_POST['SignInSubmit'])) {
     $_SESSION['error_message'];
 
 
-    if($email != ''){
-        
-        $result = Login::logInByEmail($email , $password);
-        
+    if ($email != '') {
 
-        if($result){
-            
+        $result = Login::logInByEmail($email, $password);
+
+
+        if ($result) {
+
             header("location: ../views/user/index.php");
             exit();
-
         } else {
 
 
             header("location:../Views/auth/signin.php?error=1");
-
         }
-
-
-
-
     } else if (isset($img) and $email == '') {
 
 
@@ -60,7 +57,6 @@ if (isset($_POST['SignInSubmit'])) {
         for ($i = 0; $i < count($id); $i++) {
 
             array_push($ids, $id[$i]['user_id']);
-
         }
 
 
@@ -87,26 +83,15 @@ if (isset($_POST['SignInSubmit'])) {
             if ($_SESSION['user']['password'] == $password) {
 
                 header("location:../Views/user");
-
             } else {
 
 
 
                 header("location:../Views/auth/signin.php?error=1");
-
             }
-
-
         } else {
 
             header("location:../Views/auth/signin.php?error=1");
         }
-
-
-
     }
 }
-
-
-?>
-

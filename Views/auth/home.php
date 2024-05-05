@@ -1,3 +1,13 @@
+<?php
+    if(isset($_SESSION['user'])){
+        header("Location: '../views/user/index.php'");
+    }
+
+    if(isset($_SESSION['admin'])){
+        header("Location: '../views/admin/index.php'");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -91,7 +101,7 @@
 
               <button type="button" class="btn btn-lg btn-primary m-2 ps-5 pe-5">&nbsp;Log-in&nbsp;</button>
             </a>
-            <a href="signup.html">
+            <a href="signup.php">
 
               <button type="button" class="btn btn-lg btn-light m-2 ps-5 pe-5 text-white">&nbsp;Sign-up&nbsp;</button>
             </a>

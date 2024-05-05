@@ -1,6 +1,9 @@
 <?php
 
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+};
 require("../controllers/CRUD.php");
 
 class Login
@@ -36,20 +39,13 @@ class Login
             if ($httpCode == 400) {
 
                 return false;
-
-
             } else {
 
                 return $data['response'];
-
             }
-
-
         } else {
             echo "Error: Missing image";
         }
-
-
     }
 
 
@@ -63,13 +59,10 @@ class Login
         if ($result != false) {
 
             return $result;
-
         } else {
 
             return false;
         }
-
-
     }
 
     public static function getUsersId()
@@ -82,12 +75,10 @@ class Login
         if ($result != false) {
 
             return $result;
-
         } else {
 
             return false;
         }
-
     }
 
 
@@ -103,12 +94,10 @@ class Login
             Login::storeDataInSession($result);
 
             return true;
-
         } else {
 
             return false;
         }
-
     }
 
 
@@ -124,7 +113,7 @@ class Login
             $_SESSION['user']['password'] = $data['password'];
             $_SESSION['user']['phone_number'] = $data['phone_number'];
             $_SESSION['user']['role'] = $data['role'];
-            $_SESSION['user']['image_path'] = $data['image_path'];
+            $_SESSION['user']['image_path'] = $data['image_path'] ?? "../assets/img/profile_default.jpg";
         }
     }
 
@@ -133,31 +122,26 @@ class Login
     {
 
 
-        $query = "SELECT * FROM users WHERE email = '$email'";        
+        $query = "SELECT * FROM users WHERE email = '$email'";
         $result = CRUD::Select($query);
-        
-        if(!empty($result)){
-            
-            if( password_verify($password, $result[0]['password']) ){
-                
-                Login::storeDataInSession($result[0]);
-                
-                return true;
 
+        if (!empty($result)) {
+
+            if (password_verify($password, $result[0]['password'])) {
+
+                Login::storeDataInSession($result[0]);
+
+                return true;
             } else {
 
 
 
                 return false;
             }
-
         } else {
 
             return false;
         }
-
-
-
     }
 
 
@@ -171,13 +155,8 @@ class Login
         if ($result) {
 
             return $result;
-
         } else {
             return false;
         }
     }
-
-
 }
-?>
-

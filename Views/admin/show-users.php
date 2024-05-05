@@ -1,4 +1,4 @@
-<?php require_once("../main-components/header.php") ?>
+<?php require_once("../main-components/admin-header.php") ?>
 <?php require_once("../main-components/admin-side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
 

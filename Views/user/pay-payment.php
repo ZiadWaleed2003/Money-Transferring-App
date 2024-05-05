@@ -78,7 +78,10 @@
                         </div>
 
                         <?php
-                        // session_start(); //EDITS AFTER SESSION
+                        // 
+                        if (session_status() === PHP_SESSION_NONE) {
+                            session_start();
+                        }; //EDITS AFTER SESSION
 
                         if (isset($_SESSION['transaction']['error_message'])) :
                         ?>

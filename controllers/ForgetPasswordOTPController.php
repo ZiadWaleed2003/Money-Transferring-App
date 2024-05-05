@@ -1,5 +1,8 @@
 <?php
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+};
 
 if (isset($_POST['OTPButton'])) {
     $otp = htmlspecialchars(trim($_POST['otp']));
@@ -10,6 +13,3 @@ if (isset($_POST['OTPButton'])) {
         header("location:../Views/auth/ChangePassword.php");
     }
 }
-
-?>
-
