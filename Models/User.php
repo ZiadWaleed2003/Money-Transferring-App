@@ -3,7 +3,8 @@
 require_once "Person.php";
 ?>
 <?php
-if (pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME) == "AcctEditController") {
+$exp = "~[a-zA-Z]*Controller~";
+if (preg_match($exp, pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME))) {
     require_once "CRUD.php";
 } else {
     require_once "../../controllers/CRUD.php";
@@ -74,6 +75,7 @@ description='Bill' AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
     {
         $query = "SELECT id, sender_id, reciever_id, date, status, description, amount FROM moneyapp.transactions WHERE
 description='Donation' AND (sender_id = '$this->id' OR reciever_id = '$this->id');";
+
         $res = CRUD::Select($query);
         if (empty($res)) {
             return 0;
@@ -90,7 +92,7 @@ description='Donation' AND (sender_id = '$this->id' OR reciever_id = '$this->id'
 
     public function uploadPicture($file)
     {
-        $upl_dir = "/views/assets/img/";
+        $upl_dir = "../views/assets/img/";
         $file_path = $upl_dir . basename($file["name"]);
         $file_type = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
         $trgt = $this->id . "-img.";
@@ -118,6 +120,16 @@ description='Donation' AND (sender_id = '$this->id' OR reciever_id = '$this->id'
                 echo "Upload Error Occured";
             }
         }
+    }
+
+    public function reloadUserSession()
+    {
+        $_SESSION['user']['name'] = $this->name;
+        $_SESSION['user']['id'] = $this->id;
+        $_SESSION['user']['email'] = $this->email;
+        $_SESSION['user']['password'] = $this->password;
+        $_SESSION['user']['phone_number'] = $this->phone_number;
+        $_SESSION['user']['image_path'] = $this->image_path;
     }
 
     public function setImagePath($image_path)
