@@ -21,14 +21,11 @@
                 $card->setBankId((int)$_POST['bankname']);
                 
  
-   
+
                 if($CardController->addCard($card)){
                     echo "<script> window.location.href='card.php';</script>";
                     
 
-                }
-                else{
-                    echo"Error: Card not added";
                 }
         }
     }
@@ -75,6 +72,21 @@
                                     <label for="exampleInputPassword1" class="form-label">IPN Code Number</label>
                                     <input type="text" class="form-control" id="cardipn" name="ipn">
                                 </div>
+                                <?php
+                                 // session_start(); //EDITS AFTER SESSION
+
+                                if (isset($_SESSION['error_message'])) :
+                                ?>
+                                    <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                                        <i class="fa fa-exclamation-circle me-2"></i>
+                                        <?php
+                                        echo $_SESSION['error_message'];
+                                        unset($_SESSION['error_message']);
+                                        ?>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <?php endif; ?>
+                                
                                 <button type="submit" name="add"class="btn btn-primary">Add</button>
                             </form>
                         </div>

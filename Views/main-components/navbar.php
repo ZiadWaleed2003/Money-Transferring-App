@@ -34,6 +34,6 @@ if (!isset($_SESSION)) {
             </div>
         </div>
     </nav>
-</div>
+
 
 <!-- Navbar End -->

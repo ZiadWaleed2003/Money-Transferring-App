@@ -1,7 +1,12 @@
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
-
+<?php
+if(isset($_SESSION['error_message'])){
+    echo "<script>alert('".$_SESSION['error_message']."')</script>";
+    unset($_SESSION['error_message']);
+   }
+?>
 <div class="container-fluid pt-4 px-4">
     <div class="row bg-secondary rounded align-items-center justify-content-center mx-0 p-5">
 
