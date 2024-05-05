@@ -3,31 +3,33 @@ require_once ("CRUD.php");
 
 
 
-class useracct_Controller{
-    public function viewAllusers(){
+class useracct_Controller
+{
+    public function viewAllusers()
+    {
         $query = "select * from users";
         $result = CRUD::Select($query);
-        if($result){
+        if ($result) {
             return $result;
-        }
-        else{
+        } else {
             echo "NO USERS TO SHOW";
             return false;
         }
     }
 
 
-    public function feedback($feedback){
-       $query="insert into feedback(user_id,description) values (1,'$feedback') ";
-       $result=CRUD::Update($query);
-       if($result !=false){
-        return true;
-       }
-       else{
-        return false;
-       }
+    public function feedback($feedback)
+    {
+        $query = "insert into feedback(user_id,description) values (1,'$feedback') ";
+        $result = CRUD::Update($query);
+        if ($result != false) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
 
 ?>
+
