@@ -1,4 +1,5 @@
 <?php 
+
 require_once "CRUD.php";
 require_once "DBConnection.php";
 
@@ -24,16 +25,18 @@ class CardController
             $number=$card->getNumber();
             $cvv=$card->getCvv();
             $check = "SELECT * From bankcards where bankcards.number ='$number' and bankcards.cvv='$cvv' ";
-            $variable=CRUD::Select($check);
-            if ($variable !=false){
-                if(count($variable)>1){
+            $variable=CRUD::Select($check);           
+            if ($variable !=false){ 
+                $query2="SELECT * From usercards where usercards.number ='$number' and usercards.user_id=".$_SESSION["user"]["id"]." ";
+                $result2=CRUD::Select($query2);
+                if(!count($result2)){
                 $bank_id=$card->getBankId();
                 $cardname=$card->getName();
                 $cardnumber=$card->getNumber();
                 $cardcvv=$card->getCvv();
                 $cardipn=$card->getIpnCode();
                 
-                $query="insert into usercards(user_id,bank_id,name,number,cvv,ipn_code,balance,favourite) values ('1','$bank_id','$cardname','$cardnumber','$cardcvv','$cardipn','0000','0')";
+                $query="insert into usercards(user_id,bank_id,name,number,cvv,ipn_code,balance,favourite) values ('".$_SESSION["user"]["id"]."','$bank_id','$cardname','$cardnumber','$cardcvv','$cardipn','0000','0')";
                 $result=CRUD::Insert($query);
                  return true;
                 }
@@ -41,6 +44,7 @@ class CardController
                 {
                     echo "already Entered";
                     return true;
+
                 }
             }
             else{
@@ -51,7 +55,7 @@ class CardController
 
     }
     public function getAllCards(){
-        $query="select usercards.id,bank.name as 'bank',usercards.name,usercards.number,favourite from usercards,bank where usercards.bank_id=bank.id";
+        $query="select usercards.id,bank.name as 'bank',usercards.name,usercards.number,favourite from usercards,bank where usercards.bank_id=bank.id AND usercards.user_id=".$_SESSION["user"]["id"]."";
             $result=CRUD::Select($query);
             if($result){
             return $result;
@@ -116,7 +120,12 @@ class CardController
    }
 
    public function getAllfavCards(){
-    $query="select usercards.id,bank.name as 'bank',usercards.name,usercards.number from usercards,bank where usercards.bank_id=bank.id and usercards.favourite=1 ";
+    $query="SELECT usercards.id, bank.name AS 'bank', usercards.name, usercards.number
+    FROM usercards
+    INNER JOIN bank ON usercards.bank_id = bank.id
+    WHERE usercards.favourite = 1
+    AND usercards.user_id =".$_SESSION["user"]["id"]."
+     ";
         $result=CRUD::Select($query);
         if($result){
         return $result;
