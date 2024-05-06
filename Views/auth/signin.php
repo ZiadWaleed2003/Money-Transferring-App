@@ -1,3 +1,12 @@
+<?php
+if (isset($_SESSION['user'])) {
+    header("Location: '../views/user/index.php'");
+}
+
+if (isset($_SESSION['admin'])) {
+    header("Location: '../views/admin/index.php'");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,8 +23,8 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
-    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -48,18 +57,18 @@
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="home.html" class="">
+                            <a href="home.php" class="">
                                 <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>ElZowzat and Bassel</h3>
                             </a>
                             <h3>Sign In</h3>
                         </div>
-                      <form action="../../controllers/SignInController.php" method="post" enctype="multipart/form-data"  id= "SignInForm">
+                        <form action="../../controllers/SignInController.php" method="post" enctype="multipart/form-data" id="SignInForm">
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
                                 <label for="floatingInput">Email address</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password"  required>
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
                                 <label for="floatingPassword">Password</label>
                             </div>
 
@@ -69,16 +78,16 @@
                                 <input class="form-control" type="file" id="image" name="image">
                             </div>
                             <?php
-                               if (isset($_GET['error'])) {
+                            if (isset($_GET['error'])) {
                                 echo "<p class='error' , color='#ff6347'>Invalid Credentials.</p>";
-                              }
+                            }
                             ?>
                             <button type="submit" name="SignInSubmit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                       </form>
+                        </form>
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <a href="forget-password.php">Forgot Password</a>
                         </div>
-                        <p class="text-center mb-0">Don't have an Account? <a href="signup.html">Sign Up</a></p>
+                        <p class="text-center mb-0">Don't have an Account? <a href="signup.php">Sign Up</a></p>
                     </div>
                 </div>
             </div>
@@ -102,5 +111,3 @@
 </body>
 
 </html>
-
-

@@ -1,4 +1,4 @@
-<?php require_once("../main-components/header.php") ?>
+<?php require_once("../main-components/admin-header.php") ?>
 <?php require_once("../main-components/admin-side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
 
@@ -10,7 +10,7 @@
         <div class="col-12 text-center header">
             <h3 class="display-3 p-5">Bills</h3>
         </div>
-        
+
         <div class="col-12 text-center pb-5">
             <span id="links-tracking">
                 <a href="index.php" class="h5">Home Page</a>

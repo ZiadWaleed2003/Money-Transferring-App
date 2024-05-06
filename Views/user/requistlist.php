@@ -1,9 +1,3 @@
-<?php
-session_start(); //EDITS AFTER SESSION
-
-//EDITS AFTER SESSION
-$_SESSION['user']['id'] = 4;
-?>
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
@@ -101,11 +95,14 @@ $_SESSION['user']['id'] = 4;
                         </div>
                     </div>
                     <?php
-                    // session_start(); //EDITS AFTER SESSION
+                    // 
+                    if (session_status() === PHP_SESSION_NONE) {
+                        session_start();
+                    }; //EDITS AFTER SESSION
 
                     if (isset($_SESSION['transaction']['error_message'])) :
                     ?>
-                        <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                        <div class="alert alert-danger alert-dismissible text-center text-capitalize" role="alert">
                             <i class="fa fa-exclamation-circle me-2"></i>
                             <?php
                             echo $_SESSION['transaction']['error_message'];

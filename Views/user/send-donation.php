@@ -1,12 +1,3 @@
-<?php
-session_start(); //EDITS AFTER SESSION
-// session_destroy();
-
-//EDITS AFTER SESSION
-if (!isset($_SESSION['user']['id'])) {
-    $_SESSION['user']['id'] = 1;
-}
-?>
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
@@ -89,7 +80,10 @@ if (!isset($_SESSION['user']['id'])) {
                         <input type="hidden" name="transaction_type" value="donation">
 
                         <?php
-                        // session_start(); //EDITS AFTER SESSION
+                        // 
+                        if (session_status() === PHP_SESSION_NONE) {
+                            session_start();
+                        }; //EDITS AFTER SESSION
 
                         if (isset($_SESSION['transaction']['error_message'])) :
                         ?>

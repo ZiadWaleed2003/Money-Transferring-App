@@ -1,13 +1,10 @@
+<?php $keep_transaction_session = true;?>
+
+<?php require_once("../main-components/header.php") ?>
+<?php require_once("../main-components/side-navbar.php") ?>
+<?php require_once("../main-components/navbar.php") ?>
 <?php require("../../Models/Formation.php"); ?>
 <?php
-session_start(); //EDITS AFTER SESSION
-// session_destroy();
-
-//EDITS AFTER SESSION
-if (!isset($_SESSION['user']['id'])) {
-    $_SESSION['user']['id'] = 1;
-}
-
 $transaction_data = $_SESSION['transaction'];
 
 if ($transaction_data['status'] === Formation::cleanTransactionStatus(0)) {
@@ -18,9 +15,6 @@ if ($transaction_data['status'] === Formation::cleanTransactionStatus(0)) {
     $status = 1;
 }
 ?>
-<?php require_once("../main-components/header.php") ?>
-<?php require_once("../main-components/side-navbar.php") ?>
-<?php require_once("../main-components/navbar.php") ?>
 
 
 <div class="container-fluid pt-4 px-4">

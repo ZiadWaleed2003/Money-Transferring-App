@@ -1,42 +1,31 @@
 <?php
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+};
+session_destroy();
 
 require("../Models/SignUp.php");
 require("../Models/moneySystem.php");
 
-if (isset($_POST['submit']))
-{
-    $_SESSION['user_name'] 		= trim(htmlspecialchars($_POST['username']));
-	  $_SESSION['email'] 			  = trim(htmlspecialchars($_POST['email']));
-	  $_SESSION['phone_number']	= trim(htmlspecialchars($_POST['phone']));
-	  $_SESSION['password ']		= sha1(trim(htmlspecialchars($_POST['password'])));
+if (isset($_POST['submit'])) {
 
-    
-
-    $img          = $_FILES['image'];
- 
-    $imageFile    = $img["tmp_name"];
-    $imagename    = $img['name'];
-
-    
-    if (isset($imageFile)) {
+  $_SESSION['user_name']     = trim(htmlspecialchars($_POST['username'])) ?? null;
+  $_SESSION['email']         = trim(htmlspecialchars($_POST['email'])) ?? null;
+  $_SESSION['phone_number']  = trim(htmlspecialchars($_POST['phone'])) ?? null;
+  $_SESSION['password ']    = password_hash($_POST['password'], PASSWORD_DEFAULT) ?? null;
 
 
 
-      // send and verify the otp first !
+  $img          = $_FILES['image'];
 
-      $_SESSION['otp'] = moneySystem::SendOTP($_SESSION['email']);
-        
+  $imageFile    = $img["tmp_name"];
+  $imagename    = $img['name'];
 
-        ###############
+  if (isset($imageFile) && $imageFile) {
 
-      $_SESSION['img_path']  = Signup::saveUserImage($img);  
+    $_SESSION['img_path']  = Signup::saveUserImage($img);
+  }
 
-      
-      
-    }
-
-
-
+  $_SESSION['otp'] = moneySystem::SendOTP($_SESSION['email']);
 }
-?>

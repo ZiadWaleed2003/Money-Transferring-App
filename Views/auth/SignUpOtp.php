@@ -1,5 +1,15 @@
 <?php
-session_start();
+if (isset($_SESSION['user'])) {
+    header("Location: '../views/user/index.php'");
+}
+
+if (isset($_SESSION['admin'])) {
+    header("Location: '../views/admin/index.php'");
+}
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+};
 ?>
 
 <!DOCTYPE html>
@@ -18,8 +28,8 @@ session_start();
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
-    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -58,16 +68,16 @@ session_start();
                         </div>
                         <br>
                         <!-- should replace that with the email taken from the user -->
-                     <form action="../../controllers/RegisterOtpController.php" method="post" enctype="multipart/form-data" id="signupForm">
+                        <form action="../../controllers/RegisterOtpController.php" method="post" enctype="multipart/form-data" id="signupForm">
                             <div>
                                 <?php
 
-                                    if(isset($_SESSION['email'])){
-                                        $email = $_SESSION['email'];
-                                    }else{
-                                        $email = "your email";
-                                    }
-                                    echo "<h4>We have sent the OTP code to ".$email."</h4>";
+                                if (isset($_SESSION['email'])) {
+                                    $email = $_SESSION['email'];
+                                } else {
+                                    $email = "your email";
+                                }
+                                echo "<h4>We have sent the OTP code to " . $email . "</h4>";
                                 ?>
                             </div>
                             <br>
@@ -77,7 +87,7 @@ session_start();
                             </div>
                             <button type="submit" name="OtpSubmit" class="btn btn-primary py-3 w-100 mb-4">Submit</button>
                         </form>
-                        <p class="text-center mb-0">Don't have an Account? <a href="signup.html">Sign Up</a></p>
+                        <p class="text-center mb-0">Don't have an Account? <a href="signup.php">Sign Up</a></p>
                     </div>
                 </div>
             </div>

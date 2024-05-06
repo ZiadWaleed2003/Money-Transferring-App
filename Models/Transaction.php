@@ -1,5 +1,8 @@
 <?php
-// session_start();
+// 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+};
 
 require("../controllers/CRUD.php");
 require("Formation.php");
@@ -12,7 +15,7 @@ class Transaction
 
     private $sender_card_number;
     private $receiver_card_number;
-    
+
     private $sender_id;
     private $receiver_id;
 
@@ -24,13 +27,12 @@ class Transaction
     private $type;
     private $status;
     private $description;
-    
+
     private $conn;
     ////////////////////////////// CONSTRUCT //////////////////////////////
 
     public function __construct()
     {
-
     }
 
     ////////////////////////////// METHODS //////////////////////////////
@@ -51,47 +53,43 @@ class Transaction
     {
         $sender_id = $this->getSenderId();
         $description = $this->getDescription();
-        
+
         $sql = "SELECT id FROM transactions WHERE sender_id = $sender_id AND description = '$description' ORDER BY id DESC LIMIT 1";
         $transaction_id = CRUD::Select($sql)[0]['id'];
-        
+
         $this->transaction_id = Formation::cleanNumber($transaction_id);
     }
 
     public function setSenderCardNumber($data)
     {
 
-        if(isset($data['sender_card_number']) && $data['sender_card_number']){
-            
+        if (isset($data['sender_card_number']) && $data['sender_card_number']) {
+
             $this->sender_card_number = Formation::cleanCardNumber($data['sender_card_number']);
-        }
-        else if ( isset($data['sender_card_id']) && $data['sender_card_id'] ){
-    
+        } else if (isset($data['sender_card_id']) && $data['sender_card_id']) {
+
             $sql = "SELECT `number` FROM usercards WHERE id = $data[sender_card_id]";
             $result = CRUD::Select($sql)[0]['number'];
-    
+
             $this->sender_card_number = Formation::cleanCardNumber($result);
-        }
-        else{
-    
+        } else {
+
             $this->sender_card_number = null;
         }
     }
 
     public function setReceiverCardNumber($data)
     {
-        if(isset($data['receiver_card_number']) && $data['receiver_card_number']){
-            
+        if (isset($data['receiver_card_number']) && $data['receiver_card_number']) {
+
             $this->receiver_card_number = Formation::cleanCardNumber($data['receiver_card_number']);
-        }
-        else if ( isset($data['receiver_card_id']) && $data['receiver_card_id'] ){
+        } else if (isset($data['receiver_card_id']) && $data['receiver_card_id']) {
 
             $sql = "SELECT `number` FROM usercards WHERE id = $data[receiver_card_id] ";
             $result = CRUD::Select($sql)[0]['number'];
 
             $this->receiver_card_number = Formation::cleanCardNumber($result);
-        }
-        else{
+        } else {
 
             $this->receiver_card_number = null;
         }
@@ -108,7 +106,7 @@ class Transaction
 
     public function setDate()
     {
-        $this->date = date("d-m-Y H:i:s", time()+3600);
+        $this->date = date("d-m-Y H:i:s", time() + 3600);
     }
 
     public function setStatus($status)
@@ -136,12 +134,12 @@ class Transaction
     {
         return $this->sender_id;
     }
-    
+
     public function getReceiverId()
     {
         return $this->receiver_id;
     }
-    
+
     public function getTransactionId()
     {
         return $this->transaction_id;
@@ -195,7 +193,7 @@ class Transaction
 
     public function getRequestData($request_id)
     {
-        
+
         $sql = "SELECT rs.sender_id, rs.amount, uc.number AS sender_card_number, uc_alias.number AS receiver_card_number
         FROM requests AS rs
         INNER JOIN usercards AS uc ON rs.sender_id = uc.id
@@ -225,7 +223,7 @@ class Transaction
          * 
          * At last if All is true save transaction data at session unti user send IPN TO complete transaction process
          */
-        
+
         $sender_card_number = self::getSenderCardNumber();
         $receiver_card_number = self::getReceiverCardNumber();
 
@@ -251,7 +249,7 @@ class Transaction
 
             // Here check Validation of Sender Card Number if (Sending | Receiving) operation
             if (!Validator::validateCardNumber($sender_card_number)) {
-                
+
                 throw new Exception("Invalid Sender Card Number");
             }
 
@@ -266,14 +264,12 @@ class Transaction
             // Here Get Data of each Sender and Receiver data From DB
             $sql = "SELECT * FROM usercards WHERE `number` = $sender_card_number";
             $sender_card_data = CRUD::Select($sql);
-            
-            if(in_array($type, ['send', 'receive'])){
+
+            if (in_array($type, ['send', 'receive'])) {
                 $sql = "SELECT * FROM usercards WHERE `number` = $receiver_card_number";
-            }
-            else if($type == 'donation'){
+            } else if ($type == 'donation') {
                 $sql = "SELECT * FROM donations WHERE `account_number` = $receiver_id";
-            }
-            else if($type == 'bill'){
+            } else if ($type == 'bill') {
                 $sql = "SELECT * FROM bills WHERE `account_number` = $receiver_id";
             }
 
@@ -289,7 +285,7 @@ class Transaction
 
             // Here check Exitance of This Receiver Card Account  !!(FIRST STEP)!!
             if (in_array($type, ['send', 'receive']) && count($receiver_card_data) != 1) {
-            
+
                 throw new Exception("Not Valid Receiver Data");
             }
 
@@ -298,23 +294,18 @@ class Transaction
             $sender_card_data = $sender_card_data[0];
             $receiver_card_data = $receiver_card_data[0];
 
-            
+
             // Check the Relativity of the Card Account to the Logged User  !!(SECOND STEP)!!
             if ($sender_card_data['user_id'] != $_SESSION['user']['id']) {
-                
+
                 throw new Exception("Unexpected Error (1001)");
             }
-            
-            if(!Validator::validateAmount($amount)){
-                 
+
+            if (!Validator::validateAmount($amount)) {
+
                 throw new Exception("Not valid Amount");
             }
-
-
-
-            
-        } 
-        catch (Exception $e) {
+        } catch (Exception $e) {
             throw $e;
         }
     }
@@ -332,81 +323,74 @@ class Transaction
          */
 
         // Get All needed Data
-        
+
         $sender_card_number = $this->getSenderCardNumber();
         $receiver_card_number = $this->getReceiverCardNumber();
 
         $transaction_sender_id = $this->getSenderId();
         $transaction_receiver_id = $this->getReceiverId();
-        
+
         $transaction_amount = $this->getAmount();
-        
+
         $transaction_type = $this->getType();
         $transaction_description = $this->getDescription();
-        
+
         $ipn_to_check = $this->getIpn();
-        
-        
+
+
         try {
-            
+
             // Here Get Data of each Sender and Receiver Cards data From DB
             $sql = "SELECT * FROM usercards WHERE `number` = $sender_card_number";
             $sender_card_data = CRUD::Select($sql)[0];
-            
-            if(in_array($transaction_type, ['send', 'receive'])){
+
+            if (in_array($transaction_type, ['send', 'receive'])) {
                 $sql = "SELECT * FROM usercards WHERE `number` = $receiver_card_number";
-            }
-            else if($transaction_type == 'donation'){
+            } else if ($transaction_type == 'donation') {
                 $sql = "SELECT * FROM donations WHERE `account_number` = $transaction_receiver_id";
-            }
-            else if($transaction_type == 'bill'){
+            } else if ($transaction_type == 'bill') {
                 $sql = "SELECT * FROM bills WHERE `account_number` = $transaction_receiver_id";
             }
-            
+
 
             $receiver_card_data = CRUD::Select($sql)[0];
-            
+
 
 
             // Check IPN of Sender Card !!(THIRD STEP)!!
             if (Validator::validateIpnCheck($transaction_check_time_start, time(), $ipn_to_check, $sender_card_data['ipn_code'])) {
-                
+
                 // Check There Is Enough Balance to required Transaction Amount
                 if (Validator::validateAmountSubtract($sender_card_data['balance'], $transaction_amount)) {
-                    
+
                     $this->setStatus(1);
                     $transaction_status = $this->getStatus();
 
                     $sender_update_sql = "UPDATE usercards SET balance = $sender_card_data[balance] - $transaction_amount WHERE `number` = $sender_card_number";
-                    
-                    if(in_array($transaction_type, ['send', 'receive'])){
+
+                    if (in_array($transaction_type, ['send', 'receive'])) {
                         $receiver_update_sql = "UPDATE usercards SET balance = $receiver_card_data[balance] + $transaction_amount WHERE `number` = $receiver_card_number";
                         $transaction_history_sql = "INSERT INTO transactions (sender_id, sender_card, reciever_id, reciever_card, date, status, description, amount)
                                                                     VALUES ($transaction_sender_id, '$sender_card_number', $receiver_card_data[user_id], '$receiver_card_number', CURRENT_TIMESTAMP, '$transaction_status', '$transaction_description', $transaction_amount)";
-                    }
-                    else if($transaction_type == 'donation'){
+                    } else if ($transaction_type == 'donation') {
                         $receiver_update_sql = "UPDATE donations SET balance = $receiver_card_data[balance] + $transaction_amount WHERE `account_number` = $transaction_receiver_id";
                         $transaction_history_sql = "INSERT INTO transactions (sender_id, sender_card, reciever_id, date, status, description, amount)
                                                                     VALUES ($transaction_sender_id, '$sender_card_number', $receiver_card_data[account_number], CURRENT_TIMESTAMP, '$transaction_status', '$transaction_description', $transaction_amount)";
-                    }
-                    else if($transaction_type == 'bill'){
+                    } else if ($transaction_type == 'bill') {
                         $receiver_update_sql = "UPDATE bills SET balance = $receiver_card_data[balance] + $transaction_amount WHERE `account_number` = $transaction_receiver_id";
                         $transaction_history_sql = "INSERT INTO transactions (sender_id, sender_card, reciever_id, date, status, description, amount)
                                                                     VALUES ($transaction_sender_id, '$sender_card_number', $receiver_card_data[account_number], CURRENT_TIMESTAMP, '$transaction_status', '$transaction_description', $transaction_amount)";
                     }
 
-                    
-                    self::checkout($sender_update_sql, $receiver_update_sql, $transaction_history_sql);
 
+                    self::checkout($sender_update_sql, $receiver_update_sql, $transaction_history_sql);
                 } else {
                     throw new Exception("Invalid Transaction Amount");
                 }
             } else {
-                if(Validator::validateMax($transaction_check_time_start, time())){
+                if (Validator::validateMax($transaction_check_time_start, time())) {
                     throw new Exception("!! Timeout IPN CODE !!");
-
-                }
-                else{
+                } else {
                     throw new Exception("!! WRONG IPN CODE !!");
                 }
             }
@@ -420,147 +404,139 @@ class Transaction
 
     private function checkout($sender_sql, $receiver_sql, $transaction_sql)
     {
-        
-        try{
-            if($sender_sql && $receiver_sql && $transaction_sql){
-                
+
+        try {
+            if ($sender_sql && $receiver_sql && $transaction_sql) {
+
                 $result = CRUD::Update($sender_sql);
-                if(!$result){
+                if (!$result) {
                     throw new Exception("Transaction Failed - ERROR(9001)");
                 }
-                    
+
                 $result = CRUD::Update($receiver_sql);
-                if(!$result){
+                if (!$result) {
                     throw new Exception("Transaction Failed - ERROR(9002)");
                 }
 
                 $result = CRUD::Insert($transaction_sql);
-                if(!$result){
+                if (!$result) {
                     throw new Exception("Transaction Failed - ERROR(9003)");
                 }
-                
+
                 $this->setTransactionId();
-            }
-            else {
+            } else {
                 throw new Exception("Transaction Failed - ERROR(9000)");
             }
-        } catch (Exception $e){
+        } catch (Exception $e) {
             throw $e;
         }
-
     }
-    
+
     public function checkBalance()
     {
         $sender_card_number = self::getSenderCardNumber();
 
-        try{
+        try {
             $sql = "SELECT * FROM usercards WHERE number = $sender_card_number";
             $sender_card_data = CRUD::Select($sql);
 
-            if( count( $sender_card_data ) != 1 )
-            {
+            if (count($sender_card_data) != 1) {
                 throw new Exception("not valid card number");
             }
 
-            if($sender_card_data[0]["user_id"] != $_SESSION['user']['id'])
-            {
-               throw new Exception ("please enter correct card number");
+            if ($sender_card_data[0]["user_id"] != $_SESSION['user']['id']) {
+                throw new Exception("please enter correct card number");
             }
 
-            return $sender_card_data [0]["balance"];
-        }
-        catch(Exception $e)
-        {
+            return $sender_card_data[0]["balance"];
+        } catch (Exception $e) {
             throw $e;
         }
     }
 
     public function requestMoney()
     {
-        $sender_card_number=$this->getSenderCardNumber();
-        
-        $receiver_card_number=$this->getReceiverCardNumber();
-        $receiver_id=$this->getReceiverId();
+        $sender_card_number = $this->getSenderCardNumber();
 
-        $amount=$this->getAmount();
-        
+        $receiver_card_number = $this->getReceiverCardNumber();
+        $receiver_id = $this->getReceiverId();
+
+        $amount = $this->getAmount();
+
         try {
-            
-            
-            
-            
+
+
+
+
             // Check if Sender and Receiver not the same
             if ($sender_card_number == $receiver_card_number) {
-                
+
                 throw new Exception("Can't Send money to the Same Sending Card");
             }
-            
-            
+
+
             // Here check Validation of Sender Card Number if (Sending | Receiving) operation
             if (!Validator::validateCardNumber($sender_card_number)) {
-                
+
                 throw new Exception("Invalid Sender Card Number");
             }
-            
-            
+
+
             // Here check Validation of Receiver Card Number if (Sending | Receiving) operation
             if (!validator::validateCardNumber($receiver_card_number)) {
-                
+
                 throw new Exception("Invalid Receiver Card Number");
             }
-            
-            
+
+
             // Here Get Data of each Sender and Receiver data From DB
             $sql = "SELECT * FROM usercards WHERE `number` = $sender_card_number";
             $sender_card_data = CRUD::Select($sql);
-            
+
             $sql = "SELECT * FROM usercards WHERE `number` = $receiver_card_number";
             $receiver_card_data = CRUD::Select($sql);
-            
-            
+
+
             // Here check Exitance of This Sender Card Account !!(FIRST STEP)!!
             if (count($sender_card_data) != 1) {
-                
+
                 throw new Exception("Not Valid Sender Data");
             }
-            
-            
+
+
             // Here check Exitance of This Receiver Card Account  !!(FIRST STEP)!!
             if (count($receiver_card_data) != 1) {
-                
+
                 throw new Exception("Not Valid Receiver Data");
             }
-            
-            
+
+
             // Here Set data in an single Dimension Associative Array
             $sender_card_data = $sender_card_data[0];
             $receiver_card_data = $receiver_card_data[0];
-            
-            
+
+
             // Check the Relativity of the Card Account to the Logged User  !!(SECOND STEP)!!
             if ($receiver_card_data['user_id'] != $receiver_id) {
-                
+
                 throw new Exception("Unexpected Error (1001)");
             }
-            
-            if(!Validator::validateAmount($amount)){
-                
+
+            if (!Validator::validateAmount($amount)) {
+
                 throw new Exception("Not valid Amount");
             }
-            
-            $sql="INSERT INTO requests (sender_id, reciever_id, amount, description, date) 
+
+            $sql = "INSERT INTO requests (sender_id, reciever_id, amount, description, date) 
                              VALUES ($sender_card_data[id],$receiver_card_data[id],$amount,'flossss wnby ya homar', CURRENT_TIMESTAMP)";
-             
-            $result=CRUD::Insert($sql);
-            
-            
-            if(!$result)
-            {
+
+            $result = CRUD::Insert($sql);
+
+
+            if (!$result) {
                 throw new Exception("ont valid request");
             }
-        } 
-        catch (Exception $e) {
+        } catch (Exception $e) {
             throw $e;
         }
     }

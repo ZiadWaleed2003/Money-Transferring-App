@@ -1,4 +1,4 @@
-<?php require_once("../main-components/header.php") ?>
+<?php require_once("../main-components/admin-header.php") ?>
 <?php require_once("../main-components/admin-side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
 
@@ -39,31 +39,31 @@
             <div class="row justify-content-center h-100 p-5">
                 <div class="col-sm-12 col-xl-6">
                     <div class="bg-secondary rounded h-100 p-4">
-                        
+
                         <?php
-                            if (isset($_POST['addbank'])) {
-                                if (isset($_POST['bankname']) && isset($_POST['id'])) {
-                                    if (!empty($_POST['bankname']) && !empty($_POST['id'])) {
-                                        $bank = new bank;
-                                        $bank->setName($_POST['bankname']);
-                                        $bank->setId($_POST['id']);
-                                        if ($bankcontroller->addBank($bank)) {
-                                            echo '<div class="alert alert-success alert-dismissible text-center text-capitalize" role="alert">
+                        if (isset($_POST['addbank'])) {
+                            if (isset($_POST['bankname']) && isset($_POST['id'])) {
+                                if (!empty($_POST['bankname']) && !empty($_POST['id'])) {
+                                    $bank = new bank;
+                                    $bank->setName($_POST['bankname']);
+                                    $bank->setId($_POST['id']);
+                                    if ($bankcontroller->addBank($bank)) {
+                                        echo '<div class="alert alert-success alert-dismissible text-center text-capitalize" role="alert">
                                                     <i class="fa fa-exclamation-circle me-2"></i>
                                                     BANK ADDED
                                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                                 </div>';
-                                        } else {
+                                    } else {
 
-                                            echo '<div class="alert alert-danger alert-dismissible text-center text-capitalize" role="alert">
+                                        echo '<div class="alert alert-danger alert-dismissible text-center text-capitalize" role="alert">
                                                     <i class="fa fa-exclamation-circle me-2"></i>
                                                     BANK ALREADY EXISTS"
                                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                                 </div>';
-                                        }
                                     }
                                 }
                             }
+                        }
                         ?>
                         <form action="" method="POST">
                             <div class="mb-3">
@@ -84,7 +84,7 @@
                                 </button>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
