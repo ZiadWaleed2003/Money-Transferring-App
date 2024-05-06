@@ -7,7 +7,7 @@ require("../Models/LogIn.php");
 
 if (isset($_POST['NewPasswordButton'])) {
 
-    $new_pass = sha1(htmlspecialchars(trim($_POST['new_password'])));
+    $new_pass = password_hash($_POST['new_password'] , PASSWORD_DEFAULT);
 
     $result = Login::changePassword($new_pass, $_SESSION['user']['id']);
 
