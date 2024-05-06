@@ -22,7 +22,7 @@ $(document).ready(function() {
           // Add phone number validation rule if needed (e.g., regex)
         },
         image: {
-          required: true
+          // required: true
         }
       },
       messages: {

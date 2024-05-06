@@ -1,14 +1,19 @@
 <?php
-session_start();
-// session_destroy();
 
-$amount = $_SESSION["transaction"]["check_balance"];
-// unset( $_SESSION["transaction"]["check_balance"]);
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$_SESSION['keep_transaction_session'] = true;
 ?>
+
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
 
+<?php
+    $amount = $_SESSION["transaction"]["check_balance"];
+?>
 
 
 

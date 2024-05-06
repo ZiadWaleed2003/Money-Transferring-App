@@ -58,9 +58,35 @@
         nav : false
     });
     $(document).ready(function(){
-        const current_page_name = document.location.pathname.split('/').pop().split('.')[0];
+        let side_buttons = {
+            // User Page
+            'card': ['card', 'fav-list', 'add_card'],
+            'transactions' : ['transactions', 'checkbalance', 'showbalance', 'send-money', 'send-donation', 'pay-payment', 'recievemoney', 'requistlist', 'ipn', 'view_transactions_status'],
+            'history': ['transaction-history'],
+            'faq': ['FAQ'],
+            'feedback': ['feedback'],
+
+            // Admin Page
+            'users': ['users', 'show-users'],
+            'donations': ['donations', 'show-donations', 'add-donations'],
+            'bills': ['bills', 'show-bills', 'add-bills'],
+            'banks': ['banks', 'show-banks', 'add-banks']
+            
+        };
         
-        $('#'+current_page_name).addClass('active');
+        const current_page_name = document.location.pathname.split('/').pop().split('.')[0];
+
+        for (const page_name in side_buttons){
+            
+            for(let i=0; i < side_buttons[page_name].length; i++){
+
+                if(current_page_name == side_buttons[page_name][i]){
+                    
+                    $('#' + page_name).addClass('active');
+                    return true;
+                }
+            }
+        }
     });
 
 

@@ -1,12 +1,3 @@
-<?php
-session_start();
-// session_destroy();
-
-
-if (!isset($_SESSION['user']['id'])) {
-    $_SESSION['user']['id'] = 1;
-}
-?>
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>

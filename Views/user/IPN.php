@@ -1,7 +1,8 @@
 <?php
-session_start();
+$_SESSION['check_take_ipn'] = true;
+$_SESSION['keep_transaction_session'] = true;
+$_SESSION['keep_transaction_session_request'] = true;
 ?>
-
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
@@ -97,7 +98,10 @@ session_start();
                             <input type="hidden" name="transaction_ipn_time_submit" value="<?php echo time(); ?>">
                         </div>
                         <?php
-                        // session_start(); //EDITS AFTER SESSION
+                        // 
+                        if (session_status() === PHP_SESSION_NONE) {
+                            session_start();
+                        }; //EDITS AFTER SESSION
 
                         if (isset($_SESSION['transaction']['error_message'])) :
                         ?>
