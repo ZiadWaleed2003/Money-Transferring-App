@@ -26,8 +26,15 @@ if (isset($_POST['SignInSubmit'])) {
 
         if ($result) {
 
-            header("location: ../views/user/index.php");
-            exit();
+            if($_SESSION['user']['role'] == 1){
+
+                header("location:../Views/admin/index.php");
+
+            }else if($_SESSION['user']['role'] == 0){
+
+                header("location:../Views/user/index.php");
+            }
+          
         } else {
 
 
@@ -87,11 +94,11 @@ if (isset($_POST['SignInSubmit'])) {
 
                 if($_SESSION['user']['role'] == 1){
 
-                    header("location:../Views/admin");
+                    header("location:../Views/admin/index.php");
 
                 }else if($_SESSION['user']['role'] == 0){
 
-                    header("location:../Views/user");
+                    header("location:../Views/user/index.php");
                 }
                     
                 
