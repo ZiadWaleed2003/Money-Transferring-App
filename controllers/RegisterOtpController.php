@@ -33,7 +33,7 @@ if (isset($_POST['OtpSubmit'])) {
                 $database_selected_colums_values = "'$user_name', '$email', '$password', '$phone_number', '0'";
 
 
-                if (isset($_SESSION['img_path']) && $_SESSION['img_path']) {
+                if (isset($_SESSION['img_path']) && $_SESSION['img_path']!="") {
 
                     $fileInfo = pathinfo($_SESSION['img_path']);
                     $filename = $fileInfo['basename'];
