@@ -23,8 +23,6 @@ if (isset($_POST['SignInSubmit'])) {
         $credentials = ['email' => $email, 'password' => $password];
         $result = $loginWithEmailPassword->logInUser($credentials);
 
-        // $result = Utilities::logInByEmail($email, $password);
-
 
         if ($result) {
 
@@ -59,13 +57,6 @@ if (isset($_POST['SignInSubmit'])) {
 
 
 
-
-        for ($i = 0; $i < count($id); $i++) {
-
-            array_push($ids, $id[$i]['user_id']);
-        }
-
-
         for ($i = 0; $i < count($known_faces); $i++) {
 
             $x = unserialize($known_faces[$i]['vector_data']);
@@ -79,14 +70,11 @@ if (isset($_POST['SignInSubmit'])) {
         $loginWithFaceImagePassword = new Login($faceImagePasswordLogin);
 
 
-        $credentials = ['image_file' => $image_file, 'image_name' => $image_name, 'known_faces' => $unserialized_faces, 'id' => $ids];
+        $credentials = ['image_file' => $image_file, 'image_name' => $image_name, 'known_faces' => $unserialized_faces, 'id' => $id];
 
         $response = $loginWithFaceImagePassword->logInUser($credentials);
 
 
-
-
-        // $response = Utilities::sendingApiRequest($image_file, $image_name, $unserialized_faces, $id);
 
 
         if ($response[0] != "Unknown") {
