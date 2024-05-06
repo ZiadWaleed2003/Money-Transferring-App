@@ -146,7 +146,7 @@ description='Donation' AND (sender_id = '$this->id' OR reciever_id = '$this->id'
 
     public function getImagePath()
     {
-        return $this->image_path;
+        return "../".$this->image_path;
     }
 
     public function getPhoneNumber()

@@ -3,7 +3,7 @@ $(document).ready(function () {
         console.log("lol");
         $(location).attr(
             "href",
-            "../../../controllers/TranscationHistoryController.php"
+            "../../controllers/TransactionHistoryController.php"
         );
     });
 });
