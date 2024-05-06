@@ -70,22 +70,22 @@
                             </div>
                         </div>
 
-                        <?php if (isset($_SESSION['transaction']['error_message'])) : ?>
+                        <?php if (isset($_SESSION['error_message'])) : ?>
                             <div class="alert alert-danger alert-dismissible text-center text-capitalize" role="alert">
                                 <i class="fa fa-exclamation-circle me-2"></i>
                                 <?php
-                                echo $_SESSION['transaction']['error_message'];
-                                unset($_SESSION['transaction']['error_message']);
+                                echo $_SESSION['error_message'];
+                                unset($_SESSION['error_message']);
                                 ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        <?php elseif (isset($_SESSION['transaction']['success_message'])) : ?>
+                        <?php elseif (isset($_SESSION['success_message'])) : ?>
 
                             <div class="alert alert-success alert-dismissible text-center text-capitalize" role="alert">
                                 <i class="fa fa-exclamation-circle me-2"></i>
                                 <?php
-                                echo $_SESSION['transaction']['success_message'];
-                                unset($_SESSION['transaction']['success_message']);
+                                echo $_SESSION['success_message'];
+                                unset($_SESSION['success_message']);
                                 ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>

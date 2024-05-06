@@ -159,9 +159,7 @@ description='Donation' AND (sender_id = '$this->id' OR reciever_id = '$this->id'
 
     public function logOut()
     {
-
     }
-
 }
 
 

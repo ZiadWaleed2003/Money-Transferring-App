@@ -1,7 +1,8 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}; ?>
+};
+session_start();
+?>
 
 <?php
 
@@ -182,6 +183,7 @@ class TransactionsController
                         throw new Exception("Unsuccessful reqeust Delete");
                     } else {
                         $this->handleSuccess("Request deleted successfully");
+                        $this->successRedirectBasedOnTransactionType('refuseRequest');
                     }
                 }
             } else if ($transaction_type === 'donation') {
@@ -347,8 +349,12 @@ class TransactionsController
 
     private function successRedirectBasedOnTransactionType($type)
     {
+
         $redirectUrl = '../Views/user/';
         switch ($type) {
+            case 'refuseRequest':
+                $redirectUrl .= 'requistlist.php';
+                break;
             case 'send':
             case 'receive':
             case 'donation':
@@ -364,18 +370,19 @@ class TransactionsController
                 $redirectUrl .= 'balanceshow.php';
                 break;
         }
+
         header('location: ' . $redirectUrl);
         exit();
     }
 
     private function handleSuccess($message)
     {
-        $_SESSION['transaction']['success_message'] = $message;
+        $_SESSION['success_message'] = $message;
     }
 
     private function handleError($message)
     {
-        $_SESSION['transaction']['error_message'] = $message;
+        $_SESSION['error_message'] = $message;
     }
 
     private function setSession($root_name, $data)
