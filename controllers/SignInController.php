@@ -17,7 +17,11 @@ if (isset($_POST['SignInSubmit'])) {
 
     if ($email != '') {
 
-        $result = Login::logInByEmail($email, $password);
+        $emailPasswordLogin = new logInByEmail();
+        $loginWithEmailPassword = new Login($emailPasswordLogin);
+
+        $credentials = ['email' => $email, 'password' => $password];
+        $result = $loginWithEmailPassword->logInUser($credentials);
 
 
         if ($result) {
@@ -45,19 +49,12 @@ if (isset($_POST['SignInSubmit'])) {
         }
 
 
-        $id = Login::getUsersId();
-        $known_faces = Login::getUsersEmbds();
+        $id = Utilities::getUsersId();
+        $known_faces = Utilities::getUsersEmbds();
 
         $unserialized_faces = [];
         $ids = [];
 
-
-
-
-        for ($i = 0; $i < count($id); $i++) {
-
-            array_push($ids, $id[$i]['user_id']);
-        }
 
 
         for ($i = 0; $i < count($known_faces); $i++) {
@@ -69,7 +66,13 @@ if (isset($_POST['SignInSubmit'])) {
 
 
 
-        $response = LogIn::sendingApiRequest($image_file, $image_name, $unserialized_faces, $id);
+        $faceImagePasswordLogin = new LogInByFace();
+        $loginWithFaceImagePassword = new Login($faceImagePasswordLogin);
+
+
+        $credentials = ['image_file' => $image_file, 'image_name' => $image_name, 'known_faces' => $unserialized_faces, 'id' => $id];
+
+        $response = $loginWithFaceImagePassword->logInUser($credentials);
 
 
 
@@ -78,7 +81,7 @@ if (isset($_POST['SignInSubmit'])) {
 
 
 
-            Login::getAllUserData($response[0]);
+            Utilities::getAllUserData($response[0]);
 
             if (password_verify($password , $_SESSION['user']['password'])) {
 

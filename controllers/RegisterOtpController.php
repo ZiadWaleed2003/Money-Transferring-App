@@ -27,6 +27,7 @@ if (isset($_POST['OtpSubmit'])) {
                 $email        = $_SESSION['email'];
                 $password     = $_SESSION['password '];
                 $phone_number = $_SESSION['phone_number'];
+                
 
                 $database_selected_colums = "`name`, `email`, `password`, `phone_number`, `role`";
                 $database_selected_colums_values = "'$user_name', '$email', '$password', '$phone_number', '0'";
@@ -36,13 +37,14 @@ if (isset($_POST['OtpSubmit'])) {
 
                     $fileInfo = pathinfo($_SESSION['img_path']);
                     $filename = $fileInfo['basename'];
+                    $img_path = $_SESSION['img_path'];
 
                     $embedds = Signup::sendingApiRequest($_SESSION['img_path'], $filename);
                     $embd_serialized = serialize($embedds);
 
                     // add image path to database New User insertion query
                     $database_selected_colums .= ", `image_path`";
-                    $database_selected_colums_values .= ", '$_SESSION[img_path]'";
+                    $database_selected_colums_values .= ", '$img_path'";
                 }
 
                 $query =  "INSERT INTO `users` ($database_selected_colums) VALUES ($database_selected_colums_values)";
