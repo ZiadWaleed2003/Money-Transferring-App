@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-12 text-center header">
-            <h3 class="display-3 p-5">Users</h3>
+            <h3 class="display-3 p-5">Donations</h3>
         </div>
 
         <div class="col-12 text-center pb-5">

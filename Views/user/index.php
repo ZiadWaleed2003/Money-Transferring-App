@@ -48,6 +48,17 @@ if(isset($_SESSION['error_message'])){
                     </div>
 
                     <div class="col-sm-6 col-xl-4">
+                        <a id="send-to-wallet" class="options" href="FAQ.php">
+                            <div class="section-icon m-2 flex-column align-items-center justify-content-center p-4">
+                                <h2 class="m-0 text-center p-2">FAQ</h2>
+                            </div>
+                        </a>
+                    </div>  
+                </div>
+                
+                <div class="row g-4 mb-4  justify-content-center">
+                    
+                    <div class="col-sm-6 col-xl-4">
                         <a id="send-to-wallet" class="options" href="feedback.php">
                             <div class="section-icon m-2 flex-column align-items-center justify-content-center p-4">
                                 <h2 class="m-0 text-center p-2">Feedback</h2>

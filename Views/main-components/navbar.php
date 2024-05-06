@@ -4,6 +4,13 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
+<?php require_once("../../models/User.php") ?>
+
+<?php
+$active_user_id = $_SESSION['user']['id'];  #TODO: replace with user id from sessions
+$user = User::constructFromDB($active_user_id);
+?>
+
 <div class="content">
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
@@ -18,13 +25,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <img class="rounded-circle me-lg-2" src="<?php
-                                                                echo $_SESSION['user']['image_path'];
-                                                                ?>" alt="" style="width: 40px; height: 40px;">
+                    <img class="rounded-circle me-lg-2" src="<?php echo $user->getImagePath() ?? "../assets/img/profile_default.jpg" ?>" alt="" style="width: 40px; height: 40px;">
                     <span class="d-none d-lg-inline-flex">
-                        <?php
-                        echo $_SESSION['user']['name'];
-                        ?>
+                    <?php
+                        echo $user->getName();
+                    ?>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">

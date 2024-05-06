@@ -30,7 +30,7 @@ class User extends PERSON
     {
         $query = "SELECT * FROM users WHERE id = '$id'";
         $res = CRUD::Select($query)[0];
-        return new User($id, $res["name"], $res["email"], $res["password"], $res["image_path"], $res["phone_number"]);
+        return new User($id, $res["name"], $res["email"], $res["password"], $res["image_path"] ?? "assets/img/profile_default.jpg", $res["phone_number"]);
     }
 
     public static function quickLookUp($id)
