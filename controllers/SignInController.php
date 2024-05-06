@@ -80,7 +80,7 @@ if (isset($_POST['SignInSubmit'])) {
 
             Login::getAllUserData($response[0]);
 
-            if ($_SESSION['user']['password'] == $password) {
+            if (password_verify($password , $_SESSION['user']['password'])) {
 
                 header("location:../Views/user");
             } else {
