@@ -3,7 +3,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 };
-require_once '../vendor/autoload.php';
+require '../vendor/autoload.php';
 require_once '../views/main-components/basic-table.php';
 require_once "../models/User.php";
 

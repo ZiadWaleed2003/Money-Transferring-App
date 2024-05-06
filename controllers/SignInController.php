@@ -82,7 +82,17 @@ if (isset($_POST['SignInSubmit'])) {
 
             if (password_verify($password , $_SESSION['user']['password'])) {
 
-                header("location:../Views/user");
+                if($_SESSION['user']['role'] == 1){
+
+                    header("location:../Views/admin");
+
+                }else if($_SESSION['user']['role'] == 0){
+
+                    header("location:../Views/user");
+                }
+                    
+                
+
             } else {
 
 
