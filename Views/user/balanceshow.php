@@ -1,10 +1,9 @@
 <?php
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-$_SESSION['keep_transaction_session'] = true;
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    $_SESSION['keep_transaction_session'] = true;
 ?>
 
 <?php require_once("../main-components/header.php") ?>

@@ -12,6 +12,7 @@ SessionController::checkTransaction($_SESSION['keep_transaction_session'] ?? nul
 SessionController::checkTransactionRequest($_SESSION['keep_transaction_session_request'] ?? null);
 
 SessionController::checkTakeIpn($_SESSION['check_take_ipn'] ?? null);
+SessionController::checkTransactionStatusPage($_SESSION['check_transaction_status_page'] ?? null);
 ?>
 
 <!DOCTYPE html>

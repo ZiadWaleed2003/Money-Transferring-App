@@ -12,11 +12,11 @@ class SessionController
     {
 
         if (!isset($_SESSION['user'])) {
-            self::notValidCheck();
+            self::notValidLoginCheck();
         }
 
         if (!isset($_SESSION['user']['id']) && !isset($_SESSION['user']['role'])) {
-            self::notValidCheck();
+            self::notValidLoginCheck();
         }
 
         return true;
@@ -27,11 +27,11 @@ class SessionController
         $login_done = self::checkLogin();
 
         if (!$login_done) {
-            self::notValidCheck();
+            self::notValidLoginCheck();
         }
 
         if ($_SESSION['user']['role'] != 0) {
-            self::notValidCheck();
+            self::notValidLoginCheck();
         }
 
 
@@ -39,7 +39,7 @@ class SessionController
         foreach ($must_exist as $check_one) {
             if (!isset($_SESSION['user'][$check_one])) {
 
-                self::notValidCheck();
+                self::notValidLoginCheck();
             }
         }
         return true;
@@ -51,17 +51,17 @@ class SessionController
         $login_done = self::checkLogin();
 
         if (!$login_done) {
-            self::notValidCheck();
+            self::notValidLoginCheck();
         }
 
         if ($_SESSION['user']['role'] != 1) {
-            self::notValidCheck();
+            self::notValidLoginCheck();
         }
 
         $must_exist = self::$user_must_data;
         foreach ($must_exist as $check_one) {
             if (!isset($_SESSION['user'][$check_one])) {
-                self::notValidCheck();
+                self::notValidLoginCheck();
             }
         }
     }
@@ -69,20 +69,21 @@ class SessionController
     public static function checkTransaction($keep_it = false)
     {
 
-        if (!isset($_SESSION['keep_transaction_session'])) {
+        if (isset($_SESSION['keep_transaction_session'])) {
             unset($_SESSION['keep_transaction_session']);
         }
 
 
         if (isset($_SESSION['transaction'])) {
-
+                        
             if (!$keep_it) {
                 unset($_SESSION['transaction']);
             }
         } else {
-
+            
             if ($keep_it) {
-                header("location: ../user/transactions.php");
+
+                self::notValidTransactionCheck();
             }
         }
     }
@@ -90,7 +91,7 @@ class SessionController
     public static function checkTransactionRequest($keep_it = false)
     {
 
-        if (!isset($_SESSION['keep_transaction_session_request'])) {
+        if (isset($_SESSION['keep_transaction_session_request'])) {
             unset($_SESSION['keep_transaction_session_request']);
         }
 
@@ -103,7 +104,7 @@ class SessionController
         } else {
 
             if ($keep_it) {
-                header("location: ../user/transactions.php");
+                self::notValidTransactionCheck();
             }
         }
     }
@@ -111,29 +112,60 @@ class SessionController
     public static function checkTakeIpn($do_it = false)
     {
 
-        if (!isset($_SESSION['check_take_ipn'])) {
+        if (isset($_SESSION['check_take_ipn'])) {
             unset($_SESSION['check_take_ipn']);
+        }
+
+        
+        if ($do_it) {
+            if (!isset($_SESSION['transaction'])) {
+                
+                header("location: ../user/index.php");
+                exit();
+            }
+
+            if (isset($_SESSION['transaction']['status'])) {
+
+                unset($_SESSION['transaction']);
+                self::notValidTransactionCheck();
+            }
+
+        }
+        return true;
+    }
+
+    public static function checkTransactionStatusPage($do_it = false)
+    {
+
+        if (isset($_SESSION['check_transaction_status_page'])) {
+            unset($_SESSION['check_transaction_status_page']);
         }
 
 
         if ($do_it) {
-            if (!isset($_SESSION['transactions'])) {
+            if (!isset($_SESSION['transaction'])) {
 
-                unset($_SESSION['transactions']);
-                echo "window.history.go(-1);";
-            }
-            if (isset($_SESSION['transactions']['status'])) {
-
-                unset($_SESSION['transactions']);
-                header("location: ../user/transactions.php");
+                header("location: ../user/index.php");
                 exit();
             }
+            if (!isset($_SESSION['transaction']['id'])) {
 
-            return true;
+                unset($_SESSION['transaction']);
+                self::notValidTransactionCheck();
+            }
+
         }
+        return true;
     }
 
-    public static function notValidCheck()
+    public static function notValidTransactionCheck()
+    {
+
+        header("location: ../user/index.php");
+        exit();
+    }
+
+    public static function notValidLoginCheck()
     {
         session_destroy();
 

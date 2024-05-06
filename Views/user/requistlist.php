@@ -42,6 +42,32 @@
                         <div class="table-responsive bg-dark p-5">
 
                             <table class="table table-dark table-striped">
+                            <?php
+                            if (session_status() === PHP_SESSION_NONE) {
+                                session_start();
+                            }; //EDITS AFTER SESSION
+                            ?>
+                            <?php if (isset($_SESSION['error_message'])) : ?>
+                                <div class="alert alert-danger alert-dismissible text-center text-capitalize" role="alert">
+                                    <i class="fa fa-exclamation-circle me-2"></i>
+                                    <?php
+                                    echo $_SESSION['error_message'];
+                                    unset($_SESSION['error_message']);
+                                    ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php elseif (isset($_SESSION['success_message'])) : ?>
+
+                                <div class="alert alert-success alert-dismissible text-center text-capitalize" role="alert">
+                                    <i class="fa fa-exclamation-circle me-2"></i>
+                                    <?php
+                                    echo $_SESSION['success_message'];
+                                    unset($_SESSION['success_message']);
+                                    ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
+
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -94,23 +120,7 @@
                             </form>
                         </div>
                     </div>
-                    <?php
-                    // 
-                    if (session_status() === PHP_SESSION_NONE) {
-                        session_start();
-                    }; //EDITS AFTER SESSION
-
-                    if (isset($_SESSION['transaction']['error_message'])) :
-                    ?>
-                        <div class="alert alert-danger alert-dismissible text-center text-capitalize" role="alert">
-                            <i class="fa fa-exclamation-circle me-2"></i>
-                            <?php
-                            echo $_SESSION['transaction']['error_message'];
-                            unset($_SESSION['transaction']['error_message']);
-                            ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <?php endif; ?>
+                    
                 </div>
             </div>
         </div>

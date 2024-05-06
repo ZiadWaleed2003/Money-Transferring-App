@@ -83,13 +83,13 @@
                             session_start();
                         }; //EDITS AFTER SESSION
 
-                        if (isset($_SESSION['transaction']['error_message'])) :
+                        if (isset($_SESSION['error_message'])) :
                         ?>
                             <div class="alert alert-danger alert-dismissible text-center" role="alert">
                                 <i class="fa fa-exclamation-circle me-2"></i>
                                 <?php
-                                echo $_SESSION['transaction']['error_message'];
-                                unset($_SESSION['transaction']['error_message']);
+                                echo $_SESSION['error_message'];
+                                unset($_SESSION['error_message']);
                                 ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>

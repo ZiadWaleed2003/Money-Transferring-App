@@ -395,8 +395,7 @@ class Transaction
                 }
             }
         } catch (Exception $e) {
-            var_dump($e->getMessage());
-            exit();
+            
             throw $e;
         }
     }
@@ -528,7 +527,7 @@ class Transaction
             }
 
             $sql = "INSERT INTO requests (sender_id, reciever_id, amount, description, date) 
-                             VALUES ($sender_card_data[id],$receiver_card_data[id],$amount,'flossss wnby ya homar', CURRENT_TIMESTAMP)";
+                             VALUES ($sender_card_data[id], $receiver_card_data[id], $amount, 'Give me a money', CURRENT_TIMESTAMP)";
 
             $result = CRUD::Insert($sql);
 
