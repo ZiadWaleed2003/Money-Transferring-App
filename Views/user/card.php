@@ -25,6 +25,18 @@
 
   
 ?>
+
+<?php 
+if(isset($_SESSION['success_message'])){
+ echo "<script>alert('".$_SESSION['success_message']."')</script>";
+ unset($_SESSION['success_message']);
+}
+if(isset($_SESSION['error_message'])){
+  echo "<script>alert('".$_SESSION['error_message']."')</script>";
+  unset($_SESSION['error_message']);
+ }
+
+?>
     <!-- card Start -->
         <div class="container-fluid pt-4 px-4">
           <div class="row g-4">

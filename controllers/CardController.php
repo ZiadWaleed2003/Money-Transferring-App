@@ -22,32 +22,34 @@ class CardController
 
          public function addCard(Card $card)
              {
+            $bank_id=$card->getBankId();
             $number=$card->getNumber();
             $cvv=$card->getCvv();
-            $check = "SELECT * From bankcards where bankcards.number ='$number' and bankcards.cvv='$cvv' ";
-            $variable=CRUD::Select($check);           
+            $check = "SELECT * From bankcards where bankcards.number ='$number' and bankcards.bank_id='$bank_id' and bankcards.cvv='$cvv' and bankcards.user_mobile_number='".$_SESSION['user']['phone_number']."' ";
+            $variable=CRUD::Select($check);  
             if ($variable !=false){ 
-                $query2="SELECT * From usercards where usercards.number ='$number' and usercards.user_id=".$_SESSION["user"]["id"]." ";
+                $query2="SELECT * From usercards where usercards.number ='$number' and usercards.user_id=".$_SESSION["user"]["id"]." and usercards.bank_id='$bank_id' ";
                 $result2=CRUD::Select($query2);
                 if(!count($result2)){
-                $bank_id=$card->getBankId();
                 $cardname=$card->getName();
                 $cardnumber=$card->getNumber();
                 $cardcvv=$card->getCvv();
                 $cardipn=$card->getIpnCode();
-                
-                $query="insert into usercards(user_id,bank_id,name,number,cvv,ipn_code,balance,favourite) values ('".$_SESSION["user"]["id"]."','$bank_id','$cardname','$cardnumber','$cardcvv','$cardipn','0000','0')";
+                $cardbalance=$variable[0]['balance'];          
+                $query="insert into usercards(user_id,bank_id,name,number,cvv,ipn_code,balance,favourite) values ('".$_SESSION["user"]["id"]."','$bank_id','$cardname','$cardnumber','$cardcvv','$cardipn','$cardbalance','0')";
                 $result=CRUD::Insert($query);
+                $_SESSION['success_message']="Card Added Successfully";
                  return true;
                 }
                 else
                 {
-                    echo "already Entered";
-                    return true;
+                    $_SESSION['error_message']="Card Added Before";
+                    return false;
 
                 }
             }
             else{
+                $_SESSION['error_message']="Card Not Found";
                 return false;
             }
             

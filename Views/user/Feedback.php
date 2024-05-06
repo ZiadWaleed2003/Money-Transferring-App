@@ -8,14 +8,22 @@ $useracct_Controller = new useracct_Controller;
 
 
 if (isset($_POST['submit'])) {
-    $feedback = $_POST['feedback'];
-    $result = $useracct_Controller->feedback($feedback);
-    if ($result) {
-        echo "<script> window.location.href='index.php';</script>";
-    } else {
-        echo "not added";
+    if(!empty($_POST['feedback'])){
+        $feedback = trim($_POST['feedback']);
+        $result = $useracct_Controller->feedback($feedback);
+            if ($result) {
+                echo "<script> window.location.href='index.php';</script>";
+            }
+            else{
+                echo "<script>alert('".$_SESSION['error_message']."')</script>";
+                unset($_SESSION['error_message']);
+            }    
+        }
+        else{
+            echo "<script>alert('Feedback is Empty')</script>";
     }
-}
+    }
+
 
 ?>
 
@@ -44,7 +52,7 @@ if (isset($_POST['submit'])) {
                             <form action="feedback.php" method="post">
                                 <div class="form-floating">
 
-                                    <textarea class="form-control" placeholder="Leave a feedback here" name="feedback" id="floatingTextarea" style="height: 150px"></textarea>
+                                    <textarea class="form-control" placeholder="Leave a feedback here" name="feedback" id="floatingTextarea" style="height: 150px" ></textarea>
                                     <label for="floatingTextarea">Feedback</label>
                                 </div>
 
