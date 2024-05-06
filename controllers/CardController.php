@@ -10,7 +10,7 @@ class CardController
     public function getbanks()
     {
          
-            $query="select * from bank";
+            $query="SELECT * FROM bank ORDER BY id ASC ";
             $result=CRUD::Select($query);
             if($result){
             return $result;

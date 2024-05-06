@@ -7,7 +7,7 @@ class useracct_Controller
 {
     public function viewAllusers()
     {
-        $query = "select * from users";
+        $query = "select * from users where users.role !=1";
         $result = CRUD::Select($query);
         if ($result) {
             return $result;
