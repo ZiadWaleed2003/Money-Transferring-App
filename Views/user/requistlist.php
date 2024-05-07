@@ -1,7 +1,7 @@
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
-<?php require("../../controllers/CRUD.php"); ?>
+
 <?php require("../../Models/Formation.php"); ?>
 
 

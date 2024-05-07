@@ -1,9 +1,13 @@
 <?php require_once("../main-components/header.php") ?>
 <?php require_once("../main-components/side-navbar.php") ?>
 <?php require_once("../main-components/navbar.php") ?>
-<?php require("../../controllers/CRUD.php"); ?>
-<?php require("../../Models/Formation.php"); ?>
 
+<?php require("../../Models/Formation.php"); ?>
+<?php require("../../controllers/CardController.php"); ?>
+<?php
+    $cards = new CardController();
+    $cards = $cards->getAllCards();
+?>
 
 
 
@@ -45,7 +49,7 @@
                             <select class="form-select form-select-lg mb-3" name="transaction_receiver_card_id" aria-label=".form-select-lg example" required>
                                 <option value="" class="text-muted" selected disabled> Open Cards list </option>
                                 <?php
-                                $cards = CRUD::Select("SELECT * FROM usercards WHERE user_id = " . $_SESSION['user']['id'] . " order by favourite desc");
+
                                 foreach ($cards as $card) {
                                     $card_number = Formation::showCardNumber($card['number']);
                                     $classes = ($card['favourite'] == 1) ? "bg-danger text-white" : "";
