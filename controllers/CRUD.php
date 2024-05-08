@@ -11,16 +11,27 @@ class CRUD
 
         if ($connection != FALSE) {
 
-            $result = $connection->query($query);
+            try{
+                $result = $connection->query($query);
 
-            if (!$result) {
-                echo "Error : " . mysqli_error($connection);
-                $db->closeConnection();
+                            if (!$result) {
+                                echo "Error : " . mysqli_error($connection);
+                                $db->closeConnection();
+                                throw new Exception("Insertion Error");
+
+                            } else {
+
+                                return $connection->insert_id;
+                            }
+            
+            
+            }catch(Exception $e){
+
+                $e->getMessage();
                 return false;
-            } else {
-
-                return $connection->insert_id;
             }
+
+            
 
         } else {
             echo "Error : " ;

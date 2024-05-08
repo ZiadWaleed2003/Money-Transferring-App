@@ -67,11 +67,11 @@ if (isset($_POST['OtpSubmit'])) {
                         header("location:../Views/auth/SignUpComplete.php");
                     } else {
 
-                        header("location:SignUpOtp.php");
+                        header("location:../Views/auth/signup.php");
                     }
                 } else {
 
-                    header("location:SignUpOtp.php");
+                    header("location:../Views/auth/signup.php");
                 }
             } else {
 
