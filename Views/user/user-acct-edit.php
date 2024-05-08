@@ -2,10 +2,11 @@
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-};
-require_once("../main-components/header.php") ?>
-<?php require_once("../main-components/side-navbar.php") ?>
-<?php require_once("../main-components/navbar.php") ?>
+}
+;
+require_once ("../main-components/header.php") ?>
+<?php require_once ("../main-components/side-navbar.php") ?>
+<?php require_once ("../main-components/navbar.php") ?>
 
 
 <!-- blank Start -->
@@ -21,9 +22,15 @@ require_once("../main-components/header.php") ?>
             <div class="col h-100 mx-1">
                 <div class="mb-3">
                     <label for="emailaddress" class="form-label">Edit email address</label>
-                    <input name="profile_email" type="email" class="form-control" id="emailaddress" aria-describedby="emailHelp"">
+                    <input name="profile_email" type="email" class="form-control" id="emailaddress"
+                        aria-describedby="emailHelp"">
                     <div id=" emailHelp" class="form-text">We'll never share your email with anyone else.
                 </div>
+                <?php
+                if (isset($_SESSION['invalid_mail']) && $_SESSION['invalid_mail'] == true) {
+                    echo '<p class="text-danger">Invalid Email. Check again.</p>';
+                }
+                ?>
             </div>
             <div class="mb-3">
                 <label for="passwordfirst" class="form-label">Edit password</label>
@@ -40,4 +47,5 @@ require_once("../main-components/header.php") ?>
 <!-- blank End -->
 
 
-<?php require_once("../main-components/footer.php") ?>
+<?php require_once ("../main-components/footer.php") ?>
+

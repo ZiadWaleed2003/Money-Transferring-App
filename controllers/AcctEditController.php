@@ -12,6 +12,7 @@ $user = User::constructFromDB($active_user_id);
 ?>
 
 <?php
+$_SESSION['invalid_mail'] = false;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST["profile_email"])) {
         $email = clean_input($_POST["profile_email"]);
@@ -25,10 +26,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $img_path = $user->uploadPicture($_FILES["profile_img"]);
         $user->setImagePath($img_path);
     }
-    $user->writeToDB();
-    $user->reloadUserSession();
-    header("Location: ../views/user/user-acct-view.php");
-    die();
+    try {
+        $user->writeToDB();
+        $user->reloadUserSession();
+        header("Location: ../views/user/user-acct-view.php");
+    } catch (\Throwable $th) {
+        $_SESSION['invalid_mail'] = true;
+        header("Location: ../views/user/user-acct-edit.php");
+    }
+
 }
 
 function clean_input($data)
