@@ -13,12 +13,18 @@ $user = User::constructFromDB($active_user_id);
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = empty($_POST["profile_email"]) ? $user->getEmail() : clean_input($_POST["profile_email"]);
-    $password = empty($_POST["profile_pass"]) ? $user->getPassword() : password_hash($_POST['profile_pass'], PASSWORD_DEFAULT);
-    $img_path = empty($_FILES["profile_img"]["tmp_name"]) ? $user->getImagePath() : $user->uploadPicture($_FILES["profile_img"]);
-    $user->setEmail($email);
-    $user->setPassword($password);
-    $user->setImagePath($img_path);
+    if (!empty($_POST["profile_email"])) {
+        $email = clean_input($_POST["profile_email"]);
+        $user->setEmail($email);
+    }
+    if (!empty($_POST["profile_pass"])) {
+        $password = password_hash($_POST['profile_pass'], PASSWORD_DEFAULT);
+        $user->setPassword($password);
+    }
+    if (!empty($_FILES["profile_img"]["tmp_name"])) {
+        $img_path = $user->uploadPicture($_FILES["profile_img"]);
+        $user->setImagePath($img_path);
+    }
     $user->writeToDB();
     $user->reloadUserSession();
     header("Location: ../views/user/user-acct-view.php");
