@@ -115,7 +115,7 @@ description='Donation' AND (sender_id = '$this->id' OR reciever_id = '$this->id'
             $file_pattern = $upl_dir . $trgt . "*";
             array_map("unlink", glob($file_pattern));
             if (move_uploaded_file($_FILES["profile_img"]["tmp_name"], $final)) {
-                return "assets/img/" . $trgt . $file_type;
+                return "../assets/img/" . $trgt . $file_type;
             } else {
                 echo "Upload Error Occured";
             }
@@ -146,7 +146,7 @@ description='Donation' AND (sender_id = '$this->id' OR reciever_id = '$this->id'
 
     public function getImagePath()
     {
-        return "../" . $this->image_path;
+        return  $this->image_path;
     }
 
     public function getPhoneNumber()
