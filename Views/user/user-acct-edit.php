@@ -2,10 +2,11 @@
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-};
-require_once("../main-components/header.php") ?>
-<?php require_once("../main-components/side-navbar.php") ?>
-<?php require_once("../main-components/navbar.php") ?>
+}
+;
+require_once ("../main-components/header.php") ?>
+<?php require_once ("../main-components/side-navbar.php") ?>
+<?php require_once ("../main-components/navbar.php") ?>
 
 
 <!-- blank Start -->
@@ -14,14 +15,24 @@ require_once("../main-components/header.php") ?>
         <div class="row vh-100 bg-secondary rounded py-5 justify-content-center mx-0">
             <div class="col-4 h-100 mx-1 text-center">
                 <h3 class="p-lg-2">Edit Acccount Info</h3>
-                <img src="" alt="No picture uploaded" id="img-preview" class="acct-page-img w-100 mb-1 rounded-circle ">
-                <label for="input-img" class="form-label"> Upload picture to display preview</label>
-                <input name="profile_img" class="form-control bg-dark" type="file" id="input-img">
+                <div class="row mb-5 justify-content-center align-content-center"> <img src=""
+                        alt="No profile picture uploaded" id="img-preview" class="acct-page-img mb-1 rounded-circle"
+                        style="max-width:50%">
+                    <label for="input-img" class="form-label"> Upload picture to display preview</label>
+                    <input name="profile_img" class="form-control bg-dark" type="file" id="input-img">
+                </div>
+                <div class="row justify-content-center align-content-center"> <img src=""
+                        alt="No FaceID picture uploaded" id="face-preview"
+                        class="acct-page-img w-100 mb-1 rounded-circle" style="max-width:50%">
+                    <label for="face-img" class="form-label"> Upload picture to display preview</label>
+                    <input name="face_img" class="form-control bg-dark" type="file" id="face-img">
+                </div>
             </div>
             <div class="col h-100 mx-1">
                 <div class="mb-3">
                     <label for="emailaddress" class="form-label">Edit email address</label>
-                    <input name="profile_email" type="email" class="form-control" id="emailaddress" aria-describedby="emailHelp"">
+                    <input name="profile_email" type="email" class="form-control" id="emailaddress"
+                        aria-describedby="emailHelp"">
                     <div id=" emailHelp" class="form-text">We'll never share your email with anyone else.
                 </div>
             </div>
@@ -40,4 +51,5 @@ require_once("../main-components/header.php") ?>
 <!-- blank End -->
 
 
-<?php require_once("../main-components/footer.php") ?>
+<?php require_once ("../main-components/footer.php") ?>
+

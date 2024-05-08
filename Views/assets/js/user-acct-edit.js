@@ -1,9 +1,9 @@
-function readURL(input) {
+function readURL(input, ele) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $("#img-preview").attr("src", e.target.result);
+            $(ele).attr("src", e.target.result);
         };
 
         reader.readAsDataURL(input.files[0]);
@@ -30,7 +30,10 @@ jQuery.validator.setDefaults({
 
 $(document).ready(function () {
     $("#input-img").change(function () {
-        readURL(this);
+        readURL(this, "#img-preview");
+    });
+    $("#face-img").change(function () {
+        readURL(this, "face-preview");
     });
     $("#edit-form").validate({
         rules: {
