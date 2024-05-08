@@ -2,14 +2,15 @@
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-};
-require("../Models/LogIn.php");
+}
+;
+require ("../Models/LogIn.php");
 
 if (isset($_POST['NewPasswordButton'])) {
 
-    $new_pass = password_hash($_POST['new_password'] , PASSWORD_DEFAULT);
+    $new_pass = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
 
-    $result = Login::changePassword($new_pass, $_SESSION['user']['id']);
+    $result = Utilities::changePassword($new_pass, $_SESSION['user']['id']);
 
     if ($result) {
 

@@ -2,11 +2,12 @@
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-};
+}
+;
 
 
-require("../Models/moneySystem.php");
-require("../Models/LogIn.php");
+require ("../Models/moneySystem.php");
+require ("../Models/LogIn.php");
 
 
 if (isset($_POST['forgetPasswordButton'])) {
@@ -22,9 +23,9 @@ if (isset($_POST['forgetPasswordButton'])) {
         $_SESSION['otp'] = moneySystem::SendOTP($email);
 
 
-        Login::storeDataInSession($result[0]);
+        Utilities::storeDataInSession($result[0]);
 
-        print($_SESSION['otp']);
+        print ($_SESSION['otp']);
 
         header("location:../Views/auth/ForgetPasswordOTP.php");
     } else {
