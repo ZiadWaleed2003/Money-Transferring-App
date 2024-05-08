@@ -88,7 +88,7 @@ if ($transaction_data['status'] === Formation::cleanTransactionStatus(0)) {
                                 </div>
                                 <div class="col-6 d-flex justify-content-start ps-2">
 
-                                    <?php echo "<h2 class='text-$css_text text-capitalize'>&nbsp; $_SESSION[error_message]</h2>" ?>
+                                    <?php echo "<h2 class='text-$css_text text-capitalize'>&nbsp; $transaction_data[error_message]</h2>" ?>
                                 </div>
                             </div>
                         <?php endif; ?>

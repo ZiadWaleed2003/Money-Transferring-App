@@ -271,7 +271,7 @@ class TransactionsController
         } catch (Exception $e) {
 
             $transaction->setStatus(0);
-            $this->handleError($e->getMessage());
+            $_SESSION['transaction']['error_message'] = $e->getMessage();
         } finally {
 
             $sender_id = $transaction->getSenderId();
