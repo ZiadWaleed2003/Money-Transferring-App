@@ -1,4 +1,7 @@
-<?php require_once ("../main-components/header.php") ?>
+<?php
+session_start();
+session_destroy();
+require_once ("../main-components/header.php") ?>
 
 
 <!-- blank Start -->
