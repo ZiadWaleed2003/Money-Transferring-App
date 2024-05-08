@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user->setImagePath($img_path);
     $user->writeToDB();
     $user->reloadUserSession();
-    header("Location: /views/user/user-acct-view.php");
+    header("Location: ../views/user/user-acct-view.php");
     die();
 }
 
