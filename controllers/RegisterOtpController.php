@@ -2,11 +2,12 @@
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-};
+}
+;
 
 
-require("../Models/SignUp.php");
-require("CRUD.php");
+require ("../Models/SignUp.php");
+require ("CRUD.php");
 
 if (isset($_POST['OtpSubmit'])) {
 
@@ -23,17 +24,17 @@ if (isset($_POST['OtpSubmit'])) {
 
                 // ToDo : continue the validation of the data and inserting it to the DB
 
-                $user_name    = $_SESSION['user_name'];
-                $email        = $_SESSION['email'];
-                $password     = $_SESSION['password '];
+                $user_name = $_SESSION['user_name'];
+                $email = $_SESSION['email'];
+                $password = $_SESSION['password '];
                 $phone_number = $_SESSION['phone_number'];
-                
+
 
                 $database_selected_colums = "`name`, `email`, `password`, `phone_number`, `role`";
                 $database_selected_colums_values = "'$user_name', '$email', '$password', '$phone_number', '0'";
 
 
-                if (isset($_SESSION['img_path']) && $_SESSION['img_path']!="") {
+                if (isset($_SESSION['img_path']) && $_SESSION['img_path'] != "") {
 
                     $fileInfo = pathinfo($_SESSION['img_path']);
                     $filename = $fileInfo['basename'];
@@ -44,11 +45,12 @@ if (isset($_POST['OtpSubmit'])) {
 
                     // add image path to database New User insertion query
                     $database_selected_colums .= ", `image_path`";
-                    $database_selected_colums_values .= ", '$img_path'";
+                    $insert_path = "../" . $img_path;
+                    $database_selected_colums_values .= ", '$insert_path'";
                 }
 
-                $query =  "INSERT INTO `users` ($database_selected_colums) VALUES ($database_selected_colums_values)";
-               
+                $query = "INSERT INTO `users` ($database_selected_colums) VALUES ($database_selected_colums_values)";
+
 
                 $user_id = CRUD::Insert($query);
 
@@ -56,7 +58,7 @@ if (isset($_POST['OtpSubmit'])) {
 
                     $result = true;
                     if (isset($_SESSION['img_path']) && $_SESSION['img_path']) {
-                        
+
 
                         $sql = "INSERT INTO `image` (`user_id`, `vector_data`) VALUES ( '$user_id', '$embd_serialized')";
                         $result = CRUD::Insert($sql);
