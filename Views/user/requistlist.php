@@ -73,7 +73,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Amount</th>
-                                        <th scope="col">description of requist</th>
+                                        <th scope="col">Description of Request</th>
                                         <th scope="col">Req. Card</th>
                                         <th scope="col"></th>
                                         <th scope="col"></th>

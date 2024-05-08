@@ -28,7 +28,7 @@
                 History
             </a>
             <a id="faq" href="FAQ.php" class="nav-item nav-link">
-                <i class="bi bi-arrow-down-up" style="transform: rotate(45deg);"></i> 
+                <i class="bi bi-search"></i> 
                 FAQ
             </a>
             <a id="feedback" href="feedback.php" class="nav-item nav-link">

@@ -49,8 +49,7 @@ $user = User::constructFromDB($active_user_id);
                     <p><?php
                         echo $user->getEmail();
                         ?></p>
-                    <button type="button" id="edit" class="btn btn-primary">Edit</button>
-                    <button type="button" id="delete" class="btn btn-primary">Delete</button>
+
                 </div>
             </div>
             <div class="card flex-wrap bg-secondary mx-3 col py-4 px-2">
