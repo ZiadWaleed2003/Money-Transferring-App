@@ -12,7 +12,7 @@ class CRUD
         if ($connection != FALSE) {
 
             try{
-                $result = $connection->query($query);
+                            $result = $connection->query($query);
 
                             if (!$result) {
                                 echo "Error : " . mysqli_error($connection);

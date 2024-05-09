@@ -43,10 +43,10 @@ if (isset($_POST['OtpSubmit'])) {
                     $embedds = Signup::sendingApiRequest($_SESSION['img_path'], $filename);
                     $embd_serialized = serialize($embedds);
 
-                    // add image path to database New User insertion query
-                    $database_selected_colums .= ", `image_path`";
-                    $insert_path = "../" . $img_path;
-                    $database_selected_colums_values .= ", '$insert_path'";
+                    // // add image path to database New User insertion query
+                    // $database_selected_colums .= ", `image_path`";
+                    // $insert_path = "../" . $img_path;
+                    // $database_selected_colums_values .= ", '$insert_path'";
                 }
 
                 $query = "INSERT INTO `users` ($database_selected_colums) VALUES ($database_selected_colums_values)";
@@ -64,7 +64,7 @@ if (isset($_POST['OtpSubmit'])) {
                         $result = CRUD::Insert($sql);
                     }
 
-                    if ($result) {
+                    if ($result != false) {
                         session_destroy();
                         header("location:../Views/auth/SignUpComplete.php");
                     } else {
